@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bi4nnbegrdq6k" path="res://Sprites/Assets/laserCorpo.png" id="17_o2ycl"]
 [ext_resource type="Texture2D" uid="uid://c1lhl3ciyjbij" path="res://Sprites/Assets/laserCabeca.png" id="18_8wva2"]
 [ext_resource type="Texture2D" uid="uid://cccls4bp7r5ln" path="res://Sprites/Assets/qrcode.png" id="19_2eymm"]
-[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/inimigo.tscn" id="19_xcfye"]
+[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="19_xcfye"]
 [ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="20_admqw"]
 [ext_resource type="FontFile" uid="uid://c2ij18fwli5f" path="res://Fontes/ari-w9500-display.ttf" id="21_1logj"]
 [ext_resource type="Script" uid="uid://db8l3ael3irbm" path="res://Scripts/Textos/richTextLabel.gd" id="22_6h4go"]
@@ -438,6 +438,7 @@ position = Vector2(1280, 624)
 
 [node name="deathZone4" type="Area2D" parent="obstaculos/DZ" unique_id=788383162]
 position = Vector2(1152, 664)
+collision_mask = 3
 script = ExtResource("20_admqw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone4" unique_id=321795410]

@@ -13,8 +13,8 @@
 [ext_resource type="Script" uid="uid://wcai0pdsws65" path="res://Scripts/laser.gd" id="9_pdji6"]
 [ext_resource type="Texture2D" uid="uid://bi4nnbegrdq6k" path="res://Sprites/Assets/laserCorpo.png" id="10_tv5lk"]
 [ext_resource type="Texture2D" uid="uid://c1lhl3ciyjbij" path="res://Sprites/Assets/laserCabeca.png" id="11_gkw13"]
-[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/inimigo.tscn" id="12_naww7"]
-[ext_resource type="PackedScene" uid="uid://cde0y0l5ikfdp" path="res://Cenas/inimigoGrande.tscn" id="13_mt5ky"]
+[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="12_naww7"]
+[ext_resource type="PackedScene" uid="uid://cde0y0l5ikfdp" path="res://Cenas/Inimigos/inimigoGrande.tscn" id="13_mt5ky"]
 [ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="14_gryvb"]
 [ext_resource type="PackedScene" uid="uid://duaabb775jxci" path="res://Cenas/acido.tscn" id="15_00bea"]
 [ext_resource type="Script" uid="uid://d11gxhwoy8wlk" path="res://Scripts/porta.gd" id="16_6edyy"]
@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://dvgfm3a43y307" path="res://Scripts/foco_inimigo.gd" id="27_uv5wq"]
 [ext_resource type="Texture2D" uid="uid://e7bp57d86gia" path="res://Sprites/Assets/elevadorPorta.png" id="29_715ex"]
 [ext_resource type="PackedScene" uid="uid://buiy1o157r48a" path="res://Cenas/shader.tscn" id="30_43c77"]
-[ext_resource type="PackedScene" uid="uid://vpwmdtmvcxcg" path="res://Cenas/crawler.tscn" id="30_egkkk"]
+[ext_resource type="PackedScene" uid="uid://vpwmdtmvcxcg" path="res://Cenas/Inimigos/crawler.tscn" id="30_egkkk"]
 [ext_resource type="AudioStream" uid="uid://1wcuwuher66j" path="res://Audio/Sons/elevadorDing.mp3" id="30_ix7w8"]
 [ext_resource type="PackedScene" uid="uid://do2pi1d7mm08c" path="res://Cenas/ui.tscn" id="33_aw6qm"]
 [ext_resource type="PackedScene" uid="uid://ce8ccwo2ldqe1" path="res://Cenas/Menus/introFase.tscn" id="39_spydu"]
@@ -611,6 +611,7 @@ position = Vector2(-184, -336)
 
 [node name="deathZone0" type="Area2D" parent="obstaculos/DZ" unique_id=1587432294]
 position = Vector2(416, 968)
+collision_mask = 3
 script = ExtResource("14_gryvb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone0" unique_id=679523773]
@@ -619,6 +620,7 @@ shape = SubResource("RectangleShape2D_3os7o")
 
 [node name="deathZone1" type="Area2D" parent="obstaculos/DZ" unique_id=1414912268]
 position = Vector2(2976, 992)
+collision_mask = 3
 script = ExtResource("14_gryvb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone1" unique_id=1524647664]

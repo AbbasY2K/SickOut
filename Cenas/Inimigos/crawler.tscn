@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://vpwmdtmvcxcg"]
 
 [ext_resource type="Script" uid="uid://dx8gq6gjxprqa" path="res://Scripts/Inimigos/crawler.gd" id="1_e7vep"]
-[ext_resource type="PackedScene" uid="uid://dx3kesif3syh6" path="res://Cenas/crawling.tscn" id="2_m15ux"]
+[ext_resource type="PackedScene" uid="uid://dx3kesif3syh6" path="res://Cenas/Inimigos/crawling.tscn" id="2_m15ux"]
 [ext_resource type="Texture2D" uid="uid://c6ukac7bagxal" path="res://Sprites/inimigos/crawler/crawler.png" id="4_c2d0i"]
 [ext_resource type="AudioStream" uid="uid://cxdr8lnjfscad" path="res://Audio/Sons/explosion.wav" id="4_jmfiq"]
 [ext_resource type="Texture2D" uid="uid://n2pbm3mjff3e" path="res://Sprites/inimigos/prisioneiro/prisioneiro.png" id="4_m15ux"]

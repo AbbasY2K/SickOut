@@ -24,11 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://bi4nnbegrdq6k" path="res://Sprites/Assets/laserCorpo.png" id="18_fa2in"]
 [ext_resource type="Texture2D" uid="uid://c1lhl3ciyjbij" path="res://Sprites/Assets/laserCabeca.png" id="19_6dgyt"]
 [ext_resource type="PackedScene" uid="uid://cv8dda4h0qhrb" path="res://Cenas/fita.tscn" id="19_nmeat"]
-[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/inimigo.tscn" id="20_ncs76"]
+[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="20_ncs76"]
 [ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="21_i80d4"]
 [ext_resource type="PackedScene" uid="uid://cupkgjelanyul" path="res://Cenas/player.tscn" id="22_4lxsy"]
 [ext_resource type="Script" uid="uid://korrdw78qygf" path="res://Scripts/elevador.gd" id="23_smi6t"]
-[ext_resource type="PackedScene" uid="uid://bg38x6co6apmc" path="res://Cenas/cavaleiro.tscn" id="24_wtqvg"]
+[ext_resource type="PackedScene" uid="uid://bg38x6co6apmc" path="res://Cenas/Inimigos/cavaleiro.tscn" id="24_wtqvg"]
 [ext_resource type="PackedScene" uid="uid://buiy1o157r48a" path="res://Cenas/shader.tscn" id="25_l1474"]
 [ext_resource type="PackedScene" uid="uid://br60fnlrydir3" path="res://Cenas/lab.tscn" id="27_necnh"]
 [ext_resource type="Texture2D" uid="uid://coak4wvnl3iuf" path="res://Sprites/Assets/fundoMenu.png" id="27_wtqvg"]
@@ -546,6 +546,7 @@ position = Vector2(-184, -336)
 
 [node name="deathZone0" type="Area2D" parent="obstaculos/DZ" unique_id=1587432294]
 position = Vector2(1536, 984)
+collision_mask = 3
 script = ExtResource("21_i80d4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone0" unique_id=679523773]
@@ -554,6 +555,7 @@ shape = SubResource("RectangleShape2D_3os7o")
 
 [node name="deathZone1" type="Area2D" parent="obstaculos/DZ" unique_id=1183995037]
 position = Vector2(2976, 992)
+collision_mask = 3
 script = ExtResource("21_i80d4")
 acido = true
 
@@ -563,6 +565,7 @@ shape = SubResource("RectangleShape2D_wtqvg")
 
 [node name="deathZone2" type="Area2D" parent="obstaculos/DZ" unique_id=936139936]
 position = Vector2(3296, 932)
+collision_mask = 3
 script = ExtResource("21_i80d4")
 acido = true
 
@@ -572,6 +575,7 @@ shape = SubResource("RectangleShape2D_nmeat")
 
 [node name="deathZone3" type="Area2D" parent="obstaculos/DZ" unique_id=1664484180]
 position = Vector2(3584, 976)
+collision_mask = 3
 script = ExtResource("21_i80d4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone3" unique_id=1533246660]
@@ -580,6 +584,7 @@ shape = SubResource("RectangleShape2D_pay7n")
 
 [node name="deathZone4" type="Area2D" parent="obstaculos/DZ" unique_id=1934868710]
 position = Vector2(3808, 1040)
+collision_mask = 3
 script = ExtResource("21_i80d4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone4" unique_id=1590054483]

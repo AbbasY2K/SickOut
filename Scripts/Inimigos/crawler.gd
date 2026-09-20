@@ -1,46 +1,32 @@
-extends CharacterBody2D
+extends Inimigo
+
 
 @export var crawler_scene: PackedScene
 
-var WALK_SPEED := 50.0
-var RUN_SPEED := 75.0
-
-var direction := -1
-var turn_cooldown := 0.2
-var turn_timer := 0.0
 
 var state := "walk"
 var state_timer := 0.0
 
-var vendo_player := false
-var player = null
-
-var dead := false
-
 
 func _ready():
+
+	super._ready()
+
+	WALK_SPEED = 50.0
+	RUN_SPEED = 75.0
+
 	state_timer = randf_range(1.5, 3.0)
 
-	$Sprite2D.flip_h = direction > 0
 
-	add_to_group("inimigo")
+func processar_ia(delta):
 
-
-func _physics_process(delta):
-	if dead:
-		return
-
-	turn_timer -= delta
-
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	detectar_player()
+	detectar_player_crawler()
 
 	if vendo_player:
 		state = "run"
 
 	match state:
+
 		"run":
 			run_state()
 
@@ -50,20 +36,8 @@ func _physics_process(delta):
 		"idle":
 			idle_state(delta)
 
-	move_and_slide()
 
-	for i in range(get_slide_collision_count()):
-
-		var col = get_slide_collision(i)
-
-		if col:
-
-			var normal = col.get_normal()
-
-			if abs(normal.x) > 0.9 and turn_timer <= 0:
-				virar()
-
-func detectar_player():
+func detectar_player_crawler():
 
 	var bodies = $visao.get_overlapping_bodies()
 
@@ -73,6 +47,7 @@ func detectar_player():
 
 			vendo_player = true
 			player = body
+
 			return
 
 	vendo_player = false
@@ -83,26 +58,40 @@ func detectar_player():
 		state = "idle"
 		state_timer = 1.2
 
+
 func walk_state(delta):
 
-	if $AnimationPlayer.current_animation != "walk":
-		$AnimationPlayer.play("walk")
+	tocar_animacao("walk")
 
 	velocity.x = WALK_SPEED * direction
 
 	state_timer -= delta
 
-	$direcao.force_raycast_update()
-	$pe1.force_raycast_update()
-	$pe2.force_raycast_update()
+	if has_node("direcao"):
+		$direcao.force_raycast_update()
 
-	if $direcao.is_colliding() and turn_timer <= 0:
+	if has_node("pe1"):
+		$pe1.force_raycast_update()
+
+	if has_node("pe2"):
+		$pe2.force_raycast_update()
+
+	if has_node("direcao") \
+	and $direcao.is_colliding() \
+	and turn_timer <= 0:
+
 		virar()
 
-	if not $pe1.is_colliding() and turn_timer <= 0:
+	if has_node("pe1") \
+	and not $pe1.is_colliding() \
+	and turn_timer <= 0:
+
 		virar()
 
-	if not $pe2.is_colliding() and turn_timer <= 0:
+	if has_node("pe2") \
+	and not $pe2.is_colliding() \
+	and turn_timer <= 0:
+
 		virar()
 
 	if state_timer <= 0:
@@ -110,10 +99,10 @@ func walk_state(delta):
 		state = "idle"
 		state_timer = randf_range(1.0, 2.0)
 
+
 func idle_state(delta):
 
-	if $AnimationPlayer.current_animation != "idle":
-		$AnimationPlayer.play("idle")
+	tocar_animacao("idle")
 
 	velocity.x = 0
 
@@ -124,63 +113,67 @@ func idle_state(delta):
 		state = "walk"
 		state_timer = randf_range(2.0, 4.0)
 
+
 func run_state():
 
-	if $AnimationPlayer.current_animation != "walk":
-		$AnimationPlayer.play("walk")
+	tocar_animacao("walk")
 
 	if player == null:
 		return
 
-	var dir = sign(player.global_position.x - global_position.x)
+	var dir = sign(
+		player.global_position.x - global_position.x
+	)
 
-	if dir != 0 and dir != direction and turn_timer <= 0:
+	if dir != 0 \
+	and dir != direction \
+	and turn_timer <= 0:
+
 		virar()
 
 	velocity.x = RUN_SPEED * direction
 
-func virar():
 
-	direction *= -1
+func morrer_melee(_dir_ataque := 0.0):
 
-	$Sprite2D.flip_h = direction > 0
+	return
 
-	turn_timer = turn_cooldown
 
-# IGNORA MELEE
-func morrer_tiro(_dir_ataque := 1):
+func morrer_tiro(_dir_ataque := 1.0):
 
 	if dead:
 		return
 
 	dead = true
+	pausar_fisica = true
 
-	$hitBox.monitoring = false
-	$visao.monitoring = false
+	var nova_direcao := -1
 
-	ativar_crawler()
+	if velocity.x > 0:
+		nova_direcao = 1
 
-func ativar_crawler():
-	$"../../..".add_score(200)
-	$"../../../ui/feed".adicionar_kill()
+	desativar_colisoes_morte()
+
+	registrar_kill(200)
 
 	if crawler_scene == null:
+
 		queue_free()
+
 		return
 
 	var crawler = crawler_scene.instantiate()
+
 	get_parent().add_child(crawler)
 
 	crawler.global_position = global_position + Vector2(0, 2)
-
-	if velocity.x > 0:
-		crawler.direction = 1
-	else:
-		crawler.direction = -1
+	crawler.direction = nova_direcao
 
 	queue_free()
+
 
 func _on_hit_box_body_entered(body):
 
 	if body.has_method("freezePlayer") and not body.invencivel:
+
 		body.get_parent().gameover()

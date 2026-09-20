@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://wcai0pdsws65" path="res://Scripts/laser.gd" id="17_a6nax"]
 [ext_resource type="Texture2D" uid="uid://bi4nnbegrdq6k" path="res://Sprites/Assets/laserCorpo.png" id="18_on5s3"]
 [ext_resource type="Texture2D" uid="uid://c1lhl3ciyjbij" path="res://Sprites/Assets/laserCabeca.png" id="19_tdxbv"]
-[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/inimigo.tscn" id="20_e47tw"]
+[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="20_e47tw"]
 [ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="21_a18fc"]
 [ext_resource type="Script" uid="uid://db8l3ael3irbm" path="res://Scripts/Textos/richTextLabel.gd" id="22_aajsu"]
 [ext_resource type="FontFile" uid="uid://c2ij18fwli5f" path="res://Fontes/ari-w9500-display.ttf" id="22_tqn1g"]

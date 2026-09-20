@@ -15,11 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://7jfxdddhhpca" path="res://Cenas/packMunicao.tscn" id="12_qtgqu"]
 [ext_resource type="PackedScene" uid="uid://rnlt3ygnh74b" path="res://Cenas/caixa.tscn" id="17_ksnm3"]
 [ext_resource type="Script" uid="uid://wcai0pdsws65" path="res://Scripts/laser.gd" id="19_gcx5h"]
-[ext_resource type="PackedScene" uid="uid://ccf6nbhnabb0d" path="res://Cenas/creeper.tscn" id="20_ctyf4"]
+[ext_resource type="PackedScene" uid="uid://ccf6nbhnabb0d" path="res://Cenas/Inimigos/creeper.tscn" id="20_ctyf4"]
 [ext_resource type="Texture2D" uid="uid://bi4nnbegrdq6k" path="res://Sprites/Assets/laserCorpo.png" id="20_ek4so"]
 [ext_resource type="Texture2D" uid="uid://c1lhl3ciyjbij" path="res://Sprites/Assets/laserCabeca.png" id="21_uew3m"]
-[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/inimigo.tscn" id="22_oy1oi"]
-[ext_resource type="PackedScene" uid="uid://cde0y0l5ikfdp" path="res://Cenas/inimigoGrande.tscn" id="23_7xtx8"]
+[ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="22_oy1oi"]
+[ext_resource type="PackedScene" uid="uid://cde0y0l5ikfdp" path="res://Cenas/Inimigos/inimigoGrande.tscn" id="23_7xtx8"]
 [ext_resource type="AudioStream" uid="uid://1wcuwuher66j" path="res://Audio/Sons/elevadorDing.mp3" id="24_4kxsp"]
 [ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="24_6qv3i"]
 [ext_resource type="PackedScene" uid="uid://duaabb775jxci" path="res://Cenas/acido.tscn" id="25_ixcw6"]
@@ -490,6 +490,7 @@ position = Vector2(-184, -336)
 
 [node name="deathZone2" type="Area2D" parent="obstaculos/DZ" unique_id=189112146]
 position = Vector2(1456, 992)
+collision_mask = 3
 script = ExtResource("24_6qv3i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone2" unique_id=1549819785]
@@ -498,6 +499,7 @@ shape = SubResource("RectangleShape2D_ytusy")
 
 [node name="deathZone3" type="Area2D" parent="obstaculos/DZ" unique_id=341378313]
 position = Vector2(2000, 1016)
+collision_mask = 3
 script = ExtResource("24_6qv3i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone3" unique_id=1470019089]
