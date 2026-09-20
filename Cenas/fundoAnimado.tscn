@@ -1,0 +1,149 @@
+[gd_scene format=3 uid="uid://d1dmtvig8m8dn"]
+
+[ext_resource type="Texture2D" uid="uid://kg4upsj3rq8v" path="res://Sprites/Assets/fundoTeste1.png" id="1_qkmu2"]
+
+[sub_resource type="Animation" id="Animation_qkmu2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FundoTeste1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 320)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FundoTeste2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2496.0002, 319.99997)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FundoTeste3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 1400)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FundoTeste4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2496.0002, 1400)]
+}
+
+[sub_resource type="Animation" id="Animation_qekwq"]
+resource_name = "loop"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FundoTeste1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 540), Vector2(-960, -540)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FundoTeste2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2880.0002, 540), Vector2(960.00024, -540)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FundoTeste3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 1620), Vector2(-960, 540)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FundoTeste4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2880.0002, 1620), Vector2(960.00024, 540)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xtpl"]
+_data = {
+&"RESET": SubResource("Animation_qkmu2"),
+&"loop": SubResource("Animation_qekwq")
+}
+
+[node name="fundoAnimado" type="Node2D" unique_id=2134729828]
+process_mode = 3
+
+[node name="FundoTeste1" type="Sprite2D" parent="." unique_id=1114055135]
+position = Vector2(576, 320)
+scale = Vector2(1.0996563, 1.0714285)
+texture = ExtResource("1_qkmu2")
+region_enabled = true
+region_rect = Rect2(0, -4, 1746, 1008)
+
+[node name="FundoTeste2" type="Sprite2D" parent="." unique_id=614139983]
+position = Vector2(2496.0002, 319.99997)
+scale = Vector2(1.0996563, 1.0714285)
+texture = ExtResource("1_qkmu2")
+region_enabled = true
+region_rect = Rect2(0, -4, 1746, 1008)
+
+[node name="FundoTeste3" type="Sprite2D" parent="." unique_id=760941706]
+position = Vector2(576, 1400)
+scale = Vector2(1.0996563, 1.0714285)
+texture = ExtResource("1_qkmu2")
+region_enabled = true
+region_rect = Rect2(0, -4, 1746, 1008)
+
+[node name="FundoTeste4" type="Sprite2D" parent="." unique_id=2007795249]
+position = Vector2(2496.0002, 1400)
+scale = Vector2(1.0996563, 1.0714285)
+texture = ExtResource("1_qkmu2")
+region_enabled = true
+region_rect = Rect2(0, -4, 1746, 1008)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1039707210]
+libraries/ = SubResource("AnimationLibrary_0xtpl")
+autoplay = &"loop"
+speed_scale = 0.25

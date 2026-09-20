@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c2hgtb4r6bfx3"]
+
+[node name="splash" type="CPUParticles2D" unique_id=959584941]
+emitting = false
+amount = 12
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.65
+randomness = 0.15
+direction = Vector2(0, -1)
+gravity = Vector2(0, 900)
+initial_velocity_min = 335.66
+initial_velocity_max = 426.57
+scale_amount_min = 2.5
+scale_amount_max = 3.5
+color = Color(0.11743164, 0.578125, 0.20957032, 1)

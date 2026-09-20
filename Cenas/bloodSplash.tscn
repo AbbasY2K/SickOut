@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://qssw3wykysac"]
+
+[ext_resource type="Script" uid="uid://b7k3kt0v28d5g" path="res://Scripts/bloodSplash.gd" id="1_4ncap"]
+[ext_resource type="Texture2D" uid="uid://c5akvoekm1bx" path="res://Sprites/Assets/bloodSplash.png" id="3_4ncap"]
+
+[node name="bloodSplash" type="CanvasLayer" unique_id=350166330]
+script = ExtResource("1_4ncap")
+
+[node name="flash" type="ColorRect" parent="." unique_id=537161834]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="sangue" type="Sprite2D" parent="." unique_id=285245225]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(575.99994, 319.99997)
+scale = Vector2(5.4084496, 5.7853117)
+texture = ExtResource("3_4ncap")

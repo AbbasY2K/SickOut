@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dxvrlks4455f7"]
+
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="2_3k67g"]
+[ext_resource type="AudioStream" uid="uid://c2vpkd5071tex" path="res://Audio/Sons/terminal.wav" id="2_wun5j"]
+
+[node name="mensagem" type="MarginContainer" unique_id=1414995141]
+offset_right = 355.0
+offset_bottom = 24.0
+size_flags_horizontal = 8
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=1996897267]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(0.30935287, 0.95703125, 0.014953613, 1)
+theme_override_colors/font_shadow_color = Color(0.10498047, 0.3359375, 0, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_3k67g")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[shake]ERRO 404: GUARDA NÃO ENCONTRADO"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="bip" type="AudioStreamPlayer" parent="." unique_id=657058889]
+stream = ExtResource("2_wun5j")
+volume_db = -5.0
+autoplay = true

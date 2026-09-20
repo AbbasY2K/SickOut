@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://bbkjktnmo10rb"]
+
+[ext_resource type="Script" uid="uid://do4l4eobm7mtl" path="res://Scripts/gameplayVideo.gd" id="1_uadxf"]
+[ext_resource type="VideoStream" uid="uid://ckl2tjs5o3u88" path="res://Sprites/Assets/videoGameplay.ogv" id="2_e8j4w"]
+[ext_resource type="VideoStream" uid="uid://dhv6lphhprb0c" path="res://Sprites/Assets/background.ogv" id="2_xk7a8"]
+[ext_resource type="Texture2D" uid="uid://cccls4bp7r5ln" path="res://Sprites/Assets/qrcode.png" id="3_e8j4w"]
+[ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="4_iiool"]
+[ext_resource type="Texture2D" uid="uid://bcqxicuc47phc" path="res://Sprites/Assets/tv.webp" id="6_f4u3f"]
+[ext_resource type="Shader" uid="uid://djyxr0cr0jwe0" path="res://Shaders/filtro_vinheta.gdshader" id="7_f4u3f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_psg1b"]
+shader = ExtResource("7_f4u3f")
+shader_parameter/scanline_strength = 0.2230000105925
+shader_parameter/scanline_density = 1.0390000256025
+shader_parameter/vignette_strength = 0.0
+shader_parameter/vignette_size = 0.10000000149012
+shader_parameter/vignette_softness = 0.50400002324148
+shader_parameter/contrast = 1.00000002142093
+shader_parameter/brightness = 1.0
+shader_parameter/chroma_shift = 0.0012
+shader_parameter/static_strength = 0.0310000014725
+shader_parameter/glitch_strength = 0.0010000000475
+shader_parameter/flicker_strength = 0.010000000475
+
+[sub_resource type="Animation" id="Animation_uadxf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5p00f"]
+resource_name = "in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e8j4w"]
+resource_name = "out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iiool"]
+_data = {
+&"RESET": SubResource("Animation_uadxf"),
+&"in": SubResource("Animation_5p00f"),
+&"out": SubResource("Animation_e8j4w")
+}
+
+[node name="gameplayVideo" type="Node2D" unique_id=1270771792]
+script = ExtResource("1_uadxf")
+
+[node name="fundo" type="ColorRect" parent="." unique_id=1053931599]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.03189087, 0, 0.07421875, 1)
+
+[node name="background" type="VideoStreamPlayer" parent="." unique_id=445021705]
+offset_right = 1152.0
+offset_bottom = 640.0
+stream = ExtResource("2_xk7a8")
+autoplay = true
+expand = true
+loop = true
+
+[node name="fundo2" type="ColorRect" parent="." unique_id=728411612]
+offset_top = 476.0
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="Tv" type="Sprite2D" parent="." unique_id=1762577656]
+position = Vector2(575.99994, 304)
+scale = Vector2(0.7, 0.5816194)
+texture = ExtResource("6_f4u3f")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=2039839067]
+offset_left = 225.0
+offset_top = 92.0
+offset_right = 1407.0
+offset_bottom = 824.0
+scale = Vector2(0.5, 0.5)
+stream = ExtResource("2_e8j4w")
+volume_db = 23.999996
+autoplay = true
+expand = true
+loop = true
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1868164050]
+texture_filter = 1
+material = SubResource("ShaderMaterial_psg1b")
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="Qrcode" type="Sprite2D" parent="." unique_id=963168887]
+position = Vector2(1038, 526)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_e8j4w")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=725471267]
+offset_left = 988.0
+offset_top = 581.0
+offset_right = 1088.0
+offset_bottom = 597.0
+theme_override_fonts/normal_font = ExtResource("4_iiool")
+theme_override_font_sizes/normal_font_size = 11
+bbcode_enabled = true
+text = "[wave]Nosso Instagram!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1637756443]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect" unique_id=1621240587]
+libraries/ = SubResource("AnimationLibrary_iiool")
+autoplay = &"out"
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

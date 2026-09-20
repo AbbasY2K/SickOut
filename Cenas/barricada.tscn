@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b858lstpb8k4k"]
+
+[ext_resource type="Texture2D" uid="uid://dtf7odhbq7tyi" path="res://Sprites/placeHolder/barricada.png" id="1_35kou"]
+[ext_resource type="Script" uid="uid://bip6soenj7l4x" path="res://Scripts/barricada.gd" id="1_iwq36"]
+[ext_resource type="AudioStream" uid="uid://ckqsl0ws35tv3" path="res://Audio/Sons/pickUp.ogg" id="3_2elhd"]
+[ext_resource type="AudioStream" uid="uid://c8pmbl3pjjfge" path="res://Audio/Sons/melee.ogg" id="4_dp4g5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwq36"]
+size = Vector2(26, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2elhd"]
+size = Vector2(32, 128)
+
+[node name="portaTrancada" type="StaticBody2D" unique_id=769303038]
+script = ExtResource("1_iwq36")
+item_necessario = "Sickout"
+
+[node name="sprite" type="NinePatchRect" parent="." unique_id=1240991380]
+offset_right = 32.0
+offset_bottom = 128.0
+texture = ExtResource("1_35kou")
+patch_margin_left = 1
+patch_margin_top = 34
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1525916346]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1550948846]
+position = Vector2(-3, 64)
+shape = SubResource("RectangleShape2D_iwq36")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=588144477]
+position = Vector2(16, 64)
+shape = SubResource("RectangleShape2D_2elhd")
+
+[node name="open" type="AudioStreamPlayer" parent="." unique_id=323918030]
+stream = ExtResource("3_2elhd")
+
+[node name="nope" type="AudioStreamPlayer" parent="." unique_id=720900945]
+stream = ExtResource("4_dp4g5")
+pitch_scale = 0.45
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

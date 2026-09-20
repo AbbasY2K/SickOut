@@ -1,0 +1,1422 @@
+[gd_scene format=3 uid="uid://cvsbsj3bbs8pf"]
+
+[ext_resource type="Shader" uid="uid://cqm8nuruvvu1k" path="res://Shaders/poeira.gdshader" id="1_cxcod"]
+[ext_resource type="Script" uid="uid://cmcg2cxafo22v" path="res://Scripts/inputSpeedrun.gd" id="1_m75my"]
+[ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="2_ao5lj"]
+[ext_resource type="Texture2D" uid="uid://bj83np2bs2ww8" path="res://Sprites/Assets/sickoutLogo.png" id="2_yjd6v"]
+[ext_resource type="AudioStream" uid="uid://dywrj1q2hyf83" path="res://Audio/Sons/sickout_editado.wav" id="3_ao5lj"]
+[ext_resource type="AudioStream" uid="uid://shp5xcbbtnup" path="res://Audio/Sons/morte.ogg" id="4_3c1o8"]
+[ext_resource type="FontFile" uid="uid://c2ij18fwli5f" path="res://Fontes/ari-w9500-display.ttf" id="4_qohio"]
+[ext_resource type="Script" uid="uid://bjt0ktc0imul4" path="res://Scripts/text_edit_with_on_screen_keyboard.gd" id="4_soit7"]
+[ext_resource type="Texture2D" uid="uid://dat3i0tj10r0f" path="res://Sprites/keyboard-icon.png" id="5_6ey3a"]
+[ext_resource type="Script" uid="uid://cbbkf0aymupet" path="res://Scripts/botaoMenu.gd" id="5_m7dqt"]
+[ext_resource type="Shader" uid="uid://djyxr0cr0jwe0" path="res://Shaders/filtro_vinheta.gdshader" id="5_m75my"]
+[ext_resource type="AudioStream" uid="uid://c2caxqijdcmde" path="res://Audio/Sons/hover_botao2.wav" id="7_qohio"]
+[ext_resource type="AudioStream" uid="uid://daql37lpt1ao7" path="res://Audio/Musicas/Menus/menu_speedrun.mp3" id="12_6ey3a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qohio"]
+shader = ExtResource("1_cxcod")
+shader_parameter/particle_count = 45.0
+shader_parameter/particle_size = 0.0035
+shader_parameter/speed = 0.5
+shader_parameter/glow = 1.1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_soit7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ttm8u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7ana"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_soit7"]
+bg_color = Color(0.2557068, 0.66796875, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Animation" id="Animation_m7dqt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blackout:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("flash:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("flash:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("flashSom:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("announcer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SickoutParte1:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 320)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SickoutParte2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(744, 320)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SickoutParte1:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SickoutParte2:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SickoutParte1:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SickoutParte2:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_soit7"]
+resource_name = "flash"
+length = 5.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("flash:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("flash:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blackout:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("blackout:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("flashSom:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("announcer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SickoutParte1:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [Vector2(392, 320)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SickoutParte2:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(-2),
+"update": 0,
+"values": [Vector2(744, 320)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("SickoutParte1:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("SickoutParte2:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("SickoutParte1:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.3, 1.8, 5, 5.5),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("SickoutParte2:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(2.5, 3, 5, 5.5),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("blackout:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jyyv6"]
+resource_name = "in2"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blackout:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wo48g"]
+_data = {
+&"RESET": SubResource("Animation_m7dqt"),
+&"flash": SubResource("Animation_soit7"),
+&"in2": SubResource("Animation_jyyv6")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rj3as"]
+shader = ExtResource("5_m75my")
+shader_parameter/scanline_strength = 0.2230000105925
+shader_parameter/scanline_density = 1.0390000256025
+shader_parameter/vignette_strength = 0.0
+shader_parameter/vignette_size = 0.10000000149012
+shader_parameter/vignette_softness = 0.50400002324148
+shader_parameter/contrast = 1.00000002142093
+shader_parameter/brightness = 1.0
+shader_parameter/chroma_shift = 0.0012
+shader_parameter/static_strength = 0.0310000014725
+shader_parameter/glitch_strength = 0.0010000000475
+shader_parameter/flicker_strength = 0.010000000475
+
+[node name="inputSpeedrun" type="Node2D" unique_id=455907029]
+script = ExtResource("1_m75my")
+
+[node name="fundo" type="ColorRect" parent="." unique_id=1840614145]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.03189087, 0, 0.07421875, 1)
+
+[node name="poeira" type="ColorRect" parent="." unique_id=1594154337]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qohio")
+offset_right = 1152.0
+offset_bottom = 640.0
+pivot_offset = Vector2(576, 320)
+mouse_filter = 2
+
+[node name="titulo" type="RichTextLabel" parent="." unique_id=1629498879]
+offset_top = 232.0
+offset_right = 576.0
+offset_bottom = 362.0
+theme_override_fonts/normal_font = ExtResource("2_ao5lj")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]MODO SPEEDRUN"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="subtitulo" type="RichTextLabel" parent="." unique_id=311106987]
+offset_left = 578.0
+offset_top = 112.0
+offset_right = 1088.0
+offset_bottom = 160.0
+theme_override_fonts/normal_font = ExtResource("2_ao5lj")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Digite seu nome:"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="footer" type="RichTextLabel" parent="." unique_id=122228967]
+offset_left = 32.0
+offset_top = 362.0
+offset_right = 544.0
+offset_bottom = 450.0
+theme_override_fonts/normal_font = ExtResource("2_ao5lj")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[shake]Conclua as fases o mais rápido possível para disputar no ranking!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="input" type="PanelContainer" parent="." unique_id=690541337]
+offset_left = 576.0
+offset_top = 167.0
+offset_right = 1088.0
+offset_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("4_soit7")
+
+[node name="MarginContainer" type="MarginContainer" parent="input" unique_id=667792742]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="input/MarginContainer" unique_id=2037574489]
+layout_mode = 2
+
+[node name="TextInputContainer" type="HBoxContainer" parent="input/MarginContainer/VBoxContainer" unique_id=692386873]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="input/MarginContainer/VBoxContainer/TextInputContainer" unique_id=1398023609]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2_ao5lj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_soit7")
+placeholder_text = "Seu nome..."
+virtual_keyboard_enabled = false
+scroll_fit_content_height = true
+
+[node name="KeyboardButton" type="Button" parent="input/MarginContainer/VBoxContainer/TextInputContainer" unique_id=101973246]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="input/MarginContainer/VBoxContainer/TextInputContainer/KeyboardButton" unique_id=315029079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="KeyboardTexture" type="TextureRect" parent="input/MarginContainer/VBoxContainer/TextInputContainer/KeyboardButton/MarginContainer" unique_id=1797346213]
+custom_minimum_size = Vector2(32, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_6ey3a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Controls" type="VBoxContainer" parent="input/MarginContainer/VBoxContainer" unique_id=692686634]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NumberKeys" type="GridContainer" parent="input/MarginContainer/VBoxContainer/Controls" unique_id=1133686784]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 10
+
+[node name="1" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=2100925046]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../10")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "1"
+
+[node name="2" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=2135946892]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "2"
+
+[node name="3" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=1894718621]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "3"
+
+[node name="4" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=82973855]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "4"
+
+[node name="5" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=288384552]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "5"
+
+[node name="6" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=1056773314]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "6"
+
+[node name="7" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=578284565]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "7"
+
+[node name="8" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=1857273595]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "8"
+
+[node name="9" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=748222857]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "9"
+
+[node name="10" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/NumberKeys" unique_id=1090529997]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../1")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "0"
+
+[node name="Keyboards" type="TabContainer" parent="input/MarginContainer/VBoxContainer/Controls" unique_id=2045765]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ttm8u")
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+
+[node name="Qwerty" type="TabContainer" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards" unique_id=1251625514]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t7ana")
+current_tab = 1
+clip_tabs = false
+tabs_visible = false
+metadata/_tab_index = 0
+
+[node name="LettersBig" type="GridContainer" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty" unique_id=384509920]
+visible = false
+layout_mode = 2
+columns = 10
+metadata/_tab_index = 0
+
+[node name="Q" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=309309073]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../P")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "Q"
+
+[node name="W" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=177303773]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "W"
+
+[node name="E" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=698481186]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "E"
+
+[node name="R" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1531910691]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "R"
+
+[node name="T" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=473359311]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "T"
+
+[node name="Y" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=324694628]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "Y"
+
+[node name="U" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1299487697]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "U"
+
+[node name="I" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=249041940]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "I"
+
+[node name="O" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1663324749]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "O"
+
+[node name="P" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=957979037]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../Q")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "P"
+
+[node name="A" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=169677105]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../Gravis")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "A"
+
+[node name="S" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=141479333]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "S"
+
+[node name="D" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1446768195]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "D"
+
+[node name="F" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1842444788]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "F"
+
+[node name="G" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1866337097]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "G"
+
+[node name="H" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=241990101]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "H"
+
+[node name="J" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=318151920]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "J"
+
+[node name="K" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1626543576]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "K"
+
+[node name="L" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=66800888]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "L"
+
+[node name="Gravis" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=482848212]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../A")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "´"
+
+[node name="Z" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=18390415]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../Questionmark")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "Z"
+
+[node name="X" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1714681046]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "X"
+
+[node name="C" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1462450438]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "C"
+
+[node name="V" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1765481539]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "V"
+
+[node name="B" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=739233055]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "B"
+
+[node name="N" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=745333080]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "N"
+
+[node name="M" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=583048578]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "M"
+
+[node name="Dot" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=142009931]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "."
+
+[node name="Comma" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=765430465]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = ","
+
+[node name="Questionmark" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersBig" unique_id=1623389209]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../Z")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "?"
+
+[node name="LettersSmall" type="GridContainer" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty" unique_id=1097100495]
+layout_mode = 2
+columns = 10
+metadata/_tab_index = 1
+
+[node name="Q" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1718634615]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../P")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "q"
+
+[node name="W" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1111212081]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "w"
+
+[node name="E" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=399134921]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "e"
+
+[node name="R" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1611677435]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "r"
+
+[node name="T" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=656470087]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "t"
+
+[node name="Y" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=668427478]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "y"
+
+[node name="U" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=722940775]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "u"
+
+[node name="I" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=454811981]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "i"
+
+[node name="O" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1229103693]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "o"
+
+[node name="P" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1486712869]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../Q")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "p"
+
+[node name="A" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=2105798634]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../GraveAccent")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "a"
+
+[node name="S" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=903860492]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "s"
+
+[node name="D" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1495076773]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "d"
+
+[node name="F" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1626544863]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "f"
+
+[node name="G" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1208245204]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "g"
+
+[node name="H" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1150928874]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "h"
+
+[node name="J" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=103083493]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "j"
+
+[node name="K" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=971452110]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "k"
+
+[node name="L" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1186170078]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "l"
+
+[node name="GraveAccent" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=647688]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../A")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "´"
+
+[node name="Z" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=436027577]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../Questionmark")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "z"
+
+[node name="X" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=578825956]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "x"
+
+[node name="C" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1268002237]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "c"
+
+[node name="V" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1606976584]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "v"
+
+[node name="B" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=250002859]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "b"
+
+[node name="N" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1257261709]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "n"
+
+[node name="M" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1537726824]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "m"
+
+[node name="Dot" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=2121586324]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "."
+
+[node name="Comma" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=2018266824]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = ","
+
+[node name="Questionmark" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/LettersSmall" unique_id=1600744418]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../Z")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+text = "?"
+
+[node name="Symbols" type="GridContainer" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty" unique_id=1965804861]
+visible = false
+layout_mode = 2
+columns = 10
+metadata/_tab_index = 2
+
+[node name="ExclamationMark" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1792943392]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "!"
+
+[node name="AtSign" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1516167593]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "@"
+
+[node name="Hashtag" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=715574343]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "#"
+
+[node name="Dollar" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1193771089]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "$"
+
+[node name="Percent" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1573155331]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "%"
+
+[node name="Circumflex" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=2090687360]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "^"
+
+[node name="Ampersand" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1713637747]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "&"
+
+[node name="Asterisk" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=904825636]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "*"
+
+[node name="RoundBracketOpen" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1275906320]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "("
+
+[node name="RoundBracketClose" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=271866533]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "P"
+
+[node name="Minus" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=719117983]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "-"
+
+[node name="Underline" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1283644073]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "_"
+
+[node name="Plus" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1603118773]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "+"
+
+[node name="Equal" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1467246535]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "="
+
+[node name="ForwardSlash" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1121274185]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "/"
+
+[node name="BackSlash" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1488319736]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "\\"
+
+[node name="CurlyBracketOpen" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=361724710]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "{"
+
+[node name="CurlyBracketClose" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=87843963]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "}"
+
+[node name="SquareBracketOpen" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1449084506]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "["
+
+[node name="SquareBracketClose" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1201957031]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "]"
+
+[node name="LowerThan" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=490426836]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "<"
+
+[node name="GreaterThan" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1381569682]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = ">"
+
+[node name="Semicolon" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=752488160]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = ";"
+
+[node name="Colon" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=2080145245]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = ":"
+
+[node name="QuotationMark" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=466110525]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "\""
+
+[node name="AcuteAccent" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=115949293]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "`"
+
+[node name="VerticalBar" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=549604627]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "|"
+
+[node name="Tilde" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=141715796]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "~"
+
+[node name="Pound" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=560236418]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "£"
+
+[node name="Yen" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/Keyboards/Qwerty/Symbols" unique_id=1386967379]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "¥"
+
+[node name="ManipulationButtons" type="HBoxContainer" parent="input/MarginContainer/VBoxContainer/Controls" unique_id=414643538]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShiftButton" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons" unique_id=1436272755]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../BackspaceButton")
+focus_neighbor_bottom = NodePath("../../../../../../play")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+theme_override_font_sizes/font_size = 16
+text = "Shift"
+
+[node name="SymbolsButton" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons" unique_id=177893687]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_bottom = NodePath("../../../../../../play")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+theme_override_font_sizes/font_size = 16
+text = "Symbols"
+
+[node name="SpaceButton" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons" unique_id=786225717]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_bottom = NodePath("../../../../../../play")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+theme_override_font_sizes/font_size = 16
+text = "Espaço"
+
+[node name="BackspaceButton" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons" unique_id=2107847058]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../ShiftButton")
+focus_neighbor_bottom = NodePath("../../../../../../play")
+theme_override_fonts/font = ExtResource("2_ao5lj")
+theme_override_font_sizes/font_size = 16
+text = "Backspace"
+
+[node name="MetaButtons" type="HBoxContainer" parent="input/MarginContainer/VBoxContainer/Controls" unique_id=255918722]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CancelButton" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/MetaButtons" unique_id=1694598532]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Cancel"
+
+[node name="FillSpace" type="Control" parent="input/MarginContainer/VBoxContainer/Controls/MetaButtons" unique_id=377987878]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubmitButton" type="Button" parent="input/MarginContainer/VBoxContainer/Controls/MetaButtons" unique_id=1257162517]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Submit"
+
+[node name="play" type="Button" parent="." unique_id=255340368]
+offset_left = 576.0
+offset_top = 424.0
+offset_right = 1088.0
+offset_bottom = 529.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../input/MarginContainer/VBoxContainer/Controls/ManipulationButtons/SpaceButton")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_qohio")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_soit7")
+text = "JOGAR"
+script = ExtResource("5_m7dqt")
+
+[node name="blackout" type="ColorRect" parent="." unique_id=944427032]
+visible = false
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="SickoutParte1" type="Sprite2D" parent="." unique_id=362943140]
+visible = false
+modulate = Color(1, 1, 1, 0)
+position = Vector2(576, 320)
+scale = Vector2(0.3, 0.301)
+texture = ExtResource("2_yjd6v")
+region_enabled = true
+region_rect = Rect2(1031, 1265, 1238, 536)
+
+[node name="SickoutParte2" type="Sprite2D" parent="." unique_id=1784584745]
+visible = false
+position = Vector2(744, 320)
+scale = Vector2(0.3, 0.301)
+texture = ExtResource("2_yjd6v")
+region_enabled = true
+region_rect = Rect2(2353, 1265, 1137, 536)
+
+[node name="flash" type="ColorRect" parent="." unique_id=1102580849]
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_right = 1152.0
+offset_bottom = 640.0
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1415182828]
+libraries/ = SubResource("AnimationLibrary_wo48g")
+autoplay = &"in2"
+
+[node name="hoverBotao" type="AudioStreamPlayer" parent="." unique_id=1580775720]
+stream = ExtResource("7_qohio")
+volume_db = -5.0
+
+[node name="announcer" type="AudioStreamPlayer" parent="." unique_id=715494790]
+stream = ExtResource("3_ao5lj")
+volume_db = 2.0
+
+[node name="flashSom" type="AudioStreamPlayer" parent="." unique_id=1450781436]
+stream = ExtResource("4_3c1o8")
+volume_db = -5.0
+pitch_scale = 1.5
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=230560749]
+process_mode = 3
+stream = ExtResource("12_6ey3a")
+volume_db = 7.0
+autoplay = true
+parameters/looping = true
+
+[node name="shader" type="CanvasLayer" parent="." unique_id=2019124423]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="shader" unique_id=1415249713]
+texture_filter = 1
+material = SubResource("ShaderMaterial_rj3as")
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/TextInputContainer/KeyboardButton" to="input" method="_on_keyboard_button_pressed"]
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons/ShiftButton" to="input" method="_on_shift_button_pressed"]
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons/SymbolsButton" to="input" method="_on_symbols_button_pressed"]
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons/SpaceButton" to="input" method="_on_space_button_pressed"]
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/Controls/ManipulationButtons/BackspaceButton" to="input" method="_on_backspace_button_pressed"]
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/Controls/MetaButtons/CancelButton" to="input" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="input/MarginContainer/VBoxContainer/Controls/MetaButtons/SubmitButton" to="input" method="_on_submit_button_pressed"]
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]

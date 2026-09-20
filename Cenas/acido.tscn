@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://duaabb775jxci"]
+
+[ext_resource type="Texture2D" uid="uid://bbfb04ok11ims" path="res://Sprites/Assets/acido.png" id="1_m0knj"]
+[ext_resource type="Script" uid="uid://c67v77aiipy0m" path="res://Scripts/ataque_acido.gd" id="1_vabi6"]
+
+[sub_resource type="Animation" id="Animation_0pfbv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_uqj1p"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0q37w"]
+_data = {
+&"RESET": SubResource("Animation_0pfbv"),
+&"idle": SubResource("Animation_uqj1p")
+}
+
+[node name="acido" type="Node2D" unique_id=1025618413]
+script = ExtResource("1_vabi6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=509163800]
+position = Vector2(-3.8444996e-06, -5.35)
+scale = Vector2(1.4545454, 1.3333334)
+texture = ExtResource("1_m0knj")
+vframes = 2
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1042219623]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=546661875]
+polygon = PackedVector2Array(-33, 0, -24, -14, 24, -14, 33, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=270000971]
+libraries/ = SubResource("AnimationLibrary_0q37w")
+autoplay = &"idle"
+speed_scale = 0.75
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

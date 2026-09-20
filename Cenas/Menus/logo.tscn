@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://u5w8a2alpo6e"]
+
+[ext_resource type="Script" uid="uid://46ikfapur782" path="res://Scripts/logo.gd" id="1_a2c1d"]
+[ext_resource type="VideoStream" uid="uid://dhv6lphhprb0c" path="res://Sprites/Assets/background.ogv" id="2_r4c4s"]
+[ext_resource type="AudioStream" uid="uid://bwdtg0dtp3vtn" path="res://Audio/Sons/anuncio.mp3" id="5_a2c1d"]
+[ext_resource type="Texture2D" uid="uid://do6o44uk8dv3j" path="res://Sprites/UI/logo_empresa.png" id="16_cwnex"]
+[ext_resource type="Shader" uid="uid://djyxr0cr0jwe0" path="res://Shaders/filtro_vinheta.gdshader" id="23_na6x3"]
+
+[sub_resource type="Animation" id="Animation_eheat"]
+resource_name = "outLogo"
+length = 3.5000000000000004
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1, 3, 3.5),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Logo:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("blackout:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("blackout:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("blackout:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eheat"]
+_data = {
+&"outLogo": SubResource("Animation_eheat")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpg42"]
+shader = ExtResource("23_na6x3")
+shader_parameter/scanline_strength = 0.2230000105925
+shader_parameter/scanline_density = 1.0390000256025
+shader_parameter/vignette_strength = 0.0
+shader_parameter/vignette_size = 0.10000000149012
+shader_parameter/vignette_softness = 0.50400002324148
+shader_parameter/contrast = 1.00000002142093
+shader_parameter/brightness = 1.0
+shader_parameter/chroma_shift = 0.0012
+shader_parameter/static_strength = 0.0310000014725
+shader_parameter/glitch_strength = 0.0010000000475
+shader_parameter/flicker_strength = 0.010000000475
+
+[node name="logo" type="Node2D" unique_id=1221083459]
+script = ExtResource("1_a2c1d")
+
+[node name="fundo" type="ColorRect" parent="." unique_id=590060248]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.03189087, 0, 0.07421875, 1)
+
+[node name="background" type="VideoStreamPlayer" parent="." unique_id=1692259495]
+offset_right = 1152.0
+offset_bottom = 640.0
+stream = ExtResource("2_r4c4s")
+autoplay = true
+expand = true
+loop = true
+
+[node name="blackout" type="ColorRect" parent="." unique_id=1119417379]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="Logo" type="Sprite2D" parent="." unique_id=975648056]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(576, 320)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("16_cwnex")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=55818107]
+libraries/ = SubResource("AnimationLibrary_eheat")
+autoplay = &"outLogo"
+
+[node name="shader" type="CanvasLayer" parent="." unique_id=1182161332]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="shader" unique_id=1472018452]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bpg42")
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1897391153]
+stream = ExtResource("5_a2c1d")
+volume_db = 2.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

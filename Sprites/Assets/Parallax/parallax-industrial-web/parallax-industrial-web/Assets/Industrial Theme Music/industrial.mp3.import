@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dby3llxwrnk7i"
+path="res://.godot/imported/industrial.mp3-288295213cc19003348427350dc34738.mp3str"
+
+[deps]
+
+source_file="res://Sprites/Assets/Parallax/parallax-industrial-web/parallax-industrial-web/Assets/Industrial Theme Music/industrial.mp3"
+dest_files=["res://.godot/imported/industrial.mp3-288295213cc19003348427350dc34738.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

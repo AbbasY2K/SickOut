@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://bjtedmy3ch3uf"]
+
+[ext_resource type="Texture2D" uid="uid://hdghvj3bpuox" path="res://Sprites/UI/setaLeft.png" id="1_4116y"]
+[ext_resource type="Script" uid="uid://bn7u1teoqylvi" path="res://Scripts/controles_menu.gd" id="1_k0wd5"]
+[ext_resource type="Texture2D" uid="uid://cv507whname80" path="res://Sprites/UI/setaDown.png" id="2_qq66e"]
+[ext_resource type="Texture2D" uid="uid://clrj17af2ovvy" path="res://Sprites/UI/setaRight.png" id="3_gr8su"]
+[ext_resource type="Texture2D" uid="uid://rxkhuwqa5ym" path="res://Sprites/UI/setaUp.png" id="4_k0wd5"]
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="5_k0wd5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(1, 1, 1, 0.4509804)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0wd5"]
+size = Vector2(96, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gr8su"]
+size = Vector2(64, 96)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jmaff"]
+bg_color = Color(1, 1, 1, 0.4509804)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ho4ns"]
+radius = 48.0
+
+[node name="controlesMenu" type="Control" unique_id=2121522421]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k0wd5")
+
+[node name="Panel" type="Panel" parent="." unique_id=270207209]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 384.0
+offset_right = 288.0
+offset_bottom = 576.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="setaLeft" type="TouchScreenButton" parent="." unique_id=511473772]
+position = Vector2(96.00006, 444.00003)
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("1_4116y")
+texture_pressed = ExtResource("1_4116y")
+shape = SubResource("RectangleShape2D_k0wd5")
+action = "ui_left"
+
+[node name="setaRight" type="TouchScreenButton" parent="." unique_id=637617226]
+position = Vector2(216.00006, 444.00003)
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("3_gr8su")
+texture_pressed = ExtResource("3_gr8su")
+shape = SubResource("RectangleShape2D_k0wd5")
+action = "ui_right"
+
+[node name="setaup" type="TouchScreenButton" parent="." unique_id=110457286]
+position = Vector2(156, 384)
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("4_k0wd5")
+texture_pressed = ExtResource("4_k0wd5")
+shape = SubResource("RectangleShape2D_gr8su")
+action = "ui_up"
+
+[node name="setaDown" type="TouchScreenButton" parent="." unique_id=690401709]
+position = Vector2(156, 504)
+scale = Vector2(0.75, 0.75)
+texture_normal = ExtResource("2_qq66e")
+texture_pressed = ExtResource("2_qq66e")
+shape = SubResource("RectangleShape2D_gr8su")
+action = "ui_down"
+
+[node name="enter" type="Panel" parent="." unique_id=1259765956]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 448.0
+offset_right = 1056.0
+offset_bottom = 576.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jmaff")
+
+[node name="Label" type="Label" parent="enter" unique_id=404950560]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 351.9998
+offset_top = 448.00003
+offset_right = 479.9998
+offset_bottom = 576.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_k0wd5")
+theme_override_font_sizes/font_size = 32
+text = "ENTER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="botao" type="TouchScreenButton" parent="enter" unique_id=137190422]
+position = Vector2(64, 64)
+shape = SubResource("CircleShape2D_ho4ns")
+action = "ui_accept"
+
+[connection signal="pressed" from="setaLeft" to="." method="_on_seta_left_pressed"]
+[connection signal="pressed" from="setaRight" to="." method="_on_seta_right_pressed"]
+[connection signal="pressed" from="setaup" to="." method="_on_setaup_pressed"]
+[connection signal="pressed" from="setaDown" to="." method="_on_seta_down_pressed"]

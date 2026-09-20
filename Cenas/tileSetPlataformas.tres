@@ -1,0 +1,106 @@
+[gd_resource type="TileSet" format=3 uid="uid://byyhbt71sfn1h"]
+
+[ext_resource type="Texture2D" uid="uid://em4hkaf0eh3d" path="res://Sprites/placeHolder/tiles.png" id="1_7kt43"]
+[ext_resource type="Texture2D" uid="uid://clanb8hjgn0rh" path="res://Sprites/Assets/tileSetPedra.png" id="2_kuxls"]
+[ext_resource type="Texture2D" uid="uid://bevrk1sn252xy" path="res://Sprites/Assets/tilesMusgo.png" id="3_5qc4i"]
+[ext_resource type="Texture2D" uid="uid://d3nf65jipscj" path="res://Sprites/Assets/tilesTijolos.png" id="4_g6mr5"]
+[ext_resource type="Texture2D" uid="uid://ch866h5nqpdcf" path="res://Sprites/Assets/tilesTijolosCinza.png" id="5_78dgg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ablo6"]
+texture = ExtResource("1_7kt43")
+1:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/one_way = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/one_way = true
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0/physics_layer_0/polygon_0/one_way = true
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_prltw"]
+texture = ExtResource("2_kuxls")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/one_way = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/one_way = true
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0/physics_layer_0/polygon_0/one_way = true
+1:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_218ko"]
+texture = ExtResource("3_5qc4i")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/one_way = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/one_way = true
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0/physics_layer_0/polygon_0/one_way = true
+1:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s8ybk"]
+texture = ExtResource("4_g6mr5")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/one_way = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/one_way = true
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0/physics_layer_0/polygon_0/one_way = true
+1:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7pwx"]
+texture = ExtResource("5_78dgg")
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0/physics_layer_0/polygon_0/one_way = true
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0/physics_layer_0/polygon_0/one_way = true
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0/physics_layer_0/polygon_0/one_way = true
+1:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+1:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_ablo6")
+sources/1 = SubResource("TileSetAtlasSource_prltw")
+sources/2 = SubResource("TileSetAtlasSource_218ko")
+sources/3 = SubResource("TileSetAtlasSource_s8ybk")
+sources/4 = SubResource("TileSetAtlasSource_n7pwx")

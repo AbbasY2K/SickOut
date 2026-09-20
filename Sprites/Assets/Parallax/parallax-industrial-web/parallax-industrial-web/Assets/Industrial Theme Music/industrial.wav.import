@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8wy27rjlnmvp"
+path="res://.godot/imported/industrial.wav-8b8dd74f34d46ae778e0ffadd6f48ffb.sample"
+
+[deps]
+
+source_file="res://Sprites/Assets/Parallax/parallax-industrial-web/parallax-industrial-web/Assets/Industrial Theme Music/industrial.wav"
+dest_files=["res://.godot/imported/industrial.wav-8b8dd74f34d46ae778e0ffadd6f48ffb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

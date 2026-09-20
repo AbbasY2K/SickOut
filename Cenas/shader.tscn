@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://buiy1o157r48a"]
+
+[ext_resource type="Shader" uid="uid://cn7r2yxd3on0y" path="res://Shaders/filtro_vinheta2.gdshader" id="1_ymvrr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f76us"]
+shader = ExtResource("1_ymvrr")
+shader_parameter/scanline_strength = 0.008
+shader_parameter/scanline_density = 1.0
+shader_parameter/vignette_strength = 0.75
+shader_parameter/vignette_size = 0.21800000709512002
+shader_parameter/vignette_softness = 0.42300001939398
+shader_parameter/contrast = 1.12100002716843
+shader_parameter/brightness = 1.0270000250325
+shader_parameter/chroma_shift = 0.0
+shader_parameter/static_strength = 0.003
+shader_parameter/glitch_strength = 0.0030000001425
+shader_parameter/flicker_strength = 0.003
+
+[node name="shader" type="CanvasLayer" unique_id=350166330]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=537161834]
+texture_filter = 1
+material = SubResource("ShaderMaterial_f76us")
+offset_right = 1152.0
+offset_bottom = 640.0
+metadata/_edit_use_anchors_ = true

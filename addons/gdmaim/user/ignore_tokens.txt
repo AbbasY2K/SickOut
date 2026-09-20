@@ -1,0 +1,2 @@
+# Here place you custom tokens, must be a list of tokens.
+# For example check the readme in 'https://github.com/cherriesandmochi/gdmaim' <3

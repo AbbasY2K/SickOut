@@ -1,0 +1,361 @@
+[gd_scene format=3 uid="uid://ce8ccwo2ldqe1"]
+
+[ext_resource type="VideoStream" uid="uid://dhv6lphhprb0c" path="res://Sprites/Assets/background.ogv" id="1_4c00j"]
+[ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="2_th427"]
+[ext_resource type="AudioStream" uid="uid://c4jqlkw4vmbsx" path="res://Audio/Musicas/Menus/introFase.wav" id="3_86bjm"]
+[ext_resource type="Shader" uid="uid://djyxr0cr0jwe0" path="res://Shaders/filtro_vinheta.gdshader" id="3_htqbv"]
+[ext_resource type="Texture2D" uid="uid://8tc3af5kydcb" path="res://Sprites/Assets/statico.png" id="3_th427"]
+[ext_resource type="AudioStream" uid="uid://cdbygmtkoyis1" path="res://Audio/Musicas/Menus/introFase2.wav" id="6_gd8g6"]
+[ext_resource type="AudioStream" uid="uid://ti6q4dxe1vtg" path="res://Audio/Sons/glitch.mp3" id="6_th427"]
+
+[sub_resource type="Animation" id="Animation_gd8g6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tdlx5"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.25, 0.28333333, 0.31666666, 0.35000002, 0.38333333, 0.4166667, 0.45000002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wyh38"]
+_data = {
+&"RESET": SubResource("Animation_gd8g6"),
+&"idle": SubResource("Animation_tdlx5")
+}
+
+[sub_resource type="Animation" id="Animation_foely"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rd5uv"]
+resource_name = "intro1"
+length = 5.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("intro1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("glitch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_th427"]
+resource_name = "intro2"
+length = 5.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("glitch")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("intro2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n27oo"]
+_data = {
+&"RESET": SubResource("Animation_foely"),
+&"intro1": SubResource("Animation_rd5uv"),
+&"intro2": SubResource("Animation_th427")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_th427"]
+shader = ExtResource("3_htqbv")
+shader_parameter/scanline_strength = 0.2230000105925
+shader_parameter/scanline_density = 1.0390000256025
+shader_parameter/vignette_strength = 0.0
+shader_parameter/vignette_size = 0.10000000149012
+shader_parameter/vignette_softness = 0.50400002324148
+shader_parameter/contrast = 1.00000002142093
+shader_parameter/brightness = 1.0
+shader_parameter/chroma_shift = 0.0012
+shader_parameter/static_strength = 0.0310000014725
+shader_parameter/glitch_strength = 0.0010000000475
+shader_parameter/flicker_strength = 0.010000000475
+
+[node name="introFase" type="Node2D" unique_id=1882829255]
+process_mode = 3
+visible = false
+
+[node name="fundo" type="ColorRect" parent="." unique_id=1915467047]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="background" type="VideoStreamPlayer" parent="." unique_id=699960840]
+offset_right = 1152.0
+offset_bottom = 640.0
+stream = ExtResource("1_4c00j")
+autoplay = true
+expand = true
+loop = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=702535080]
+offset_top = 192.0
+offset_right = 1152.0
+offset_bottom = 448.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="fase" type="RichTextLabel" parent="VBoxContainer" unique_id=1360718294]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_th427")
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[shake]FASE 1"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="subfase" type="RichTextLabel" parent="VBoxContainer" unique_id=1985772499]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_th427")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[shake]O Laboratório"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=245993378]
+visible = false
+modulate = Color(0.040283203, 0.6875, 0.11107254, 1)
+position = Vector2(576, 321.5)
+scale = Vector2(2.4, 1.6851852)
+texture = ExtResource("3_th427")
+hframes = 5
+vframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=782738742]
+libraries/ = SubResource("AnimationLibrary_wyh38")
+autoplay = &"idle"
+speed_scale = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=354556869]
+libraries/ = SubResource("AnimationLibrary_n27oo")
+
+[node name="shader" type="CanvasLayer" parent="." unique_id=1344839319]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="shader" unique_id=986533646]
+texture_filter = 1
+material = SubResource("ShaderMaterial_th427")
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="intro1" type="AudioStreamPlayer" parent="." unique_id=278687118]
+stream = ExtResource("3_86bjm")
+volume_db = 8.0
+pitch_scale = 0.85
+
+[node name="intro2" type="AudioStreamPlayer" parent="." unique_id=108106143]
+stream = ExtResource("6_gd8g6")
+volume_db = 8.0
+pitch_scale = 0.85
+
+[node name="glitch" type="AudioStreamPlayer" parent="." unique_id=1212924182]
+stream = ExtResource("6_th427")
+volume_db = -3.0

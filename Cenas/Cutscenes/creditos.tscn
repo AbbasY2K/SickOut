@@ -1,0 +1,304 @@
+[gd_scene format=3 uid="uid://lngcisklqfs"]
+
+[ext_resource type="Script" uid="uid://daw86dm8ash0b" path="res://Scripts/thanks.gd" id="1_dyx1h"]
+[ext_resource type="FontFile" uid="uid://c2ij18fwli5f" path="res://Fontes/ari-w9500-display.ttf" id="2_mrsfm"]
+[ext_resource type="Script" uid="uid://db8l3ael3irbm" path="res://Scripts/Textos/richTextLabel.gd" id="3_j74se"]
+[ext_resource type="AudioStream" uid="uid://dsh5yrr6f681h" path="res://Audio/Musicas/Menus/musica_creditos.wav" id="5_5gqxl"]
+
+[sub_resource type="Shader" id="Shader_mrsfm"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+
+// CRT leve
+uniform float scanline_strength : hint_range(0.0, 0.05) = 0.008;
+uniform float scanline_density : hint_range(0.5, 2.0) = 1.0;
+
+// Vinheta
+uniform float vignette_strength : hint_range(0.0, 1.0) = 0.25;
+uniform float vignette_size : hint_range(0.1, 1.0) = 0.6;
+uniform float vignette_softness : hint_range(0.01, 1.0) = 0.4;
+
+// Imagem
+uniform float contrast : hint_range(0.8, 1.5) = 1.02;
+uniform float brightness : hint_range(0.8, 1.2) = 1.02;
+uniform float chroma_shift : hint_range(0.0, 0.003) = 0.0003;
+
+// Efeitos
+uniform float static_strength : hint_range(0.0, 0.05) = 0.003;
+uniform float glitch_strength : hint_range(0.0, 0.03) = 0.0015;
+uniform float flicker_strength : hint_range(0.0, 0.03) = 0.003;
+
+float random(vec2 uv) {
+	return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void fragment() {
+
+	vec2 uv = SCREEN_UV;
+	vec2 resolution = vec2(textureSize(SCREEN_TEXTURE, 0));
+
+	// Glitch extremamente raro
+	float glitchLine = step(0.998, sin(TIME * 1.5 + uv.y * 30.0));
+
+	if (glitchLine > 0.0) {
+		uv.x += sin(TIME * 70.0 + uv.y * 100.0) * glitch_strength;
+	}
+
+	// Aberração cromática leve
+	float r = texture(SCREEN_TEXTURE, uv + vec2(chroma_shift, 0.0)).r;
+	float g = texture(SCREEN_TEXTURE, uv).g;
+	float b = texture(SCREEN_TEXTURE, uv - vec2(chroma_shift, 0.0)).b;
+
+	vec3 col = vec3(r, g, b);
+
+	// Scanlines quase imperceptíveis e SEM animação
+	float scan = sin(uv.y * resolution.y * scanline_density);
+	scan = scan * 0.5 + 0.5;
+
+	col *= 1.0 - (scan * scanline_strength);
+
+	// Ruído muito leve
+	float noise = random(
+		vec2(
+			floor(uv.x * resolution.x),
+			floor(uv.y * resolution.y + TIME * 20.0)
+		)
+	);
+
+	col += (noise - 0.5) * static_strength;
+
+	// Flicker mínimo
+	float flicker = 1.0 + sin(TIME * 12.0) * flicker_strength;
+	col *= flicker;
+
+	// Vinheta suave
+	float dist = distance(uv, vec2(0.5));
+
+	float vignette = smoothstep(
+		vignette_size,
+		vignette_size - vignette_softness,
+		dist
+	);
+
+	col *= mix(1.0, max(vignette, 0.85), vignette_strength);
+
+	// Contraste e brilho
+	col = (col - 0.5) * contrast + 0.5;
+	col *= brightness;
+
+	COLOR = vec4(col, 1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6gxsk"]
+shader = SubResource("Shader_mrsfm")
+shader_parameter/scanline_strength = 0.008
+shader_parameter/scanline_density = 1.0
+shader_parameter/vignette_strength = 0.6
+shader_parameter/vignette_size = 0.55
+shader_parameter/vignette_softness = 0.35
+shader_parameter/contrast = 1.1
+shader_parameter/brightness = 1.0
+shader_parameter/chroma_shift = 0.0012
+shader_parameter/static_strength = 0.018
+shader_parameter/glitch_strength = 0.0015
+shader_parameter/flicker_strength = 0.025
+
+[sub_resource type="Animation" id="Animation_rdu1u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fundo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/texto:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0feyy"]
+resource_name = "idle"
+length = 10.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/texto:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3, 3.5, 6, 6.5, 7, 9.55, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/texto:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 6.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": ["[wave]Obrigado por testar 
+nosso jogo!", "[wave]Esse é apenas o início. Se você gostou da nossa demo...", "[wave]Veja a evolução do jogo no nosso Insta,
+[color=purple]@finallevel_studio!"]
+}
+
+[sub_resource type="Animation" id="Animation_j74se"]
+resource_name = "idle2"
+length = 35.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/texto:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 34.5, 35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmiid"]
+_data = {
+&"RESET": SubResource("Animation_rdu1u"),
+&"idle": SubResource("Animation_0feyy"),
+&"idle2": SubResource("Animation_j74se")
+}
+
+[node name="thanks" type="Node2D" unique_id=1762128019]
+script = ExtResource("1_dyx1h")
+
+[node name="audio" type="AudioStreamPlayer" parent="." unique_id=1761195130]
+autoplay = true
+
+[node name="fundo" type="ColorRect" parent="." unique_id=2004985796]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1010340096]
+offset_left = 576.0
+offset_right = 1152.0
+offset_bottom = 640.0
+alignment = 1
+
+[node name="texto" type="RichTextLabel" parent="VBoxContainer" unique_id=1287862527]
+layout_mode = 2
+theme_override_constants/line_separation = 16
+theme_override_fonts/normal_font = ExtResource("2_mrsfm")
+theme_override_font_sizes/normal_font_size = 55
+bbcode_enabled = true
+text = "[wave]Obrigado por testar 
+nosso jogo!"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_j74se")
+key = "OBG_TEXTO1"
+
+[node name="texto2" type="RichTextLabel" parent="VBoxContainer" unique_id=2093633715]
+layout_mode = 2
+theme_override_constants/line_separation = 16
+theme_override_fonts/normal_font = ExtResource("2_mrsfm")
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "[wave]Acompanhe nosso desenvolvimento 
+no Instagram: [color=#9751dd]@finallevel_studio
+"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_j74se")
+key = "OBG_TEXTO2"
+
+[node name="creditos" type="RichTextLabel" parent="." unique_id=932479067]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 576.0
+offset_bottom = 624.0
+theme_override_constants/line_separation = 16
+theme_override_fonts/normal_font = ExtResource("2_mrsfm")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave][font_size=40][color=#ef3e3e]CEO[/color][/font_size][/wave]
+Lorena Goes
+
+[wave][font_size=40][color=#f5c16c]GESTORES[/color][/font_size][/wave]
+André Nóbrega  
+Alberto Barbosa
+
+"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_j74se")
+key = "CREDITOS_TEXTO"
+
+[node name="fade" type="ColorRect" parent="." unique_id=2012380514]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="shader" type="CanvasLayer" parent="." unique_id=234927791]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="shader" unique_id=395783894]
+texture_filter = 1
+material = SubResource("ShaderMaterial_6gxsk")
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=2137762482]
+stream = ExtResource("5_5gqxl")
+volume_db = 5.0
+pitch_scale = 0.9
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1761227331]
+libraries/ = SubResource("AnimationLibrary_xmiid")

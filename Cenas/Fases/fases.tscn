@@ -1,0 +1,370 @@
+[gd_scene format=3 uid="uid://bu2e8hkpaose2"]
+
+[ext_resource type="Script" uid="uid://c214odtfjfp8w" path="res://Scripts/fases.gd" id="1_p2s0o"]
+[ext_resource type="VideoStream" uid="uid://dhv6lphhprb0c" path="res://Sprites/Assets/background.ogv" id="2_ff3ji"]
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="3_e8pq3"]
+[ext_resource type="PackedScene" uid="uid://crwhyrchl2xhr" path="res://Cenas/botaoFase.tscn" id="4_14vhe"]
+[ext_resource type="Shader" uid="uid://djyxr0cr0jwe0" path="res://Shaders/filtro_vinheta.gdshader" id="5_ymmoi"]
+[ext_resource type="AudioStream" uid="uid://ycdw2ptjct4w" path="res://Audio/Musicas/Menus/musica_menu.mp3" id="6_gkbe8"]
+[ext_resource type="AudioStream" uid="uid://c2caxqijdcmde" path="res://Audio/Sons/hover_botao2.wav" id="7_mfdmr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqyqj"]
+bg_color = Color(0, 0, 0, 0.38431373)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.23724365, 0.66015625, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_168vt"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.23724365, 0.66015625, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.07545471, 0.83984375, 0.12322903, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qb6s"]
+shader = ExtResource("5_ymmoi")
+shader_parameter/scanline_strength = 0.2230000105925
+shader_parameter/scanline_density = 1.0390000256025
+shader_parameter/vignette_strength = 0.0
+shader_parameter/vignette_size = 0.10000000149012
+shader_parameter/vignette_softness = 0.50400002324148
+shader_parameter/contrast = 1.00000002142093
+shader_parameter/brightness = 1.0
+shader_parameter/chroma_shift = 0.0012
+shader_parameter/static_strength = 0.0310000014725
+shader_parameter/glitch_strength = 0.0010000000475
+shader_parameter/flicker_strength = 0.010000000475
+
+[sub_resource type="Animation" id="Animation_f5h1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0667j"]
+resource_name = "in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.5),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mioqm"]
+resource_name = "out"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(2),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ajgue"]
+_data = {
+&"RESET": SubResource("Animation_f5h1b"),
+&"in": SubResource("Animation_0667j"),
+&"out": SubResource("Animation_mioqm")
+}
+
+[node name="fases" type="Node2D" unique_id=177220864]
+script = ExtResource("1_p2s0o")
+
+[node name="background" type="VideoStreamPlayer" parent="." unique_id=1453932247]
+offset_right = 1152.0
+offset_bottom = 640.0
+stream = ExtResource("2_ff3ji")
+autoplay = true
+expand = true
+loop = true
+
+[node name="fundo" type="Panel" parent="." unique_id=1120130893]
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 960.0
+offset_bottom = 576.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uqyqj")
+
+[node name="fundo2" type="Panel" parent="." unique_id=267201502]
+offset_left = 256.0
+offset_top = 432.0
+offset_right = 896.0
+offset_bottom = 528.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_168vt")
+
+[node name="desc" type="Label" parent="fundo2" unique_id=660581878]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 624.0
+offset_bottom = 80.0
+theme_override_fonts/font = ExtResource("3_e8pq3")
+theme_override_font_sizes/font_size = 22
+
+[node name="titulo" type="RichTextLabel" parent="." unique_id=263496864]
+offset_left = 448.0
+offset_top = 112.0
+offset_right = 896.0
+offset_bottom = 176.0
+theme_override_fonts/normal_font = ExtResource("3_e8pq3")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[shake]SELECIONE A FASE"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fase0" parent="." unique_id=439093538 instance=ExtResource("4_14vhe")]
+offset_left = 256.0
+offset_top = 112.0
+offset_right = 448.0
+offset_bottom = 176.0
+focus_neighbor_top = NodePath("../fase1")
+focus_neighbor_bottom = NodePath("../fase1")
+theme_override_font_sizes/font_size = 24
+text = "Tutorial"
+
+[node name="fase1" parent="." unique_id=1492923432 instance=ExtResource("4_14vhe")]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 448.0
+offset_bottom = 256.0
+focus_neighbor_left = NodePath("../fase3")
+focus_neighbor_top = NodePath("../fase0")
+focus_neighbor_right = NodePath("../fase2")
+focus_neighbor_bottom = NodePath("../fase4")
+fase_id = 1
+
+[node name="fase2" parent="." unique_id=1909432770 instance=ExtResource("4_14vhe")]
+offset_left = 480.0
+offset_top = 192.0
+offset_right = 672.0
+offset_bottom = 256.0
+focus_neighbor_left = NodePath("../fase1")
+focus_neighbor_top = NodePath("../fase8")
+focus_neighbor_right = NodePath("../fase3")
+focus_neighbor_bottom = NodePath("../fase5")
+text = "2"
+fase_id = 2
+
+[node name="fase3" parent="." unique_id=1226423340 instance=ExtResource("4_14vhe")]
+offset_left = 704.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 256.0
+focus_neighbor_left = NodePath("../fase2")
+focus_neighbor_top = NodePath("../fase9")
+focus_neighbor_right = NodePath("../fase1")
+focus_neighbor_bottom = NodePath("../fase6")
+text = "3"
+fase_id = 3
+
+[node name="fase4" parent="." unique_id=1790667206 instance=ExtResource("4_14vhe")]
+offset_left = 256.0
+offset_top = 272.0
+offset_right = 448.0
+offset_bottom = 336.0
+focus_neighbor_left = NodePath("../fase6")
+focus_neighbor_top = NodePath("../fase1")
+focus_neighbor_right = NodePath("../fase5")
+focus_neighbor_bottom = NodePath("../fase7")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
+disabled = true
+text = "4"
+fase_id = 4
+
+[node name="fase5" parent="." unique_id=1374525361 instance=ExtResource("4_14vhe")]
+offset_left = 480.0
+offset_top = 272.0
+offset_right = 672.0
+offset_bottom = 336.0
+focus_neighbor_left = NodePath("../fase4")
+focus_neighbor_top = NodePath("../fase2")
+focus_neighbor_right = NodePath("../fase6")
+focus_neighbor_bottom = NodePath("../fase8")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
+disabled = true
+text = "5"
+fase_id = 5
+
+[node name="fase6" parent="." unique_id=1294310486 instance=ExtResource("4_14vhe")]
+offset_left = 704.0
+offset_top = 272.0
+offset_right = 896.0
+offset_bottom = 336.0
+focus_neighbor_left = NodePath("../fase5")
+focus_neighbor_top = NodePath("../fase3")
+focus_neighbor_right = NodePath("../fase4")
+focus_neighbor_bottom = NodePath("../fase9")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
+disabled = true
+text = "6"
+fase_id = 6
+
+[node name="fase7" parent="." unique_id=74534338 instance=ExtResource("4_14vhe")]
+offset_left = 256.0
+offset_top = 352.0
+offset_right = 448.0
+offset_bottom = 416.0
+focus_neighbor_left = NodePath("../fase9")
+focus_neighbor_top = NodePath("../fase4")
+focus_neighbor_right = NodePath("../fase8")
+focus_neighbor_bottom = NodePath("../fase0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
+disabled = true
+text = "7"
+fase_id = 7
+
+[node name="fase8" parent="." unique_id=220142007 instance=ExtResource("4_14vhe")]
+offset_left = 480.0
+offset_top = 352.0
+offset_right = 672.0
+offset_bottom = 416.0
+focus_neighbor_left = NodePath("../fase7")
+focus_neighbor_top = NodePath("../fase5")
+focus_neighbor_right = NodePath("../fase9")
+focus_neighbor_bottom = NodePath("../fase0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
+disabled = true
+text = "8"
+fase_id = 8
+
+[node name="fase9" parent="." unique_id=1273567975 instance=ExtResource("4_14vhe")]
+offset_left = 704.0
+offset_top = 352.0
+offset_right = 896.0
+offset_bottom = 416.0
+focus_neighbor_left = NodePath("../fase8")
+focus_neighbor_top = NodePath("../fase6")
+focus_neighbor_right = NodePath("../fase7")
+focus_neighbor_bottom = NodePath("../fase0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
+disabled = true
+text = "9"
+fase_id = 9
+
+[node name="shader" type="CanvasLayer" parent="." unique_id=1985175627]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="shader" unique_id=797502099]
+texture_filter = 1
+material = SubResource("ShaderMaterial_1qb6s")
+offset_right = 1152.0
+offset_bottom = 640.0
+
+[node name="music" type="AudioStreamPlayer" parent="." unique_id=1452711027]
+stream = ExtResource("6_gkbe8")
+volume_db = 5.0
+autoplay = true
+parameters/looping = true
+
+[node name="hoverBotao" type="AudioStreamPlayer" parent="." unique_id=524507024]
+stream = ExtResource("7_mfdmr")
+volume_db = -5.0
+
+[node name="blackout" type="ColorRect" parent="." unique_id=994973906]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1490347851]
+libraries/ = SubResource("AnimationLibrary_ajgue")
+autoplay = &"out"
+
+[connection signal="pressed" from="fase0" to="." method="_on_fase_0_pressed"]
+[connection signal="pressed" from="fase1" to="." method="_on_fase_1_pressed"]
+[connection signal="pressed" from="fase2" to="." method="_on_fase_2_pressed"]
+[connection signal="pressed" from="fase3" to="." method="_on_fase_3_pressed"]
+[connection signal="pressed" from="fase4" to="." method="_on_fase_4_pressed"]
+[connection signal="pressed" from="fase5" to="." method="_on_fase_5_pressed"]
+[connection signal="pressed" from="fase6" to="." method="_on_fase_6_pressed"]
+[connection signal="pressed" from="fase7" to="." method="_on_fase_7_pressed"]
+[connection signal="pressed" from="fase8" to="." method="_on_fase_8_pressed"]
+[connection signal="pressed" from="fase9" to="." method="_on_fase_9_pressed"]

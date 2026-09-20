@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dwq5dhcqsbvbt"]
+
+[ext_resource type="Texture2D" uid="uid://drhqjy63ft6rr" path="res://Sprites/Assets/caixotepixelart.png" id="1_q818j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h23ua"]
+size = Vector2(64, 24)
+
+[node name="caixaLonga" type="StaticBody2D" unique_id=190043932]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1727517915]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_h23ua")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1783277933]
+position = Vector2(1.9073486e-06, 4.0000005)
+scale = Vector2(0.098159514, 0.036809817)
+texture = ExtResource("1_q818j")

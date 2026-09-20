@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dt84826ld6ux5"]
+
+[ext_resource type="Script" uid="uid://ddo6udom0ergr" path="res://Scripts/tiro.gd" id="1_qbadt"]
+[ext_resource type="Texture2D" uid="uid://df0sgi3ulyngf" path="res://Sprites/player/tiro.png" id="1_uit8l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uit8l"]
+size = Vector2(4.9999995, 2.5)
+
+[sub_resource type="Animation" id="Animation_po8pd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bala:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v0468"]
+resource_name = "idle"
+length = 0.185
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bala:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.185),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qs13w"]
+_data = {
+&"RESET": SubResource("Animation_po8pd"),
+&"idle": SubResource("Animation_v0468")
+}
+
+[node name="bala" type="CharacterBody2D" unique_id=1017331285]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_qbadt")
+
+[node name="Bala" type="Sprite2D" parent="." unique_id=115823387]
+position = Vector2(-8.940697e-08, 1.4901161e-08)
+scale = Vector2(0.25000003, 0.28571427)
+texture = ExtResource("1_uit8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=740334726]
+position = Vector2(-1.0430813e-07, 7.1054274e-15)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_uit8l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=321509568]
+libraries/ = SubResource("AnimationLibrary_qs13w")
+autoplay = &"idle"

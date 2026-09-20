@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://jnom6u43quuo"]
+
+[ext_resource type="Script" uid="uid://dyoi6ld1lanbf" path="res://Scripts/porta_trancada.gd" id="1_gk3n4"]
+[ext_resource type="Texture2D" uid="uid://o8kufs2o5xjx" path="res://Sprites/Assets/portaTrancada.png" id="2_jlogd"]
+[ext_resource type="Texture2D" uid="uid://btr7e4agwnfc2" path="res://Sprites/Assets/portaDestrancada.png" id="3_wwvxq"]
+[ext_resource type="AudioStream" uid="uid://ckqsl0ws35tv3" path="res://Audio/Sons/pickUp.ogg" id="4_jlogd"]
+[ext_resource type="AudioStream" uid="uid://c8pmbl3pjjfge" path="res://Audio/Sons/melee.ogg" id="5_wwvxq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpfdb"]
+size = Vector2(32, 48)
+
+[sub_resource type="Animation" id="Animation_h11xw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("saida/portaSaida:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_jlogd")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("entrada/portaEntrada:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_jlogd")]
+}
+
+[sub_resource type="Animation" id="Animation_wbpmv"]
+resource_name = "open"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("saida/portaSaida:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [ExtResource("3_wwvxq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("entrada/portaEntrada:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0),
+"update": 1,
+"values": [ExtResource("3_wwvxq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgue1"]
+_data = {
+&"RESET": SubResource("Animation_h11xw"),
+&"open": SubResource("Animation_wbpmv")
+}
+
+[node name="portaTrancada" type="Node2D" unique_id=112916828]
+script = ExtResource("1_gk3n4")
+
+[node name="entrada" type="Node2D" parent="." unique_id=150381287]
+position = Vector2(-24, 0)
+
+[node name="entrada" type="Area2D" parent="entrada" unique_id=120073989]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada/entrada" unique_id=1551946759]
+shape = SubResource("RectangleShape2D_mpfdb")
+
+[node name="portaEntrada" type="Sprite2D" parent="entrada" unique_id=2022691642]
+position = Vector2(-1.9073486e-06, -1.4305115e-06)
+scale = Vector2(1.4545455, 1.7142856)
+texture = ExtResource("2_jlogd")
+
+[node name="saida" type="Node2D" parent="." unique_id=980732937]
+position = Vector2(24, 0)
+
+[node name="saida" type="Area2D" parent="saida" unique_id=1665438372]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="saida/saida" unique_id=17313235]
+shape = SubResource("RectangleShape2D_mpfdb")
+
+[node name="portaSaida" type="Sprite2D" parent="saida" unique_id=2068842667]
+position = Vector2(-1.9073486e-06, 0)
+scale = Vector2(1.4545455, 1.7142856)
+texture = ExtResource("2_jlogd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=809464606]
+libraries/ = SubResource("AnimationLibrary_vgue1")
+
+[node name="open" type="AudioStreamPlayer" parent="." unique_id=303562195]
+stream = ExtResource("4_jlogd")
+
+[node name="nope" type="AudioStreamPlayer" parent="." unique_id=401542748]
+stream = ExtResource("5_wwvxq")
+pitch_scale = 0.45
+
+[connection signal="body_entered" from="entrada/entrada" to="." method="_on_entrada_body_entered"]
+[connection signal="body_exited" from="entrada/entrada" to="." method="_on_entrada_body_exited"]
+[connection signal="body_entered" from="saida/saida" to="." method="_on_saida_body_entered"]
+[connection signal="body_exited" from="saida/saida" to="." method="_on_saida_body_exited"]

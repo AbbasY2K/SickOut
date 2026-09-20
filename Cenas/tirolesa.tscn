@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dj1x7lxmhpqp5"]
+
+[ext_resource type="Script" uid="uid://bv6dmh0ojpkcm" path="res://Scripts/tirolesa.gd" id="1_jnb7g"]
+[ext_resource type="Texture2D" uid="uid://ctsqcop6slwmp" path="res://Sprites/Assets/tirolesa.png" id="1_yrppv"]
+[ext_resource type="AudioStream" uid="uid://b1804wvobux3y" path="res://Audio/Sons/subir_tirolesa.ogg" id="3_g8wtd"]
+[ext_resource type="AudioStream" uid="uid://cvs63absddfpo" path="res://Audio/Sons/tirolesa.ogg" id="4_g8wtd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnb7g"]
+size = Vector2(32, 40)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_woh7c"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="tirolesa" type="Node2D" unique_id=1186889954]
+script = ExtResource("1_jnb7g")
+
+[node name="pontoA" type="Node2D" parent="." unique_id=1740137565]
+
+[node name="sprite" type="Sprite2D" parent="pontoA" unique_id=1255953811]
+position = Vector2(2.3841858e-07, 20)
+scale = Vector2(1.6, 1.25)
+texture = ExtResource("1_yrppv")
+
+[node name="Area2D" type="Area2D" parent="pontoA" unique_id=295334487]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pontoA/Area2D" unique_id=1716749156]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_jnb7g")
+
+[node name="pontoB" type="Node2D" parent="." unique_id=1572888477]
+position = Vector2(192, 0)
+
+[node name="sprite" type="Sprite2D" parent="pontoB" unique_id=504492173]
+position = Vector2(1.4305115e-06, 20)
+scale = Vector2(1.6000001, 1.25)
+texture = ExtResource("1_yrppv")
+
+[node name="fio" type="Panel" parent="." unique_id=113779865]
+offset_right = 192.0
+offset_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_woh7c")
+
+[node name="subirTirolesa" type="AudioStreamPlayer" parent="." unique_id=975022797]
+stream = ExtResource("3_g8wtd")
+
+[node name="tirolesa" type="AudioStreamPlayer" parent="." unique_id=1019954186]
+stream = ExtResource("4_g8wtd")
+volume_db = -15.0
+
+[connection signal="body_entered" from="pontoA/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="pontoA/Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cv8dda4h0qhrb"]
+
+[ext_resource type="Script" uid="uid://cf2ndek6i504u" path="res://Scripts/fita.gd" id="1_d37q0"]
+[ext_resource type="Shader" uid="uid://bs8r7xlsug2lr" path="res://Shaders/colecionavel.gdshader" id="2_gi1o0"]
+[ext_resource type="Texture2D" uid="uid://btie3fnq7ep3w" path="res://Sprites/Assets/fita.png" id="3_euxgo"]
+[ext_resource type="AudioStream" uid="uid://dpkm340k5ac0w" path="res://Audio/Sons/moeda.mp3" id="4_gi1o0"]
+[ext_resource type="AudioStream" uid="uid://dayfcyagkjb4i" path="res://Audio/Sons/hmmmm.wav" id="5_euxgo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(48, 48)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
+shader = ExtResource("2_gi1o0")
+shader_parameter/hover_speed = 2.0
+shader_parameter/hover_amount = 3.0
+shader_parameter/glitch_speed = 25.0
+shader_parameter/glitch_strength = 0.035
+shader_parameter/rgb_split = 0.008
+shader_parameter/pickup_glitch = false
+
+[node name="fita" type="Node2D" unique_id=412393285]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_d37q0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=31290883]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1276305919]
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1079292228]
+material = SubResource("ShaderMaterial_xrivr")
+position = Vector2(-1.9073486e-06, -9.536743e-07)
+scale = Vector2(0.74999994, 0.74999994)
+texture = ExtResource("3_euxgo")
+
+[node name="grab" type="AudioStreamPlayer" parent="." unique_id=722748844]
+stream = ExtResource("4_gi1o0")
+
+[node name="hmmm" type="AudioStreamPlayer2D" parent="." unique_id=625236144]
+stream = ExtResource("5_euxgo")
+autoplay = true
+max_distance = 256.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://p0ubqep8aoc1"]
+
+[ext_resource type="Texture2D" uid="uid://bgyi0fvqnfflu" path="res://Sprites/placeHolder/refFase1.jpeg" id="1_xn8ui"]
+
+[node name="Node2D" type="Node2D" unique_id=152989105]
+
+[node name="RefFase1" type="Sprite2D" parent="." unique_id=1955873982]
+position = Vector2(680, 272)
+texture = ExtResource("1_xn8ui")

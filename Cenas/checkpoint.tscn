@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://br1u61lpq0htk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7g23p"]
+size = Vector2(8, 256)
+
+[node name="checkpoint" type="Area2D" unique_id=479455982]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=479053009]
+shape = SubResource("RectangleShape2D_7g23p")

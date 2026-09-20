@@ -1,0 +1,309 @@
+[gd_scene format=3 uid="uid://dov8h3pe1obqq"]
+
+[ext_resource type="Script" uid="uid://bn7u1teoqylvi" path="res://Scripts/controles_menu.gd" id="1_auo57"]
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="1_cuele"]
+[ext_resource type="Texture2D" uid="uid://hdghvj3bpuox" path="res://Sprites/UI/setaLeft.png" id="1_efeom"]
+[ext_resource type="Texture2D" uid="uid://clrj17af2ovvy" path="res://Sprites/UI/setaRight.png" id="2_auo57"]
+[ext_resource type="Script" uid="uid://miqaf48q7j51" path="res://Scripts/Textos/label.gd" id="2_efeom"]
+[ext_resource type="Texture2D" uid="uid://ledpgtcw7rig" path="res://Sprites/UI/pauseUi.png" id="4_j258r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(1, 1, 1, 0.4509804)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 4
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0wd5"]
+size = Vector2(180, 180)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6cfpc"]
+radius = 52.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mn45k"]
+bg_color = Color(0.6039216, 0.6039216, 0.6039216, 0.44313726)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xrivr"]
+radius = 54.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_auo57"]
+radius = 60.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j258r"]
+bg_color = Color(1, 1, 1, 0.69411767)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="controlesGameplay" type="Control" unique_id=2121522421]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_auo57")
+metadata/_edit_use_anchors_ = true
+
+[node name="fundo1" type="Panel" parent="." unique_id=270207209]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 512.0
+offset_right = 272.0
+offset_bottom = 576.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
+
+[node name="setaLeft" type="TouchScreenButton" parent="." unique_id=511473772]
+position = Vector2(64, 520)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("1_efeom")
+texture_pressed = ExtResource("1_efeom")
+shape = SubResource("RectangleShape2D_k0wd5")
+action = "left"
+
+[node name="setaRight" type="TouchScreenButton" parent="." unique_id=637617226]
+position = Vector2(216, 520)
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_auo57")
+texture_pressed = ExtResource("2_auo57")
+shape = SubResource("RectangleShape2D_k0wd5")
+action = "right"
+
+[node name="interagir1" type="TouchScreenButton" parent="." unique_id=1716338921]
+visible = false
+position = Vector2(96, 416)
+shape = SubResource("CircleShape2D_6cfpc")
+action = "interact"
+
+[node name="fundo3" type="Panel" parent="interagir1" unique_id=673847234]
+offset_left = -56.0
+offset_top = -56.0
+offset_right = 56.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mn45k")
+
+[node name="Label5" type="Label" parent="interagir1" unique_id=1242479201]
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = -48.0
+offset_top = -16.0
+offset_right = 48.0
+offset_bottom = 15.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_cuele")
+theme_override_font_sizes/font_size = 20
+text = "INTERAGIR"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_efeom")
+key = "BOTAO_INTE"
+
+[node name="fundo7" type="Panel" parent="." unique_id=112933431]
+layout_mode = 0
+offset_left = 1024.0
+offset_top = 357.0
+offset_right = 1132.0
+offset_bottom = 467.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mn45k")
+
+[node name="adadadad" type="TouchScreenButton" parent="." unique_id=183278292]
+position = Vector2(1078, 412)
+shape = SubResource("CircleShape2D_xrivr")
+action = "dash"
+
+[node name="daaash" type="Label" parent="." unique_id=113161160]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 4192.0
+offset_top = 2632.0002
+offset_right = 4296.0
+offset_bottom = 2672.0002
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_cuele")
+theme_override_font_sizes/font_size = 32
+text = "DASH"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_efeom")
+key = "BOTAO_DASH"
+
+[node name="fundo8" type="Panel" parent="." unique_id=1323254457]
+layout_mode = 0
+offset_left = 891.0
+offset_top = 357.0
+offset_right = 996.0
+offset_bottom = 460.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mn45k")
+
+[node name="atirar" type="TouchScreenButton" parent="." unique_id=860927780]
+position = Vector2(944, 408)
+shape = SubResource("CircleShape2D_6cfpc")
+action = "shoot"
+
+[node name="Label3" type="Label" parent="." unique_id=1640951120]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 4064.0002
+offset_top = 2632.0002
+offset_right = 4160.0
+offset_bottom = 2663.0002
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_cuele")
+theme_override_font_sizes/font_size = 20
+text = "ATIRAR"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_efeom")
+key = "BOTAO_ATIRAR"
+
+[node name="pausar" type="TouchScreenButton" parent="." unique_id=121370123]
+position = Vector2(576, 64)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_xrivr")
+action = "pause"
+
+[node name="Label2" type="TextureRect" parent="." unique_id=1978692415]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 3688.0002
+offset_top = 2272.0002
+offset_right = 3800.0002
+offset_bottom = 2336.0002
+texture = ExtResource("4_j258r")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="pular" type="TouchScreenButton" parent="." unique_id=1870934239]
+position = Vector2(1056, 560)
+shape = SubResource("CircleShape2D_auo57")
+action = "jump"
+
+[node name="fundo6" type="Panel" parent="." unique_id=2090961615]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 496.0
+offset_right = 1120.0
+offset_bottom = 624.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mn45k")
+
+[node name="Label6" type="Label" parent="." unique_id=1049949725]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 4160.0
+offset_top = 2736.0002
+offset_right = 4288.0
+offset_bottom = 2864.0002
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_cuele")
+theme_override_font_sizes/font_size = 32
+text = "PULAR"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_efeom")
+key = "BOTAO_PULAR"
+
+[node name="bater" type="TouchScreenButton" parent="." unique_id=305670774]
+position = Vector2(904, 544)
+shape = SubResource("CircleShape2D_auo57")
+action = "melee"
+
+[node name="fundo2" type="Panel" parent="." unique_id=136792087]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 480.0
+offset_right = 968.0
+offset_bottom = 608.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mn45k")
+
+[node name="Label7" type="Label" parent="." unique_id=1933256033]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 4008.0
+offset_top = 2720.0002
+offset_right = 4136.0
+offset_bottom = 2848.0002
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_cuele")
+theme_override_font_sizes/font_size = 32
+text = "BATER"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_efeom")
+key = "BOTAO_BATER"
+
+[node name="olhar" type="VirtualJoystick" parent="." unique_id=782866058]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 312.0
+offset_right = 248.0
+offset_bottom = 360.0
+theme_override_styles/normal_tip = SubResource("StyleBoxFlat_j258r")
+theme_override_styles/pressed_tip = SubResource("StyleBoxFlat_j258r")
+tip_size = 58.0
+action_left = &"look_left"
+action_right = &"look_right"
+action_up = &"look_up"
+action_down = &"look_down"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=178729314]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.7500002
+anchor_top = -3.5000002
+anchor_right = -2.7500002
+anchor_bottom = -3.5000002
+offset_left = 3280.0002
+offset_top = 2480.0002
+offset_right = 3504.0002
+offset_bottom = 2512.0002
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("1_cuele")
+theme_override_font_sizes/font_size = 32
+text = "OLHAR"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_efeom")
+key = "BOTAO_OLHAR"
+metadata/_edit_use_anchors_ = true

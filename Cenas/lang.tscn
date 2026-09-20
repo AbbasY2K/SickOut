@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://gnj7hm3lngjd"]
+
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="1_08lqu"]
+[ext_resource type="Script" uid="uid://cpiv607jwe41c" path="res://Scripts/lang.gd" id="1_niw6t"]
+[ext_resource type="Texture2D" uid="uid://bd03178issvq6" path="res://Sprites/UI/brasilFlag.png" id="2_niw6t"]
+[ext_resource type="Texture2D" uid="uid://0w8dcyfxrm1" path="res://Sprites/UI/euaFlag.png" id="4_144fi"]
+[ext_resource type="FontFile" uid="uid://cx6fcf7c3tc8m" path="res://Fontes/ari-w9500.ttf" id="4_gpfbv"]
+
+[sub_resource type="Animation" id="Animation_gpfbv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_144fi"]
+resource_name = "in"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wfef2"]
+resource_name = "out"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tr16r"]
+_data = {
+&"RESET": SubResource("Animation_gpfbv"),
+&"in": SubResource("Animation_144fi"),
+&"out": SubResource("Animation_wfef2")
+}
+
+[node name="lang" type="Node2D" unique_id=1880718030]
+script = ExtResource("1_niw6t")
+
+[node name="fundo" type="ColorRect" parent="." unique_id=372161826]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="pick" type="Label" parent="." unique_id=2090315577]
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 960.0
+offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("1_08lqu")
+theme_override_font_sizes/font_size = 100
+text = "PICK A LANGUAGE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BrasilFlag" type="Sprite2D" parent="." unique_id=757992239]
+position = Vector2(336, 364)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_niw6t")
+
+[node name="euaFlag" type="Sprite2D" parent="." unique_id=1453552220]
+position = Vector2(816, 364)
+scale = Vector2(1.5, 1.6875001)
+texture = ExtResource("4_144fi")
+
+[node name="ptbr" type="Button" parent="." unique_id=1678217649]
+offset_left = 192.0
+offset_top = 496.0
+offset_right = 480.0
+offset_bottom = 544.0
+focus_neighbor_right = NodePath("../eng")
+theme_override_fonts/font = ExtResource("4_gpfbv")
+theme_override_font_sizes/font_size = 24
+text = "PORTUGUES BRASILEIRO"
+flat = true
+
+[node name="eng" type="Button" parent="." unique_id=1637635782]
+offset_left = 672.0
+offset_top = 496.0
+offset_right = 960.0
+offset_bottom = 544.0
+focus_neighbor_left = NodePath("../ptbr")
+theme_override_fonts/font = ExtResource("4_gpfbv")
+theme_override_font_sizes/font_size = 24
+text = "ENGLISH"
+flat = true
+
+[node name="blackout" type="ColorRect" parent="." unique_id=1939597627]
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=163968742]
+libraries/ = SubResource("AnimationLibrary_tr16r")
+autoplay = &"out"
+
+[connection signal="pressed" from="ptbr" to="." method="_on_ptbr_pressed"]
+[connection signal="pressed" from="eng" to="." method="_on_eng_pressed"]

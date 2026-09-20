@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://s3ho5rofj0fv"]
+
+[ext_resource type="Script" uid="uid://d11gxhwoy8wlk" path="res://Scripts/porta.gd" id="1_ilbgv"]
+[ext_resource type="Texture2D" uid="uid://de78lmgqoyeaf" path="res://Sprites/Assets/portaSaida.png" id="2_ilbgv"]
+[ext_resource type="Texture2D" uid="uid://b0hokyvudgpa7" path="res://Sprites/Assets/portaEntrada.png" id="2_tyelx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpfdb"]
+size = Vector2(32, 48)
+
+[sub_resource type="Animation" id="Animation_dl03h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("saida/portaSaida:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_tyelx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("entrada/portaEntrada:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_tyelx")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("entrada/portaEntrada:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.0784384, 1.0940714)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("saida/portaSaida:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.0666667, 1.0909091)]
+}
+
+[sub_resource type="Animation" id="Animation_50fg0"]
+resource_name = "open"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("saida/portaSaida:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0, 0),
+"update": 1,
+"values": [ExtResource("2_ilbgv"), ExtResource("2_tyelx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("entrada/portaEntrada:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0, 0),
+"update": 1,
+"values": [ExtResource("2_ilbgv"), ExtResource("2_tyelx")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("entrada/portaEntrada:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [Vector2(0.86486495, 0.9795919), Vector2(1.0784384, 1.0940714)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("saida/portaSaida:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0, 0),
+"update": 0,
+"values": [Vector2(0.86486477, 0.97959185), Vector2(1.0666667, 1.0909091)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_detf3"]
+_data = {
+&"RESET": SubResource("Animation_dl03h"),
+&"open": SubResource("Animation_50fg0")
+}
+
+[node name="porta" type="Node2D" unique_id=112916828]
+script = ExtResource("1_ilbgv")
+
+[node name="entrada" type="Node2D" parent="." unique_id=150381287]
+
+[node name="entrada" type="Area2D" parent="entrada" unique_id=120073989]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="entrada/entrada" unique_id=1551946759]
+position = Vector2(-24, 0)
+shape = SubResource("RectangleShape2D_mpfdb")
+
+[node name="portaEntrada" type="Sprite2D" parent="entrada" unique_id=2022691642]
+position = Vector2(-24, 8.34465e-07)
+scale = Vector2(1.0784384, 1.0940714)
+texture = ExtResource("2_tyelx")
+
+[node name="saida" type="Node2D" parent="." unique_id=980732937]
+
+[node name="saida" type="Area2D" parent="saida" unique_id=1665438372]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="saida/saida" unique_id=17313235]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_mpfdb")
+
+[node name="portaSaida" type="Sprite2D" parent="saida" unique_id=2068842667]
+position = Vector2(24, -1.5497208e-06)
+scale = Vector2(1.0666667, 1.0909091)
+texture = ExtResource("2_tyelx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=809464606]
+libraries/ = SubResource("AnimationLibrary_detf3")
+
+[connection signal="body_entered" from="entrada/entrada" to="." method="_on_entrada_body_entered"]
+[connection signal="body_exited" from="entrada/entrada" to="." method="_on_entrada_body_exited"]
+[connection signal="body_entered" from="saida/saida" to="." method="_on_saida_body_entered"]
+[connection signal="body_exited" from="saida/saida" to="." method="_on_saida_body_exited"]
