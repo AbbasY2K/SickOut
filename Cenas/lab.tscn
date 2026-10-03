@@ -265,7 +265,7 @@ texture = ExtResource("9_3yrbt")
 texture_scale = 0.25
 
 [node name="item" type="Node2D" parent="." unique_id=385177469]
-position = Vector2(768, 272)
+position = Vector2(768, 296)
 script = ExtResource("9_txqba")
 
 [node name="hitbox" type="Area2D" parent="item" unique_id=216692241]

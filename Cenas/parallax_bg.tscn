@@ -9,6 +9,7 @@
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1210098451]
 scroll_scale = Vector2(0.2, 0)
+scroll_offset = Vector2(153, -59)
 repeat_size = Vector2(523.75, 0)
 repeat_times = 2
 
@@ -23,6 +24,7 @@ stretch_mode = 6
 
 [node name="Parallax2D2" type="Parallax2D" parent="." unique_id=1037466638]
 scroll_scale = Vector2(0.3, 0.2)
+scroll_offset = Vector2(104, 116)
 repeat_size = Vector2(523.75, 0)
 repeat_times = 2
 
@@ -37,6 +39,7 @@ stretch_mode = 6
 
 [node name="Parallax2D3" type="Parallax2D" parent="." unique_id=1459135232]
 scroll_scale = Vector2(0.35, 0.2)
+scroll_offset = Vector2(78, 106)
 repeat_size = Vector2(523.75, 0)
 repeat_times = 2
 
@@ -51,6 +54,7 @@ stretch_mode = 6
 
 [node name="Parallax2D4" type="Parallax2D" parent="." unique_id=2023095658]
 scroll_scale = Vector2(0.4, 0)
+scroll_offset = Vector2(878, 0)
 repeat_size = Vector2(523.75, 0)
 repeat_times = 2
 

@@ -4,23 +4,23 @@ render_mode unshaded;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 
 // CRT leve
-uniform float scanline_strength : hint_range(0.0, 0.05) = 0.008;
+uniform float scanline_strength : hint_range(0.0, 0.05) = 0.006;
 uniform float scanline_density : hint_range(0.5, 2.0) = 1.0;
 
 // Vinheta
-uniform float vignette_strength : hint_range(0.0, 1.0) = 0.75;
-uniform float vignette_size : hint_range(0.1, 1.0) = 0.42;
+uniform float vignette_strength : hint_range(0.0, 1.0) = 0.80;
+uniform float vignette_size : hint_range(0.1, 1.0) = 0.40;
 uniform float vignette_softness : hint_range(0.01, 1.0) = 0.45;
 
 // Imagem
 uniform float contrast : hint_range(0.8, 1.5) = 1.06;
-uniform float brightness : hint_range(0.5, 1.2) = 0.88;
+uniform float brightness : hint_range(0.5, 1.2) = 0.94;
 uniform float chroma_shift : hint_range(0.0, 0.003) = 0.0003;
 
 // Efeitos
-uniform float static_strength : hint_range(0.0, 0.05) = 0.003;
+uniform float static_strength : hint_range(0.0, 0.05) = 0.002;
 uniform float glitch_strength : hint_range(0.0, 0.03) = 0.0015;
-uniform float flicker_strength : hint_range(0.0, 0.03) = 0.003;
+uniform float flicker_strength : hint_range(0.0, 0.03) = 0.002;
 
 float random(vec2 uv) {
 	return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
@@ -74,8 +74,12 @@ void fragment() {
 		dist
 	);
 
-	// Escurece bastante as bordas
-	col *= mix(0.15, 1.0, vignette);
+	// Mantém o centro claro e escurece bastante as bordas
+	float edge_darkness = mix(0.20, 1.0, vignette);
+	col *= mix(1.0, edge_darkness, vignette_strength);
+
+	// Pequena iluminação no centro
+	col *= 1.0 + (vignette * 0.06);
 
 	// Contraste e brilho
 	col = (col - 0.5) * contrast + 0.5;

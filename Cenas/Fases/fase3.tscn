@@ -271,9 +271,9 @@ _data = {
 [node name="fase3" type="Node2D" unique_id=997735052]
 script = ExtResource("1_on17v")
 faseID = 3
-metaPontuacao = 1770
-metaKills = 7
-metaTempo = 55.0
+metaPontuacao = 1500
+metaKills = 6
+metaTempo = 80.0
 
 [node name="fundo" type="CanvasLayer" parent="." unique_id=301413174]
 layer = -1
@@ -465,7 +465,7 @@ shape = SubResource("RectangleShape2D_slu7a")
 [node name="inimigos" type="Node2D" parent="obstaculos" unique_id=772935265]
 
 [node name="creeper" parent="obstaculos/inimigos" unique_id=395438767 instance=ExtResource("20_ctyf4")]
-position = Vector2(336, 636)
+position = Vector2(275, 636)
 
 [node name="inimigo3" parent="obstaculos/inimigos" unique_id=1680228648 instance=ExtResource("22_oy1oi")]
 position = Vector2(824, 640)

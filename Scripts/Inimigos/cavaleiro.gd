@@ -260,6 +260,11 @@ func morrer_melee(dir_ataque: float):
 
 	vida -= 1
 
+	var lado = sign(dir_ataque)
+
+	if lado == 0:
+		lado = 1
+
 	if vida > 0:
 
 		$sfx/parry.play()
@@ -267,11 +272,6 @@ func morrer_melee(dir_ataque: float):
 		taking_damage = true
 
 		tocar_animacao("idle")
-
-		var lado = sign(dir_ataque)
-
-		if lado == 0:
-			lado = 1
 
 		knockback.x = lado * KNOCKBACK_FORCE
 
@@ -297,11 +297,6 @@ func morrer_melee(dir_ataque: float):
 	ativar_efeitos_morte()
 	desativar_colisoes_morte()
 
-	var lado = sign(dir_ataque)
-
-	if lado == 0:
-		lado = 1
-
 	if lado > 0:
 
 		tocar_animacao("death1")
@@ -324,7 +319,6 @@ func morrer_melee(dir_ataque: float):
 	await get_tree().create_timer(2.0).timeout
 
 	queue_free()
-
 
 func _on_inimigo_hit_box_body_entered(body: Node2D) -> void:
 

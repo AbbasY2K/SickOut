@@ -205,22 +205,22 @@ func _on_inimigo_hit_box_body_entered(body):
 
 	if body.name == "bala":
 
-		body.queue_free()
+		print("DANO! Vida antes:", vida)
 
+		body.queue_free()
 		vida -= 1
+
+		print("Vida depois:", vida)
 
 		$sfx/hit.play()
 
 		if vida <= 0:
-
 			sprite.modulate = Color.WHITE
-
-			await morrer_melee(direction)
+			morrer_melee(direction)
 
 		return
 
 	if body.has_method("freezePlayer") and not body.invencivel:
-
 		body.get_parent().gameover()
 
 
@@ -264,6 +264,19 @@ func iniciar_ataque():
 
 	call_deferred("_spawn_ataque")
 
+func morrer_tiro(_dir_ataque := 1.0):
+
+	if dead:
+		return
+
+	vida -= 1
+
+	$sfx/hit.play()
+
+	if vida <= 0:
+
+		sprite.modulate = Color.WHITE
+		morrer_melee(direction)
 
 func _spawn_ataque():
 

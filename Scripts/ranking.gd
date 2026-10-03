@@ -5,6 +5,7 @@ extends Node2D
 var tempo := 0.0
 var offset_base := Vector2.ZERO
 
+
 func _ready():
 	if camera:
 		offset_base = camera.position
@@ -15,7 +16,7 @@ func _ready():
 	var kills = Global.killsAtual if Global.killsAtual != null else 0
 	var mortes = Global.mortesAtual if Global.mortesAtual != null else 0
 	var tempo_total = Global.tempoTotal if Global.tempoTotal != null else 0.0
-	
+
 	$ui/labels/pontos.text = "[tornado radius=1 freq=3]%s:[/tornado] [shake level=2]%d[/shake]" % [
 		Tradutor.get_text("PONTOS"),
 		pontos
@@ -39,11 +40,12 @@ func _ready():
 		minutos,
 		segundos
 	]
-	
+
 	calcular_rank()
-	
+
 	await get_tree().create_timer(10.3).timeout
 	$ambiente.play()
+
 
 func _input(event):
 	if event.is_action_pressed("interact"):
@@ -51,6 +53,7 @@ func _input(event):
 
 		if anim.current_animation == "in" and anim.is_playing():
 			anim.seek(10.25, true)
+
 
 func _process(delta):
 	if camera == null:
@@ -90,42 +93,54 @@ func calcular_rank():
 
 	meta_pontos = max(meta_pontos, 1.0)
 	meta_kills = max(meta_kills, 1.0)
+	meta_tempo = max(meta_tempo, 1.0)
 
+	# Pontuação: importante, mas não domina o ranking.
 	score += min(
-		pontos / meta_pontos * 40.0,
-		40.0
-	)
-
-	score += min(
-		float(kills) / meta_kills * 25.0,
+		pontos / meta_pontos * 25.0,
 		25.0
 	)
 
-	score += max(
-		20.0 - mortes * 4.0,
-		0.0
+	# Kills: ajudam bastante, mas não são obrigatórias para conseguir A.
+	score += min(
+		float(kills) / meta_kills * 20.0,
+		20.0
 	)
 
+	# Pouca penalidade por morte.
 	score += max(
-		15.0 - (tempo_total - meta_tempo) / 10.0,
-		0.0
+		20.0 - mortes * 2.0,
+		8.0
 	)
+
+	# Tempo passa a ter bastante peso.
+	if tempo_total <= meta_tempo:
+		score += 35.0
+	else:
+		var atraso = tempo_total - meta_tempo
+
+		score += max(
+			35.0 - atraso / 15.0,
+			0.0
+		)
+
+	score = clamp(score, 0.0, 100.0)
 
 	var rank := ""
 
-	if score >= 95:
+	if score >= 90.0 and mortes == 0:
 		rank = "S"
 		$ui/rank.text = "RANK: [color=gold][wave amp=25 freq=4]S[/wave][/color]"
 
-	elif score >= 80:
+	elif score >= 55.0:
 		rank = "A"
 		$ui/rank.text = "RANK: [color=lime_green]A[/color]"
 
-	elif score >= 60:
+	elif score >= 40.0:
 		rank = "B"
 		$ui/rank.text = "RANK: [color=deepskyblue]B[/color]"
 
-	elif score >= 40:
+	elif score >= 25.0:
 		rank = "C"
 		$ui/rank.text = "RANK: [color=orange]C[/color]"
 

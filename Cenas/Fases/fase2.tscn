@@ -244,7 +244,7 @@ script = ExtResource("1_uv5wq")
 faseID = 2
 metaPontuacao = 920
 metaKills = 3
-metaTempo = 30.0
+metaTempo = 60.0
 
 [node name="fundo" type="CanvasLayer" parent="." unique_id=301413174]
 layer = -1

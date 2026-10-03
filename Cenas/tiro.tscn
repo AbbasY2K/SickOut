@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://df0sgi3ulyngf" path="res://Sprites/player/tiro.png" id="1_uit8l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uit8l"]
-size = Vector2(4.9999995, 2.5)
+size = Vector2(11.249998, 2.625)
 
 [sub_resource type="Animation" id="Animation_po8pd"]
 length = 0.001
@@ -55,7 +55,7 @@ scale = Vector2(0.25000003, 0.28571427)
 texture = ExtResource("1_uit8l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=740334726]
-position = Vector2(-1.0430813e-07, 7.1054274e-15)
+position = Vector2(2, 0.15)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_uit8l")
 

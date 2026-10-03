@@ -7,9 +7,9 @@ const JUMP_VELOCITY = -420.0
 const GRAVITY = 1350.0
 
 # DASH
-const DASH_SPEED = 320.0
-const DASH_TIME = 0.33
-const DASH_COOLDOWN = 0.28
+const DASH_SPEED = 340.0
+const DASH_TIME = 0.24
+const DASH_COOLDOWN = 0.45
 
 const MAX_STAMINA := 100.0
 const DASH_STAMINA_COST := 45.0
@@ -38,8 +38,8 @@ const MELEE_TIME = 0.46
 const MELEE_HIT_START = 0.05
 const MELEE_HIT_END = 0.28
 
-const MELEE_COOLDOWN = 0.06
-const MELEE_BUFFER_TIME := 0.16
+const MELEE_COOLDOWN = 0.10
+const MELEE_BUFFER_TIME := 0.18
 
 const RUN_SHOOT_SLOW_FACTOR = 0.65
 const KNOCKBACK_DECAY = 3200.0
@@ -439,7 +439,7 @@ func processJump(_inputData):
 		stamina -= WALL_JUMP_STAMINA_COST
 
 		wallJumpLocked = true
-		pulos = 2
+		pulos = 1
 		jumpBufferTimer = 0
 
 		$sfx/walljump.play()

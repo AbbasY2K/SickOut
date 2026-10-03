@@ -4,17 +4,17 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f76us"]
 shader = ExtResource("1_ymvrr")
-shader_parameter/scanline_strength = 0.008
-shader_parameter/scanline_density = 1.0
-shader_parameter/vignette_strength = 0.75
-shader_parameter/vignette_size = 0.21800000709512002
-shader_parameter/vignette_softness = 0.42300001939398
-shader_parameter/contrast = 1.12100002716843
-shader_parameter/brightness = 1.0270000250325
-shader_parameter/chroma_shift = 0.0
-shader_parameter/static_strength = 0.003
-shader_parameter/glitch_strength = 0.0030000001425
-shader_parameter/flicker_strength = 0.003
+shader_parameter/scanline_strength = 0.01200000057
+shader_parameter/scanline_density = 1.1660000316349999
+shader_parameter/vignette_strength = 1.0
+shader_parameter/vignette_size = 0.31700001179762
+shader_parameter/vignette_softness = 0.45000002067648004
+shader_parameter/contrast = 1.08300002536343
+shader_parameter/brightness = 0.94
+shader_parameter/chroma_shift = 0.0003
+shader_parameter/static_strength = 0.010000000475
+shader_parameter/glitch_strength = 0.00400000019
+shader_parameter/flicker_strength = 0.006000000285
 
 [node name="shader" type="CanvasLayer" unique_id=350166330]
 
