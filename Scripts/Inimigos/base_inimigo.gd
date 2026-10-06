@@ -46,8 +46,8 @@ func _ready():
 
 	atualizar_direcao()
 
-	# Começa completamente desativado.
 	process_mode = Node.PROCESS_MODE_DISABLED
+
 
 func ativar():
 
@@ -74,8 +74,6 @@ func _physics_process(delta):
 
 	turn_timer = max(turn_timer - delta, 0.0)
 
-	# Detecta o player somente depois que o inimigo
-	# estiver com PROCESS_MODE_INHERIT.
 	detectar_player()
 
 	aplicar_gravidade(delta)
@@ -87,7 +85,6 @@ func _physics_process(delta):
 	verificar_colisoes()
 
 
-
 func processar_ia(_delta):
 	pass
 
@@ -96,6 +93,7 @@ func aplicar_gravidade(delta):
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
 
 func detectar_player():
 
@@ -216,6 +214,12 @@ func verificar_colisoes():
 	if not VIRAR_COM_COLISAO:
 		return
 
+	if turn_timer > 0:
+		return
+
+	if abs(velocity.x) < 10.0:
+		return
+
 	for i in range(get_slide_collision_count()):
 
 		var col := get_slide_collision(i)
@@ -225,9 +229,20 @@ func verificar_colisoes():
 
 		var normal := col.get_normal()
 
-		if abs(normal.x) > 0.9 and turn_timer <= 0:
+		if normal.y < -0.5:
+			continue
 
-			virar()
+		if abs(normal.x) < 0.9:
+			continue
+
+		if velocity.x > 0 and normal.x > 0:
+			continue
+
+		if velocity.x < 0 and normal.x < 0:
+			continue
+
+		virar()
+		return
 
 
 func tocar_animacao(nome: String):

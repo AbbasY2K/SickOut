@@ -7,6 +7,8 @@ extends TileMapLayer
 @export var quantidade_minima_tiles: int = 500
 @export var grupo_player: StringName = &"player"
 
+@export var nome_dado_tile: String = "mata_player"
+
 var player: Node2D
 var chunks: Array[TileMapLayer] = []
 var centros_chunks: Array[Vector2] = []
@@ -14,9 +16,21 @@ var raio_chunk: float = 0.0
 var tempo_verificacao: float = 0.0
 var preparado := false
 
+var tem_dado_morte := false
+var morte_acionada := false
+
 
 func _ready() -> void:
 	set_process(false)
+	set_physics_process(false)
+
+	if tile_set == null:
+		pass
+	else:
+		tem_dado_morte = tile_set.has_custom_data_layer_by_name(nome_dado_tile)
+
+	player = _encontrar_player()
+
 	call_deferred("_criar_chunks")
 
 
@@ -30,16 +44,21 @@ func _criar_chunks() -> void:
 	var cells := get_used_cells()
 
 	if cells.is_empty():
-		return
-
-	if cells.size() < quantidade_minima_tiles:
 		preparado = true
+		set_process(false)
+		set_physics_process(tem_dado_morte)
 		return
 
 	player = _encontrar_player()
 
 	if player == null:
-		push_warning("Player nao encontrado. Otimizacao cancelada em: " + name)
+		push_warning("Player nao encontrado em: " + name)
+		return
+
+	if cells.size() < quantidade_minima_tiles:
+		preparado = true
+		set_process(false)
+		set_physics_process(tem_dado_morte)
 		return
 
 	var parent := get_parent()
@@ -143,7 +162,8 @@ func _criar_chunks() -> void:
 
 	preparado = true
 
-	set_process(true)
+	set_process(chunks.size() > 0)
+	set_physics_process(tem_dado_morte)
 
 	_atualizar_chunks()
 
@@ -165,7 +185,27 @@ func _process(delta: float) -> void:
 		if player == null:
 			return
 
-	_atualizar_chunks()
+	if chunks.size() > 0:
+		_atualizar_chunks()
+
+
+func _physics_process(_delta: float) -> void:
+	if not preparado:
+		return
+
+	if morte_acionada:
+		return
+
+	if not tem_dado_morte:
+		return
+
+	if not is_instance_valid(player):
+		player = _encontrar_player()
+
+		if player == null:
+			return
+
+	_verificar_colisao_mortal()
 
 
 func _atualizar_chunks() -> void:
@@ -188,6 +228,81 @@ func _atualizar_chunks() -> void:
 		else:
 			if distancia <= distancia_carregamento + raio_chunk:
 				chunk.enabled = true
+
+
+func _verificar_colisao_mortal() -> void:
+	var quantidade_colisoes: int = player.get_slide_collision_count()
+
+	if quantidade_colisoes <= 0:
+		return
+
+	for i in quantidade_colisoes:
+		var colisao := player.get_slide_collision(i)
+
+		if colisao == null:
+			continue
+
+		var objeto = colisao.get_collider()
+
+		if objeto == null:
+			continue
+
+		var chunk := objeto as TileMapLayer
+
+		if chunk == null:
+			continue
+
+		if not chunks.has(chunk):
+			continue
+
+		if not chunk.enabled:
+			continue
+
+		var rid = colisao.get_collider_rid()
+		var quadrante := chunk.get_coords_for_body_rid(rid)
+
+		var posicao_colisao = colisao.get_position()
+		var normal = colisao.get_normal()
+
+		var ponto_no_tile = posicao_colisao - normal * 2.0
+		var ponto_local := chunk.to_local(ponto_no_tile)
+		var celula := chunk.local_to_map(ponto_local)
+
+		var source_id := chunk.get_cell_source_id(celula)
+
+		if source_id < 0:
+			continue
+
+		var atlas_coords := chunk.get_cell_atlas_coords(celula)
+		var alternative_tile := chunk.get_cell_alternative_tile(celula)
+
+		var tile_data := chunk.get_cell_tile_data(celula)
+
+		if tile_data == null:
+			continue
+
+		var mata = tile_data.get_custom_data(nome_dado_tile)
+
+		if mata == true:
+			morte_acionada = true
+			_matar_player()
+			return
+
+
+func _matar_player() -> void:
+	if not is_instance_valid(player):
+		return
+
+	var cena := get_tree().current_scene
+
+	if cena == null:
+		return
+
+	if not cena.has_method("gameover"):
+		return
+
+	cena.gameover()
+
 
 func _encontrar_player() -> Node2D:
 	var encontrado := get_tree().get_first_node_in_group(grupo_player)

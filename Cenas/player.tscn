@@ -1076,7 +1076,7 @@ vframes = 2
 [node name="Camera2D" type="Camera2D" parent="ganchoCamera" unique_id=948435969]
 position = Vector2(16, -2.6666677)
 offset = Vector2(0, 10)
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(2.7, 2.7)
 position_smoothing_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.1

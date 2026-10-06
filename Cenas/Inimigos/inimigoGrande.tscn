@@ -18,7 +18,7 @@ size = Vector2(44, 91)
 size = Vector2(448, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_duo5w"]
-size = Vector2(88, 96)
+size = Vector2(68, 96)
 
 [sub_resource type="Animation" id="Animation_duo5w"]
 length = 0.001
@@ -454,7 +454,7 @@ position = Vector2(57, 37)
 target_position = Vector2(0, 20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=137255514]
-position = Vector2(12, 8)
+position = Vector2(6, 8)
 shape = SubResource("RectangleShape2D_duo5w")
 
 [node name="spawner1" type="Node2D" parent="." unique_id=1322805316]

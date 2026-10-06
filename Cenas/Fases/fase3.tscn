@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="22_oy1oi"]
 [ext_resource type="PackedScene" uid="uid://cde0y0l5ikfdp" path="res://Cenas/Inimigos/inimigoGrande.tscn" id="23_7xtx8"]
 [ext_resource type="AudioStream" uid="uid://1wcuwuher66j" path="res://Audio/Sons/elevadorDing.mp3" id="24_4kxsp"]
-[ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="24_6qv3i"]
 [ext_resource type="PackedScene" uid="uid://duaabb775jxci" path="res://Cenas/acido.tscn" id="25_ixcw6"]
 [ext_resource type="PackedScene" uid="uid://do2pi1d7mm08c" path="res://Cenas/ui.tscn" id="25_qapm4"]
 [ext_resource type="PackedScene" uid="uid://cupkgjelanyul" path="res://Cenas/player.tscn" id="26_sfudt"]
@@ -176,12 +175,6 @@ size = Vector2(2, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_slu7a"]
 size = Vector2(2, 128)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytusy"]
-size = Vector2(96, 24)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtqvg"]
-size = Vector2(128, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f76us"]
 size = Vector2(8, 80)
@@ -744,27 +737,6 @@ position = Vector2(920, 1408)
 [node name="crawler" parent="obstaculos/inimigos" unique_id=1711451340 instance=ExtResource("22_aiq5a")]
 position = Vector2(1888, 1264)
 
-[node name="DZ" type="Node2D" parent="obstaculos" unique_id=506365321]
-position = Vector2(-184, -336)
-
-[node name="deathZone2" type="Area2D" parent="obstaculos/DZ" unique_id=189112146]
-position = Vector2(1456, 992)
-collision_mask = 3
-script = ExtResource("24_6qv3i")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone2" unique_id=1549819785]
-position = Vector2(-232, 4)
-shape = SubResource("RectangleShape2D_ytusy")
-
-[node name="deathZone3" type="Area2D" parent="obstaculos/DZ" unique_id=341378313]
-position = Vector2(2000, 1016)
-collision_mask = 3
-script = ExtResource("24_6qv3i")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone3" unique_id=1470019089]
-position = Vector2(-216, 8)
-shape = SubResource("RectangleShape2D_wtqvg")
-
 [node name="acidos" type="Node2D" parent="obstaculos" unique_id=1614362379]
 
 [node name="acido2" parent="obstaculos/acidos" unique_id=1321223399 instance=ExtResource("25_ixcw6")]
@@ -887,8 +859,6 @@ autoplay = &"fadeOut"
 [connection signal="body_entered" from="obstaculos/lasers/laser1/Area2D" to="obstaculos/lasers/laser1" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="obstaculos/lasers/laser2/Area2D" to="obstaculos/lasers/laser2" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="obstaculos/lasers/laser3/Area2D" to="obstaculos/lasers/laser3" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="obstaculos/DZ/deathZone2" to="obstaculos/DZ/deathZone2" method="_on_body_entered"]
-[connection signal="body_entered" from="obstaculos/DZ/deathZone3" to="obstaculos/DZ/deathZone3" method="_on_body_entered"]
 [connection signal="body_entered" from="elevador/Area2D" to="elevador" method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="ui/gameOver/reiniciar" to="." method="_on_reiniciar_pressed"]
 [connection signal="pressed" from="ui/gameOver/menu" to="." method="_on_menu_pressed"]

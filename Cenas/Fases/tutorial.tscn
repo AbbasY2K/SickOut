@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://c1lhl3ciyjbij" path="res://Sprites/Assets/laserCabeca.png" id="18_8wva2"]
 [ext_resource type="Texture2D" uid="uid://cccls4bp7r5ln" path="res://Sprites/Assets/qrcode.png" id="19_2eymm"]
 [ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="19_xcfye"]
-[ext_resource type="Script" uid="uid://c3rhqdcp54263" path="res://Scripts/zona_de_morte.gd" id="20_admqw"]
 [ext_resource type="FontFile" uid="uid://c2ij18fwli5f" path="res://Fontes/ari-w9500-display.ttf" id="21_1logj"]
 [ext_resource type="Script" uid="uid://db8l3ael3irbm" path="res://Scripts/Textos/richTextLabel.gd" id="22_6h4go"]
 [ext_resource type="Texture2D" uid="uid://e7bp57d86gia" path="res://Sprites/Assets/elevadorPorta.png" id="22_q5p40"]
@@ -157,9 +156,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_slu7a"]
 size = Vector2(2, 200)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0bwo"]
-size = Vector2(64, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f76us"]
 size = Vector2(8, 80)
@@ -433,16 +429,6 @@ position = Vector2(672, 621)
 
 [node name="inimigo4" parent="obstaculos/inimigos" unique_id=395438767 instance=ExtResource("19_xcfye")]
 position = Vector2(1280, 624)
-
-[node name="DZ" type="Node2D" parent="obstaculos" unique_id=506365321]
-
-[node name="deathZone4" type="Area2D" parent="obstaculos/DZ" unique_id=788383162]
-position = Vector2(1152, 664)
-collision_mask = 3
-script = ExtResource("20_admqw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="obstaculos/DZ/deathZone4" unique_id=321795410]
-shape = SubResource("RectangleShape2D_m0bwo")
 
 [node name="tutoriais" type="Node2D" parent="." unique_id=651800651]
 process_mode = 3
@@ -755,7 +741,6 @@ autoplay = &"fadeOut"
 [connection signal="body_entered" from="elementos/portas/porta0/saida/saida" to="elementos/portas/porta0" method="_on_saida_body_entered"]
 [connection signal="body_exited" from="elementos/portas/porta0/saida/saida" to="elementos/portas/porta0" method="_on_saida_body_exited"]
 [connection signal="body_entered" from="obstaculos/lasers/laser/Area2D" to="obstaculos/lasers/laser" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="obstaculos/DZ/deathZone4" to="obstaculos/DZ/deathZone4" method="_on_body_entered"]
 [connection signal="body_entered" from="elevador/Area2D" to="elevador" method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="ui/gameOver/reiniciar" to="." method="_on_reiniciar_pressed"]
 [connection signal="pressed" from="ui/gameOver/menu" to="." method="_on_menu_pressed"]

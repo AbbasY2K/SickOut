@@ -10,6 +10,8 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gkoo2"]
 texture = ExtResource("1_cmtad")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -9.5, 8, -9.5, 8, 8, -8, 8)
+0:0/0/custom_data_0 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_616er"]
 texture = ExtResource("2_hm1uc")
@@ -150,7 +152,10 @@ texture = ExtResource("6_1pnhw")
 0:0/animation_frame_0/duration = 1.0
 0:0/animation_frame_1/duration = 1.0
 0:0/0 = 0
+0:0/0/custom_data_0 = true
+0:0/0/custom_data_1 = true
 2:0/0 = 0
+2:0/0/custom_data_0 = true
 
 [resource]
 physics_layer_0/collision_layer = 1
@@ -158,6 +163,10 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "madeiraNormal"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 navigation_layer_0/layers = 1
+custom_data_layer_0/name = "mata_player"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "acido"
+custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_gkoo2")
 sources/7 = SubResource("TileSetAtlasSource_e8bri")
 sources/2 = SubResource("TileSetAtlasSource_616er")
