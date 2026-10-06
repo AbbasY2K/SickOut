@@ -10,6 +10,7 @@ var gas_mode := false
 
 const EXPLOSION_DELAY := 0.75
 
+var invulneravel := false
 
 func _ready():
 
@@ -23,6 +24,10 @@ func _ready():
 
 	$gas.hide()
 	$gas/CollisionShape2D.set_deferred("disabled", true)
+
+	# Hitbox começa ativa normalmente.
+	$hitBox.monitoring = true
+	$hitBox/CollisionShape2D.set_deferred("disabled", false)
 
 
 func processar_ia(delta):
@@ -134,15 +139,21 @@ func run_state():
 
 	velocity.x = RUN_SPEED * direction
 
-
 func explodir():
 
 	if exploding or exploded:
 		return
 
 	exploding = true
+	invulneravel = true
+
 	pausar_fisica = true
 	velocity = Vector2.ZERO
+
+	$hitBox.set_deferred("monitoring", false)
+	$hitBox/CollisionShape2D.set_deferred("disabled", true)
+
+	$CollisionShape2D.set_deferred("disabled", true)
 
 	tocar_animacao("explosion")
 	$sfx/fusing.play()
@@ -184,14 +195,17 @@ func virar_gas():
 
 	$Sprite2D.hide()
 
+	# Corpo principal continua sem colisão
 	$CollisionShape2D.set_deferred("disabled", true)
 
-	$hitBox.monitoring = false
-	$visao.monitoring = false
+	# Hitbox continua desligada
+	$hitBox.set_deferred("monitoring", false)
+	$hitBox/CollisionShape2D.set_deferred("disabled", true)
+
+	$visao.set_deferred("monitoring", false)
 
 	$gas.show()
 	$gas/CollisionShape2D.set_deferred("disabled", false)
-
 
 func morrer_melee(_dir_ataque := 0.0):
 
@@ -209,6 +223,10 @@ func _on_explode_range_body_entered(body):
 
 
 func _on_hit_box_body_entered(body):
+
+	# Segurança adicional.
+	if exploding or exploded or gas_mode:
+		return
 
 	if body.has_method("freezePlayer") and not body.invencivel:
 

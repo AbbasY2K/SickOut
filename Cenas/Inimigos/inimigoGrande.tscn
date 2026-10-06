@@ -403,6 +403,7 @@ _data = {
 
 [node name="inimigoGrande" type="CharacterBody2D" unique_id=406667561]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_gqcux")
 
 [node name="sangue" type="CPUParticles2D" parent="." unique_id=1581558591]

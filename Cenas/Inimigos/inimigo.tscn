@@ -457,6 +457,7 @@ _data = {
 
 [node name="inimigo" type="CharacterBody2D" unique_id=395438767]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_y60ay")
 
 [node name="sangue" type="CPUParticles2D" parent="." unique_id=1135569946]

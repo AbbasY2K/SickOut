@@ -131,6 +131,7 @@ func _ready():
 
 func _physics_process(delta):
 	updateTimers(delta)
+	ativar_inimigos_proximos()
 
 	var inputData = getInput()
 
@@ -709,3 +710,23 @@ func unfreezePlayer():
 
 	set_process(true)
 	set_physics_process(true)
+
+func ativar_inimigos_proximos():
+
+	for inimigo in get_tree().get_nodes_in_group("inimigo"):
+
+		if not is_instance_valid(inimigo):
+			continue
+
+		if inimigo.dead:
+			continue
+
+		if inimigo.process_mode != Node.PROCESS_MODE_DISABLED:
+			continue
+
+		var distancia := global_position.distance_to(
+			inimigo.global_position
+		)
+
+		if distancia <= inimigo.DISTANCIA_ATIVACAO:
+			inimigo.ativar()

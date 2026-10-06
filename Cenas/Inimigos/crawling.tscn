@@ -72,6 +72,7 @@ size = Vector2(80, 8)
 size = Vector2(82, 10)
 
 [node name="crawling" type="CharacterBody2D" unique_id=1130641682]
+collision_mask = 5
 script = ExtResource("1_1j3gu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1065299315]

@@ -1000,6 +1000,7 @@ _data = {
 
 [node name="player" type="CharacterBody2D" unique_id=1077873675]
 scale = Vector2(1.5, 1.5)
+collision_mask = 5
 script = ExtResource("1_pmvhq")
 
 [node name="gancho" type="Node2D" parent="." unique_id=1620724202]
@@ -1073,9 +1074,9 @@ vframes = 2
 [node name="ganchoCamera" type="Node2D" parent="." unique_id=1423053556]
 
 [node name="Camera2D" type="Camera2D" parent="ganchoCamera" unique_id=948435969]
-position = Vector2(10.666666, -16)
+position = Vector2(16, -2.6666677)
 offset = Vector2(0, 10)
-zoom = Vector2(3, 3)
+zoom = Vector2(0.1, 0.1)
 position_smoothing_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.1

@@ -3,10 +3,12 @@ extends CharacterBody2D
 const SPEED = 1250
 var direction := Vector2.ZERO
 
+
 func _ready():
 
 	await get_tree().create_timer(0.185).timeout
 	queue_free()
+
 
 func _physics_process(delta):
 
@@ -19,6 +21,11 @@ func _physics_process(delta):
 		var obj = collision.get_collider()
 
 		if obj.is_in_group("inimigo"):
+
+			# Inimigo está explodindo/transicionando.
+			# A bala atravessa e não mata.
+			if "invulneravel" in obj and obj.invulneravel:
+				return
 
 			if obj.has_method("morrer_tiro"):
 				obj.morrer_tiro(direction.x)

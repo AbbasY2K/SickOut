@@ -18,6 +18,8 @@ extends CharacterBody2D
 
 @export var VIRAR_COM_COLISAO := true
 
+@export var DISTANCIA_ATIVACAO := 720.0
+
 
 var vida := VIDA_MAX
 var dead := false
@@ -44,6 +46,16 @@ func _ready():
 
 	atualizar_direcao()
 
+	# Começa completamente desativado.
+	process_mode = Node.PROCESS_MODE_DISABLED
+
+func ativar():
+
+	if dead:
+		return
+
+	process_mode = Node.PROCESS_MODE_INHERIT
+
 
 func _physics_process(delta):
 
@@ -62,6 +74,10 @@ func _physics_process(delta):
 
 	turn_timer = max(turn_timer - delta, 0.0)
 
+	# Detecta o player somente depois que o inimigo
+	# estiver com PROCESS_MODE_INHERIT.
+	detectar_player()
+
 	aplicar_gravidade(delta)
 
 	processar_ia(delta)
@@ -69,6 +85,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	verificar_colisoes()
+
 
 
 func processar_ia(_delta):
@@ -79,7 +96,6 @@ func aplicar_gravidade(delta):
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
 
 func detectar_player():
 
@@ -101,7 +117,8 @@ func detectar_player():
 			$ray_visao.target_position = dir
 			$ray_visao.force_raycast_update()
 
-			if $ray_visao.is_colliding() and $ray_visao.get_collider() != body:
+			if $ray_visao.is_colliding() \
+			and $ray_visao.get_collider() != body:
 				continue
 
 		player = body
@@ -381,6 +398,7 @@ func morrer_melee(dir_ataque: float):
 	await get_tree().create_timer(2.0).timeout
 
 	queue_free()
+
 
 func morrer_tiro(dir_ataque := 1.0):
 

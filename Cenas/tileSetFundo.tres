@@ -116,7 +116,7 @@ texture = ExtResource("6_8ywnr")
 5:5/0 = 0
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 4
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ablo6")
 sources/1 = SubResource("TileSetAtlasSource_prltw")
