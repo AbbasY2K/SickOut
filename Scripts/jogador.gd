@@ -656,10 +656,15 @@ func updateUi():
 
 func _on_area_soco_body_entered(body):
 
-	var inimigo = body
-	var direcao_ataque = 1 if not $Sprite2D.flip_h else -1
+	var inimigo: Node = body
+	var direcao_ataque: float = 1 if not $Sprite2D.flip_h else -1
 
 	while inimigo:
+
+		if inimigo.has_method("rebater"):
+			inimigo.rebater(self)
+			return
+
 		if inimigo.has_method("morrer_melee"):
 			inimigo.morrer_melee(direcao_ataque)
 			return

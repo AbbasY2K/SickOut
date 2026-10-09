@@ -32,7 +32,7 @@ height = 25.5
 size = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60xba"]
-size = Vector2(8.666668, 25.333332)
+size = Vector2(8.666668, 29.999998)
 
 [sub_resource type="Animation" id="Animation_5p0qj"]
 length = 0.001
@@ -1087,7 +1087,8 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="areaSoco" unique_id=837780664]
-position = Vector2(14.333334, 1.3333324)
+position = Vector2(9.333336, -1.9999993)
+rotation = -0.14570186
 shape = SubResource("RectangleShape2D_60xba")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=531417081]

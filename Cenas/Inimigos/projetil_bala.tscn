@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://2bdqiuv43k6g"]
+
+[ext_resource type="Script" uid="uid://cewkrdl83ru8w" path="res://Scripts/Inimigos/projetil_bala.gd" id="1_818no"]
+[ext_resource type="Texture2D" uid="uid://bf3oab31tkp2g" path="res://Sprites/UI/bolha.png" id="1_jata3"]
+[ext_resource type="AudioStream" uid="uid://bfoo6hnvbf711" path="res://Audio/Sons/parry.wav" id="3_m04cf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_818no"]
+size = Vector2(16, 16)
+
+[node name="projetilBala" type="CharacterBody2D" unique_id=1130972311]
+script = ExtResource("1_818no")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=806808164]
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("1_jata3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1333596207]
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="AreaRebate" type="Area2D" parent="." unique_id=1975199092]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaRebate" unique_id=1514144831]
+shape = SubResource("RectangleShape2D_818no")
+
+[node name="parry" type="AudioStreamPlayer" parent="." unique_id=1314840735]
+stream = ExtResource("3_m04cf")
+volume_db = 10.0
+pitch_scale = 2.5
