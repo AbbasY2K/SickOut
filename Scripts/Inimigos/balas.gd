@@ -1,6 +1,5 @@
 extends Inimigo
 
-
 @export var cena_bala: PackedScene
 @export var intervalo_disparo := 0.9
 @export var velocidade_mira := 8.0
@@ -9,19 +8,20 @@ extends Inimigo
 @export var tempo_fade_morte := 0.4
 @export var tempo_antes_de_sumir := 0.2
 
-
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var area: Area2D = $Area2D
 @onready var mira: RayCast2D = $Sprite2D/mira
 @onready var bala_spawning: Node2D = $Sprite2D/mira/balaSpawner
 
-
 var tempo_disparo := 0.0
+var escala_original: Vector2
+var tween_disparo: Tween
 
 
 func _ready() -> void:
-
 	super._ready()
+
+	escala_original = sprite.scale
 
 	ativar()
 
@@ -36,7 +36,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-
 	if dead:
 		return
 
@@ -61,7 +60,6 @@ func _physics_process(delta: float) -> void:
 	tempo_disparo -= delta
 
 	if tempo_disparo <= 0.0:
-
 		if _pode_disparar():
 			_disparar()
 
@@ -69,7 +67,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _pode_disparar() -> bool:
-
 	if not exigir_linha_de_visao:
 		return true
 
@@ -82,20 +79,18 @@ func _pode_disparar() -> bool:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-
 	if body.is_in_group("player"):
 		player = body
 		tempo_disparo = 0.15
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-
 	if body == player:
 		player = null
 		tempo_disparo = 0.0
 
-func _disparar() -> void:
 
+func _disparar() -> void:
 	if cena_bala == null:
 		return
 
@@ -119,18 +114,43 @@ func _disparar() -> void:
 
 	bala.add_collision_exception_with(self)
 
-func morrer_tiro(_dir_ataque := 1.0) -> void:
+	$atirar.play()
 
+	_animar_disparo()
+
+
+func _animar_disparo() -> void:
+	if tween_disparo != null and tween_disparo.is_running():
+		tween_disparo.kill()
+
+	sprite.scale = escala_original
+
+	tween_disparo = create_tween()
+
+	tween_disparo.tween_property(
+		sprite,
+		"scale",
+		escala_original * Vector2(1.15, 0.85),
+		0.05
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	tween_disparo.tween_property(
+		sprite,
+		"scale",
+		escala_original,
+		0.09
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func morrer_tiro(_dir_ataque := 1.0) -> void:
 	_morrer_maquina()
 
 
 func morrer() -> void:
-
 	_morrer_maquina()
 
 
 func _morrer_maquina() -> void:
-
 	if dead:
 		return
 
@@ -140,6 +160,11 @@ func _morrer_maquina() -> void:
 	tempo_disparo = 999999.0
 
 	desativar_colisoes_morte()
+
+	if tween_disparo != null and tween_disparo.is_running():
+		tween_disparo.kill()
+
+	sprite.scale = escala_original
 
 	$explosao.play()
 
@@ -155,7 +180,8 @@ func _morrer_maquina() -> void:
 	var modulate_final: Color = sprite.modulate
 	modulate_final.a = 0.0
 
-	var tween := create_tween()
+	var tween: Tween = create_tween()
+	tween.set_parallel(true)
 
 	tween.tween_property(
 		sprite,
@@ -163,6 +189,20 @@ func _morrer_maquina() -> void:
 		modulate_final,
 		tempo_fade_morte
 	)
+
+	tween.tween_property(
+		sprite,
+		"scale",
+		escala_original * 0.65,
+		tempo_fade_morte
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+
+	tween.tween_property(
+		sprite,
+		"rotation",
+		sprite.rotation + deg_to_rad(25.0),
+		tempo_fade_morte
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 
 	await tween.finished
 

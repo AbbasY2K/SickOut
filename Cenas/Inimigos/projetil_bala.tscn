@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cewkrdl83ru8w" path="res://Scripts/Inimigos/projetil_bala.gd" id="1_818no"]
 [ext_resource type="Texture2D" uid="uid://bf3oab31tkp2g" path="res://Sprites/UI/bolha.png" id="1_jata3"]
-[ext_resource type="AudioStream" uid="uid://bfoo6hnvbf711" path="res://Audio/Sons/parry.wav" id="3_m04cf"]
+[ext_resource type="AudioStream" uid="uid://2gv6xu8743rf" path="res://Audio/Sons/parry2.ogg" id="3_m04cf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
 size = Vector2(10, 10)
@@ -27,5 +27,5 @@ shape = SubResource("RectangleShape2D_818no")
 
 [node name="parry" type="AudioStreamPlayer" parent="." unique_id=1314840735]
 stream = ExtResource("3_m04cf")
-volume_db = 10.0
-pitch_scale = 2.5
+volume_db = -16.0
+pitch_scale = 0.8

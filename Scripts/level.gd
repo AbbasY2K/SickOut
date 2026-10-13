@@ -7,6 +7,8 @@ extends Node2D
 @export var metaKills := 8
 @export var metaTempo := 45.0
 
+
+
 var pausavel = true
 
 var pontuacao := 0
@@ -344,12 +346,6 @@ func gameover():
 	$ui/gameOver/reiniciar.focus_mode = Control.FOCUS_ALL
 	$ui/gameOver/reiniciar.grab_focus()
 
-
-func _on_death_zone_body_entered(body: Node2D) -> void:
-	if body.name == "player":
-		gameover()
-
-
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
 	atualizar_controles_mobile()
@@ -392,3 +388,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_checkpoint_1_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		pass
+
+
+func _on_death_zone_0_body_entered(body: Node2D) -> void:
+	if body.name == "player":
+		gameover()

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dhqs57p455del" path="res://Scripts/Inimigos/balas.gd" id="1_efamt"]
 [ext_resource type="PackedScene" uid="uid://2bdqiuv43k6g" path="res://Cenas/Inimigos/projetil_bala.tscn" id="2_mdh2r"]
 [ext_resource type="AudioStream" uid="uid://bfhjs0ttcqfvj" path="res://Audio/Sons/desligar.mp3" id="4_ix0rq"]
+[ext_resource type="AudioStream" uid="uid://bbexg0sye5uvu" path="res://Audio/Sons/atirarLaser.wav" id="5_0njgr"]
 [ext_resource type="AudioStream" uid="uid://cxdr8lnjfscad" path="res://Audio/Sons/explosion.wav" id="5_apocq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
@@ -63,7 +64,12 @@ target_position = Vector2(0, 0)
 
 [node name="desligar" type="AudioStreamPlayer2D" parent="." unique_id=1615004942]
 stream = ExtResource("4_ix0rq")
-volume_db = 10.0
+volume_db = 18.0
+
+[node name="atirar" type="AudioStreamPlayer2D" parent="." unique_id=802446107]
+stream = ExtResource("5_0njgr")
+volume_db = 6.0
 
 [node name="explosao" type="AudioStreamPlayer" parent="." unique_id=857988309]
 stream = ExtResource("5_apocq")
+volume_db = 2.0
