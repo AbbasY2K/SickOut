@@ -16,6 +16,7 @@ var origin_x := 0.0
 @onready var sprite := $Sprite2D
 @onready var anim := $AnimationPlayer
 
+var imune_melee := true
 
 func _ready():
 
@@ -220,8 +221,9 @@ func _on_inimigo_hit_box_body_entered(body):
 
 		return
 
-	if body.has_method("freezePlayer") and not body.invencivel:
-		body.get_parent().gameover()
+	if body.is_in_group("player"):
+			body.takeDamage(global_position)
+
 
 
 func _on_visao_ataque_body_entered(body):

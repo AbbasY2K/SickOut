@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://mewnp0y1aibh"]
+
+[ext_resource type="Texture2D" uid="uid://bn44f2q6csnny" path="res://Sprites/Assets/andaime.png" id="1_lla7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13qdw"]
+size = Vector2(79.5, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lla7y"]
+size = Vector2(12, 6)
+
+[node name="andaime" type="StaticBody2D" unique_id=130579759]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1099162066]
+texture = ExtResource("1_lla7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2039942916]
+visible = false
+position = Vector2(-28, -23)
+shape = SubResource("RectangleShape2D_13qdw")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=509046852]
+visible = false
+position = Vector2(62, -23)
+shape = SubResource("RectangleShape2D_lla7y")
+one_way_collision = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1536071676]
+visible = false
+position = Vector2(-58, 49)
+polygon = PackedVector2Array(-10, -10, 62, -10, 70, -4, -10, -4)
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1611237222]
+visible = false
+position = Vector2(62, 42)
+shape = SubResource("RectangleShape2D_lla7y")
+one_way_collision = true

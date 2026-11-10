@@ -1,10 +1,47 @@
+
 extends CharacterBody2D
+
+const MAX_LIVES := 2
+var lives: int = 1
 
 const SPEED = 180
 const ACCELERATION = 1400.0
 const FRICTION = 975.0
 const JUMP_VELOCITY = -420.0
 const GRAVITY = 1350.0
+
+const TOXICIDADE_MAXIMA := 100.0
+
+var toxicidade := 0.0
+var recuperacaoToxicidade := 20.0
+var dentroAreaToxica := false
+
+# OVERDOSE
+const OVERDOSE_DURATION := 7.0
+const OVERDOSE_WORLD_SCALE := 0.2
+const OVERDOSE_PLAYER_BOOST := 1.2
+const OVERDOSE_TRANSITION_TIME := 0.16
+const OVERDOSE_ANIM_SPEED := 0.9
+const OVERDOSE_GHOST_INTERVAL := 0.055
+const OVERDOSE_GHOST_OPACITY := 0.68
+const OVERDOSE_GHOST_FADE := 0.24
+const OVERDOSE_SCENE_DARKEN := Color(0.38, 0.34, 0.48, 1.0)
+
+var overdoseActive := false
+var overdoseToken := 0
+var overdoseSceneTween: Tween = null
+
+var overdoseSceneNodes: Array[CanvasItem] = []
+var overdoseOriginalColors: Array[Color] = []
+
+var overdoseOriginalAnimSpeed := 1.0
+var overdoseOriginalMusicPitch := 1.0
+var overdoseOriginalShaderVisible := false
+
+var overdoseMusic: AudioStreamPlayer = null
+
+var overdoseOriginalCameraPositionSpeed := 0.0
+var overdoseOriginalCameraRotationSpeed := 0.0
 
 # DASH
 const DASH_SPEED = 340.0
@@ -14,6 +51,19 @@ const DASH_COOLDOWN = 0.45
 const MAX_STAMINA := 100.0
 const DASH_STAMINA_COST := 45.0
 const STAMINA_RECOVER_SPEED := 40.0
+
+const DAMAGE_INVINCIBILITY_TIME := 1.15
+const DAMAGE_BLINK_INTERVAL := 0.08
+
+const DAMAGE_KNOCKBACK_SPEED := 340.0
+const DAMAGE_KNOCKBACK_UP := -160.0
+const DAMAGE_MOVEMENT_LOCK := 0.24
+
+var damageKnockbackTimer := 0.0
+
+var damageInvulnerabilityTimer := 0.0
+var damageBlinkTimer := 0.0
+var damageBlinkState := false
 
 # CONTROLE
 const INPUT_DEADZONE := 0.25
@@ -28,8 +78,6 @@ var AIR_SHOOT_STOP := 0.0
 
 var coyoteTimer := 0.0
 var jumpBufferTimer := 0.0
-
-var basePoeiraPos := Vector2.ZERO
 
 var stamina := MAX_STAMINA
 
@@ -88,7 +136,16 @@ const WALL_JUMP_STAMINA_COST := 28.0
 
 var wallJumpLocked = false
 
-const GHOST_INTERVAL = 0.06
+const KILL_STREAK_WINDOW := 3.0
+
+var killStreak := 0
+var killStreakTimer := 0.0
+
+var killHitstopActive := false
+var killHitstopScale := 1.0
+var killHitstopToken := 0
+
+const GHOST_INTERVAL := 0.06
 
 var ghostTimer := 0.0
 
@@ -102,11 +159,15 @@ var runShootExitTimer := 0.0
 @onready var areaSoco: Area2D = $areaSoco
 @onready var bulletScene = preload("res://Cenas/tiro.tscn")
 @onready var ganchoCamera = $ganchoCamera
+@onready var livesUI = get_tree().current_scene.get_node_or_null("ui")
+@onready var toxicOverlay: ColorRect = get_node_or_null("../ui/toxico") as ColorRect
 
 @onready var pe1 = $pe1
 @onready var pe2 = $pe2
 @onready var collision = $CollisionShape2D
 @onready var camera = $ganchoCamera/Camera2D
+
+@onready var overdoseShader: CanvasItem = get_node_or_null("../shaderOverdose/ColorRect") as CanvasItem
 
 var cameraTarget: Node2D = null
 var cameraTargetOffset := Vector2.ZERO
@@ -122,57 +183,129 @@ var cameraTargetOffset := Vector2.ZERO
 
 var baseSocoPos: Vector2
 
+
 func _ready():
 	add_to_group("player")
 	baseSocoPos = $areaSoco/CollisionShape2D.position
 	areaSoco.monitoring = false
-	
+
+	overdoseOriginalAnimSpeed = anim.speed_scale
+
+	if is_instance_valid(overdoseShader):
+		overdoseOriginalShaderVisible = overdoseShader.visible
+
+	var cenaAtual := get_tree().current_scene
+
+	if cenaAtual != null:
+		overdoseMusic = cenaAtual.get_node_or_null("sfx/music") as AudioStreamPlayer
+
+	if is_instance_valid(overdoseMusic):
+		overdoseOriginalMusicPitch = overdoseMusic.pitch_scale
+
+	if is_instance_valid(camera):
+		overdoseOriginalCameraPositionSpeed = camera.position_smoothing_speed
+		overdoseOriginalCameraRotationSpeed = camera.rotation_smoothing_speed
+
+	registrar_cenario_overdose()
+
 	updateUi()
 
+
+func _exit_tree():
+	overdoseActive = false
+	overdoseToken += 1
+
+	killHitstopToken += 1
+	killHitstopActive = false
+	killHitstopScale = 1.0
+
+	if overdoseSceneTween != null and is_instance_valid(overdoseSceneTween):
+		overdoseSceneTween.kill()
+
+	if is_instance_valid(overdoseMusic):
+		overdoseMusic.pitch_scale = overdoseOriginalMusicPitch
+
+	if is_instance_valid(overdoseShader):
+		overdoseShader.visible = overdoseOriginalShaderVisible
+
+	if is_instance_valid(anim):
+		anim.speed_scale = overdoseOriginalAnimSpeed
+
+	transicionar_cenario_overdose(false, false)
+
+	atualizar_escala_tempo()
+
+
 func _physics_process(delta):
-	updateTimers(delta)
+	var playerDelta = delta
+
+	if overdoseActive:
+		playerDelta /= OVERDOSE_WORLD_SCALE
+
+	updateTimers(playerDelta)
 	ativar_inimigos_proximos()
 
 	var inputData = getInput()
 
-	# Coyote time
 	if is_on_floor():
 		coyoteTimer = COYOTE_TIME
 	else:
-		coyoteTimer = max(coyoteTimer - delta, 0.0)
+		coyoteTimer = max(coyoteTimer - playerDelta, 0.0)
 
-	# Jump buffer
 	if inputData.jump:
 		jumpBufferTimer = JUMP_BUFFER_TIME
 	else:
-		jumpBufferTimer = max(jumpBufferTimer - delta, 0.0)
+		jumpBufferTimer = max(jumpBufferTimer - playerDelta, 0.0)
 
 	updateFacing(inputData)
 
-	processDash(inputData)
-	processMelee(inputData, delta)
-	processMovement(inputData, delta)
-	applyGravity(delta)
+	processDash(inputData, playerDelta)
+	processMelee(inputData, playerDelta)
+	processMovement(inputData, playerDelta)
+	applyGravity(playerDelta)
 	processJump(inputData)
-	applyKnockback(delta)
+	applyKnockback(playerDelta)
 	processShoot(inputData)
 
-	updateCameraLook(delta)
+	updateCameraLook(playerDelta)
 
-	move_and_slide()
+	if overdoseActive:
+		var fatorMovimento := OVERDOSE_PLAYER_BOOST / OVERDOSE_WORLD_SCALE
 
-	airShootStop = max(airShootStop - delta, 0.0)
+		velocity *= fatorMovimento
+		move_and_slide()
+		velocity /= fatorMovimento
+	else:
+		move_and_slide()
+
+	airShootStop = max(airShootStop - playerDelta, 0.0)
 
 	stamina = min(
-		stamina + STAMINA_RECOVER_SPEED * delta,
+		stamina + STAMINA_RECOVER_SPEED * playerDelta,
 		MAX_STAMINA
 	)
 
-	if dashTime > 0:
-		ghostTimer -= delta
+	if not dentroAreaToxica and toxicidade > 0:
+		toxicidade = maxf(
+			toxicidade - recuperacaoToxicidade * playerDelta,
+			0.0
+		)
+	atualizarToxicidadeVisual()
+
+	var deveCriarGhost := dashTime > 0
+
+	if overdoseActive and velocity.length() > 30.0:
+		deveCriarGhost = true
+
+	if deveCriarGhost:
+		ghostTimer -= playerDelta
 
 		if ghostTimer <= 0:
-			ghostTimer = GHOST_INTERVAL
+			if overdoseActive:
+				ghostTimer = OVERDOSE_GHOST_INTERVAL
+			else:
+				ghostTimer = GHOST_INTERVAL
+
 			spawnGhost()
 	else:
 		ghostTimer = 0.0
@@ -192,15 +325,178 @@ func _physics_process(delta):
 
 	updateAnimation(inputData)
 
+
+# OVERDOSE
+
+func registrar_cenario_overdose() -> void:
+	var caminhos := [
+		"../tileSet3",
+		"../tileSet",
+		"../tileSet4",
+		"../parallaxBg",
+		"../elementos/portas"
+	]
+
+	for caminho in caminhos:
+		var elemento := get_node_or_null(caminho)
+
+		if elemento != null:
+			registrar_elemento_cenario(elemento)
+
+
+func registrar_elemento_cenario(node: Node) -> void:
+	if node is CanvasItem:
+		var item := node as CanvasItem
+
+		if not overdoseSceneNodes.has(item):
+			overdoseSceneNodes.append(item)
+			overdoseOriginalColors.append(item.modulate)
+
+		return
+
+	for filho in node.get_children():
+		registrar_elemento_cenario(filho)
+
+
+func ativar_overdose() -> void:
+	if not overdoseActive:
+		overdoseActive = true
+		configurar_camera_overdose(true)
+
+		if killHitstopActive:
+			killHitstopToken += 1
+			killHitstopActive = false
+			killHitstopScale = 1.0
+
+		anim.speed_scale = OVERDOSE_ANIM_SPEED / OVERDOSE_WORLD_SCALE
+
+		if is_instance_valid(overdoseShader):
+			overdoseShader.visible = true
+
+		if is_instance_valid(overdoseMusic):
+			overdoseMusic.pitch_scale = 1.1
+
+		$"../shaderOverdose".show()
+
+		transicionar_cenario_overdose(true)
+
+		atualizar_escala_tempo()
+
+	overdoseToken += 1
+	var token := overdoseToken
+
+	await get_tree().create_timer(
+		OVERDOSE_DURATION,
+		true,
+		false,
+		true
+	).timeout
+
+	if token != overdoseToken or not overdoseActive:
+		return
+
+	$"../shaderOverdose".hide()
+
+	encerrar_overdose()
+
+
+func encerrar_overdose(transicao: bool = true) -> void:
+	if not overdoseActive:
+		return
+
+	overdoseActive = false
+	configurar_camera_overdose(false)
+	overdoseToken += 1
+
+	if killHitstopActive:
+		killHitstopToken += 1
+		killHitstopActive = false
+		killHitstopScale = 1.0
+
+	if is_instance_valid(anim):
+		anim.speed_scale = overdoseOriginalAnimSpeed
+
+	if is_instance_valid(overdoseMusic):
+		overdoseMusic.pitch_scale = overdoseOriginalMusicPitch
+
+	if is_instance_valid(overdoseShader):
+		overdoseShader.visible = overdoseOriginalShaderVisible
+
+	transicionar_cenario_overdose(false, transicao)
+
+	atualizar_escala_tempo()
+
+func configurar_camera_overdose(ativa: bool) -> void:
+	if not is_instance_valid(camera):
+		return
+
+	if ativa:
+		camera.position_smoothing_speed = (
+			overdoseOriginalCameraPositionSpeed / OVERDOSE_WORLD_SCALE
+		)
+
+		camera.rotation_smoothing_speed = (
+			overdoseOriginalCameraRotationSpeed / OVERDOSE_WORLD_SCALE
+		)
+	else:
+		camera.position_smoothing_speed = overdoseOriginalCameraPositionSpeed
+		camera.rotation_smoothing_speed = overdoseOriginalCameraRotationSpeed
+
+func transicionar_cenario_overdose(
+	ativar: bool,
+	usarTween: bool = true
+) -> void:
+
+	if overdoseSceneTween != null and is_instance_valid(overdoseSceneTween):
+		overdoseSceneTween.kill()
+
+	if usarTween and is_inside_tree():
+		overdoseSceneTween = create_tween()
+		overdoseSceneTween.set_ignore_time_scale(true)
+		overdoseSceneTween.set_parallel(true)
+
+		for i in range(overdoseSceneNodes.size()):
+			var elemento := overdoseSceneNodes[i]
+
+			if not is_instance_valid(elemento):
+				continue
+
+			var corOriginal := overdoseOriginalColors[i]
+			var corDestino: Color
+
+			if ativar:
+				corDestino = corOriginal * OVERDOSE_SCENE_DARKEN
+			else:
+				corDestino = corOriginal
+
+			overdoseSceneTween.tween_property(
+				elemento,
+				"modulate",
+				corDestino,
+				OVERDOSE_TRANSITION_TIME
+			)
+	else:
+		overdoseSceneTween = null
+
+		for i in range(overdoseSceneNodes.size()):
+			var elemento := overdoseSceneNodes[i]
+
+			if not is_instance_valid(elemento):
+				continue
+
+			elemento.modulate = overdoseOriginalColors[i]
+
+
 func getInput():
 	return {
 		"direction": Input.get_axis("left", "right"),
-		"shootPressed": Input.is_action_pressed("shoot") and ammo > 0,
+		"shootPressed": Input.is_action_pressed("shoot"),
 		"shootJust": Input.is_action_just_pressed("shoot"),
 		"dash": Input.is_action_just_pressed("dash"),
 		"jump": Input.is_action_just_pressed("jump"),
 		"melee": Input.is_action_just_pressed("melee")
 	}
+
 
 func updateCameraLook(delta):
 
@@ -216,7 +512,6 @@ func updateCameraLook(delta):
 		Input.get_axis("look_up", "look_down")
 	)
 
-	# Se estiver usando controle, prioriza o analógico direito
 	var joyInput := Vector2(
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_X),
 		Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
@@ -237,6 +532,7 @@ func updateCameraLook(delta):
 
 	ganchoCamera.position = cameraOffset
 
+
 func updateFacing(inputData):
 
 	if dashTime > 0 or meleeing:
@@ -245,6 +541,7 @@ func updateFacing(inputData):
 	if inputData.direction != 0 and not inputData.shootPressed:
 		facingDir = sign(inputData.direction)
 
+
 func updateTimers(delta):
 	dashTime = max(dashTime - delta, 0)
 	dashCooldown = max(dashCooldown - delta, 0)
@@ -252,12 +549,134 @@ func updateTimers(delta):
 	meleeBuffer = max(meleeBuffer - delta, 0)
 	voiceCooldown = max(voiceCooldown - delta, 0)
 
-	if dashTime == 0:
+	damageInvulnerabilityTimer = maxf(
+		damageInvulnerabilityTimer - delta,
+		0.0
+	)
+
+	damageKnockbackTimer = maxf(
+		damageKnockbackTimer - delta,
+		0.0
+	)
+
+	if damageInvulnerabilityTimer > 0.0:
+		invencivel = true
+		damageBlinkTimer -= delta
+
+		if damageBlinkTimer <= 0:
+			damageBlinkTimer = DAMAGE_BLINK_INTERVAL
+			damageBlinkState = not damageBlinkState
+
+			if damageBlinkState:
+				sprite.modulate = Color(1, 0.4, 0.4, 0.45)
+			else:
+				sprite.modulate = Color.WHITE
+
+	elif dashTime <= 0:
 		invencivel = false
-	
+		sprite.modulate = Color.WHITE
+
 	runShootExitTimer = max(runShootExitTimer - delta, 0)
 
-func processDash(inputData):
+	# TIMER DA KILL STREAK
+	if killStreakTimer > 0.0:
+		killStreakTimer = max(killStreakTimer - delta, 0.0)
+
+		if killStreakTimer <= 0.0:
+			killStreak = 0
+
+
+func registrar_kill_streak() -> int:
+	if killStreakTimer > 0.0:
+		killStreak = mini(killStreak + 1, 3)
+	else:
+		killStreak = 1
+
+	killStreakTimer = KILL_STREAK_WINDOW
+
+	aplicar_impacto_kill(killStreak)
+
+	return killStreak
+
+
+func aplicar_impacto_kill(nivel: int) -> void:
+	var shakeDuracao := 0.12
+	var shakeForca := 2.0
+
+	var hitstopDuracao := 0.025
+	var hitstopEscala := 0.14
+
+	match nivel:
+		2:
+			shakeDuracao = 0.21
+			shakeForca = 4.3
+			hitstopDuracao = 0.040
+			hitstopEscala = 0.09
+
+		3:
+			shakeDuracao = 0.32
+			shakeForca = 6.8
+			hitstopDuracao = 0.055
+			hitstopEscala = 0.045
+
+	if is_instance_valid(camera) and camera.has_method("shake"):
+		camera.shake(shakeDuracao, shakeForca)
+
+	aplicar_hitstop_kill(hitstopDuracao, hitstopEscala)
+
+
+func aplicar_hitstop_kill(duracao: float, escala: float) -> void:
+	if overdoseActive:
+		return
+
+	if killHitstopActive:
+		killHitstopScale = minf(killHitstopScale, escala)
+		atualizar_escala_tempo()
+		return
+
+	killHitstopActive = true
+	killHitstopScale = escala
+
+	killHitstopToken += 1
+	var token := killHitstopToken
+
+	atualizar_escala_tempo()
+
+	await get_tree().create_timer(
+		duracao,
+		true,
+		false,
+		true
+	).timeout
+
+	if token != killHitstopToken:
+		return
+
+	killHitstopActive = false
+	killHitstopScale = 1.0
+
+	atualizar_escala_tempo()
+
+
+func atualizar_escala_tempo() -> void:
+	if overdoseActive:
+		Engine.time_scale = OVERDOSE_WORLD_SCALE
+	elif killHitstopActive:
+		Engine.time_scale = killHitstopScale
+	else:
+		Engine.time_scale = 1.0
+
+
+func addExtraLife() -> bool:
+	if lives >= MAX_LIVES:
+		return false
+
+	lives += 1
+	updateUi()
+	return true
+
+
+func processDash(inputData, delta: float):
 	if meleeing:
 		return
 
@@ -292,7 +711,7 @@ func processDash(inputData):
 
 		$sfx/land.volume_db = -90
 
-		await get_tree().create_timer(0.46).timeout
+		await get_tree().create_timer(0.46, true, false, true).timeout
 
 		$sfx/land.volume_db = 2
 
@@ -303,7 +722,7 @@ func processDash(inputData):
 		sprite.rotation_degrees = move_toward(
 			sprite.rotation_degrees,
 			targetRotation,
-			1200 * get_physics_process_delta_time()
+			1200 * delta
 		)
 
 		if $peito1.is_colliding() or $peito2.is_colliding():
@@ -321,8 +740,9 @@ func processDash(inputData):
 		sprite.rotation_degrees = move_toward(
 			sprite.rotation_degrees,
 			0,
-			900 * get_physics_process_delta_time()
+			900 * delta
 		)
+
 
 func processMelee(inputData, delta):
 	if inputData.melee:
@@ -369,8 +789,9 @@ func processMelee(inputData, delta):
 		anim.play("idle")
 		changeState("idle")
 
+
 func processMovement(inputData, delta):
-	if meleeing or dashTime > 0:
+	if meleeing or dashTime > 0 or damageKnockbackTimer > 0:
 		return
 
 	if knockback.length() > 5:
@@ -400,13 +821,14 @@ func processMovement(inputData, delta):
 			FRICTION * delta
 		)
 
+
 func applyGravity(delta):
 	if airShootStop > 0:
 		return
 
 	if dashTime == 0 and not is_on_floor():
 		velocity.y += GRAVITY * delta
-	
+
 	if !is_on_floor() and is_on_wall_custom() and velocity.y > 0:
 		velocity.y = min(velocity.y, WALL_SLIDE_SPEED)
 
@@ -416,8 +838,10 @@ func applyGravity(delta):
 		if $paredeDir.is_colliding():
 			facingDir = 1
 
+
 func is_on_wall_custom():
 	return $paredeEsq.is_colliding() or $paredeDir.is_colliding()
+
 
 func processJump(_inputData):
 	# WALL JUMP
@@ -471,6 +895,7 @@ func processJump(_inputData):
 		$sfx/jump2.play()
 		velocity.y = JUMP_VELOCITY * 0.7
 
+
 func applyKnockback(delta):
 	if dashTime > 0:
 		knockback = Vector2.ZERO
@@ -482,6 +907,7 @@ func applyKnockback(delta):
 		KNOCKBACK_DECAY * delta
 	)
 
+
 func processShoot(inputData):
 	if runShootExitTimer > 0:
 		return
@@ -490,6 +916,8 @@ func processShoot(inputData):
 		return
 
 	if ammo <= 0:
+		if inputData.shootJust:
+			shoot()
 		return
 
 	if not inputData.shootJust:
@@ -506,8 +934,88 @@ func processShoot(inputData):
 	else:
 		changeState("shoot")
 
+
+func takeDamage(source_position: Vector2 = Vector2.ZERO):
+	if lives <= 0 or invencivel or damageInvulnerabilityTimer > 0.0:
+		return
+
+	var tinhaVidaExtra: bool = lives > 1
+	lives -= 1
+
+	if tinhaVidaExtra:
+		var hitSound = $sfx/hit
+
+		if hitSound != null:
+			hitSound.pitch_scale = randf_range(0.8, 1.2)
+			hitSound.play()
+			$sangue.emitting = true
+
+	updateUi()
+
+	camera.shake(0.2, 4)
+	Input.start_joy_vibration(0, 0.4, 0.7, 0.18)
+
+	if lives <= 0:
+		if overdoseActive:
+			encerrar_overdose()
+
+		get_parent().gameover()
+		return
+
+	var origem := source_position
+
+	if origem == Vector2.ZERO:
+		var inimigoMaisProximo: Node2D = null
+		var menorDistancia := INF
+
+		for inimigo in get_tree().get_nodes_in_group("inimigo"):
+			if not is_instance_valid(inimigo) or not (inimigo is Node2D):
+				continue
+
+			if inimigo.get("dead") == true:
+				continue
+
+			var candidato := inimigo as Node2D
+			var distancia := global_position.distance_squared_to(
+				candidato.global_position
+			)
+
+			if distancia < menorDistancia:
+				menorDistancia = distancia
+				inimigoMaisProximo = candidato
+
+		if is_instance_valid(inimigoMaisProximo):
+			origem = inimigoMaisProximo.global_position
+
+	var direction := -float(facingDir)
+
+	if origem != Vector2.ZERO:
+		var distanciaX := global_position.x - origem.x
+
+		if absf(distanciaX) > 2.0:
+			direction = signf(distanciaX)
+
+	dashTime = 0.0
+	collision.set_deferred("disabled", false)
+
+	velocity.x = direction * DAMAGE_KNOCKBACK_SPEED
+	velocity.y = minf(velocity.y, DAMAGE_KNOCKBACK_UP)
+
+	knockback = Vector2.ZERO
+	damageKnockbackTimer = DAMAGE_MOVEMENT_LOCK
+
+	invencivel = true
+	damageInvulnerabilityTimer = DAMAGE_INVINCIBILITY_TIME
+
+	damageBlinkTimer = 0.0
+	damageBlinkState = false
+
+	sprite.modulate = Color(1.0, 0.3, 0.3, 1.0)
+
 func shoot():
 	if ammo <= 0:
+		if not $sfx/unloaded.is_playing():
+			$sfx/unloaded.play()
 		return
 
 	ammo -= 1
@@ -531,9 +1039,7 @@ func shoot():
 		else:
 			velocity.x = AIR_SHOOT_STOP
 
-		$AnimationPlayer.play("tiroPulo")
-		
-		
+		anim.play("tiroPulo")
 
 	playVoiceLine()
 
@@ -544,17 +1050,10 @@ func shoot():
 	else:
 		$"../ui/municao/AnimationPlayer".play("in")
 
+
 func updateAnimation(inputData):
 	sprite.flip_h = facingDir < 0
 	mira.scale.x = -1 if facingDir < 0 else 1
-
-	# Inverte posição e direção da poeira
-	if facingDir < 0:
-		$poeira.position.x *= -1
-		$poeira.scale.x = -1
-	else:
-		$poeira.position.x *= -1
-		$poeira.scale.x = 1
 
 	$areaSoco/CollisionShape2D.position.x = abs(baseSocoPos.x) * facingDir
 	$areaSoco/CollisionShape2D.position.y = baseSocoPos.y
@@ -594,19 +1093,19 @@ func updateAnimation(inputData):
 
 	changeState(newState)
 
+
 func changeState(newState):
 	if currentState == newState:
 		return
 
 	currentState = newState
 	anim.play(newState)
-	
+
 	if newState == "run":
-		$poeira.emitting = true
 		$sfx/walk/AnimationPlayer.play("idle")
 	else:
-		$poeira.emitting = false
 		$sfx/walk/AnimationPlayer.stop()
+
 
 func spawnGhost():
 	var ghost := Sprite2D.new()
@@ -624,13 +1123,54 @@ func spawnGhost():
 	ghost.global_rotation = sprite.global_rotation
 	ghost.global_scale = sprite.global_scale
 
-	ghost.modulate = Color(1, 1, 1, 0.6)
+	var fadeDuration := 0.22
+
+	if overdoseActive:
+		ghost.modulate = Color(
+			0.65,
+			0.25,
+			1.0,
+			OVERDOSE_GHOST_OPACITY
+		)
+
+		fadeDuration = OVERDOSE_GHOST_FADE
+	else:
+		ghost.modulate = Color(1, 1, 1, 0.6)
 
 	get_parent().add_child(ghost)
 
 	var tween := create_tween()
-	tween.tween_property(ghost, "modulate:a", 0.0, 0.22)
+
+	if overdoseActive:
+		tween.set_ignore_time_scale(true)
+
+	tween.tween_property(
+		ghost,
+		"modulate:a",
+		0.0,
+		fadeDuration
+	)
+
 	tween.finished.connect(ghost.queue_free)
+
+func aumentarToxicidade(valor):
+	toxicidade = minf(toxicidade + valor, TOXICIDADE_MAXIMA)
+	atualizarToxicidadeVisual()
+
+	if toxicidade >= TOXICIDADE_MAXIMA:
+		get_parent().gameover()
+
+
+func definirAreaToxica(estado):
+		dentroAreaToxica = estado
+
+func atualizarToxicidadeVisual():
+	var intensidade := clampf(toxicidade / TOXICIDADE_MAXIMA, 0.0, 1.0)
+
+	modulate = Color.WHITE.lerp(Color.GREEN, intensidade)
+
+	if is_instance_valid(toxicOverlay):
+		toxicOverlay.color = Color(0.0, 0.85, 0.05, intensidade * 0.10)
 
 func regenerateAmmo():
 	if ammo >= MAX_AMMO:
@@ -647,12 +1187,23 @@ func regenerateAmmo():
 
 	$sfx/reloadFull.play()
 
+
 func updateUi():
 	for i in range(MAX_AMMO):
 		if i < ammo:
-			ammoIcons[i].modulate = Color(1, 1, 1, 1)
+			ammoIcons[i].modulate = Color.WHITE
 		else:
 			ammoIcons[i].modulate = Color(0.3, 0.3, 0.3, 0.5)
+
+	if livesUI == null:
+		return
+
+	if lives == 1:
+		livesUI.get_node_or_null("items/siringasVermelhas").hide()
+
+	if lives == 2:
+		livesUI.get_node_or_null("items/siringasVermelhas").show()
+
 
 func _on_area_soco_body_entered(body):
 
@@ -665,15 +1216,19 @@ func _on_area_soco_body_entered(body):
 			inimigo.rebater(self)
 			return
 
+		if inimigo.get("imune_melee") == true:
+			return
+
 		if inimigo.has_method("morrer_melee"):
 			inimigo.morrer_melee(direcao_ataque)
 			return
 
 		if inimigo.has_method("morrer"):
-			inimigo.morrer(direcao_ataque)
+			inimigo.morrer()
 			return
 
 		inimigo = inimigo.get_parent()
+
 
 func playVoiceLine():
 	if voiceCooldown > 0:
@@ -694,7 +1249,11 @@ func playVoiceLine():
 		VOICE_DELAY_MAX
 	)
 
+
 func freezePlayer():
+	if overdoseActive:
+		encerrar_overdose()
+
 	velocity = Vector2.ZERO
 	knockback = Vector2.ZERO
 	dashTime = 0
@@ -708,6 +1267,7 @@ func freezePlayer():
 	set_process(false)
 	set_physics_process(false)
 
+
 func unfreezePlayer():
 	collision.disabled = false
 
@@ -715,6 +1275,7 @@ func unfreezePlayer():
 
 	set_process(true)
 	set_physics_process(true)
+
 
 func ativar_inimigos_proximos():
 

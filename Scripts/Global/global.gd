@@ -34,6 +34,8 @@ var fitas := {}
 
 var lingua = null
 
+var potatoMode = false
+
 const CAMINHO = "user://sickoutSave.txt"
 const CONFIG = "user://config.cfg"
 const RANKS = "user://ranks.cfg"
@@ -63,6 +65,7 @@ func salvar_config():
 
 	cfg.set_value("geral", "volume", volume)
 	cfg.set_value("geral", "lingua", lingua)
+	cfg.set_value("geral", "potatoMode", potatoMode)
 
 	for id in fitas.keys():
 		cfg.set_value("fitas", id, fitas[id])
@@ -77,6 +80,7 @@ func carregar_config():
 
 	volume = cfg.get_value("geral", "volume", 100)
 	lingua = cfg.get_value("geral", "lingua", null)
+	potatoMode = cfg.get_value("geral", "potatoMode", false)
 
 	fitas.clear()
 
@@ -232,6 +236,41 @@ func pegar_leaderboard():
 	)
 
 	return lista
+
+
+func apagar_saves() -> void:
+	var caminhos: Array[String] = [CAMINHO, CONFIG, RANKS]
+
+	for caminho in caminhos:
+		if FileAccess.file_exists(caminho):
+			var erro := DirAccess.remove_absolute(ProjectSettings.globalize_path(caminho))
+
+			if erro != OK:
+				push_error("Falha ao apagar " + caminho + ": " + str(erro))
+				return
+
+	volume = 100
+	lingua = null
+	potatoMode = false
+
+	ranks.clear()
+	fitas.clear()
+	itens.clear()
+
+	playerAtual = ""
+	checkpointPos = Vector2.ZERO
+	spawnAtual = null
+
+	freshStart = true
+	respawn = false
+	speedrun = false
+
+	pontuacaoAtual = 0
+	killsAtual = 0
+	tempoAtual = 0.0
+	mortesAtual = 0
+	tempoTotal = 0
+	timerTempo = 0.0
 
 
 func _process(_delta: float) -> void:

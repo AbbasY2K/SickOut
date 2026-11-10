@@ -81,6 +81,7 @@ func _move_along_tirolesa(delta):
 		return
 
 	$tirolesa.play()
+	player.sprite.flip_h = false
 
 	var total_dist = pontoA.global_position.distance_to(pontoB.global_position)
 	tirolesa_dist += tirolesa_speed * delta

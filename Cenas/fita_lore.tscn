@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cs8viosds6hbi"]
+
+[ext_resource type="PackedScene" uid="uid://b2wcje5nlmv2c" path="res://Cenas/documento.tscn" id="1_s5xyp"]
+[ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="2_8orb0"]
+[ext_resource type="Script" uid="uid://cbbkf0aymupet" path="res://Scripts/botaoMenu.gd" id="3_2jk3e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8mdp"]
+bg_color = Color(0.38431373, 1, 0, 0.47058824)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06ix1"]
+bg_color = Color(0.11372549, 0.29411766, 0, 0.47058824)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8iwrc"]
+
+[node name="fitaLore" type="Node2D" unique_id=1123956193]
+
+[node name="fundo" type="ColorRect" parent="." unique_id=834854766]
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 0.3372549)
+
+[node name="documento" parent="." unique_id=715714774 instance=ExtResource("1_s5xyp")]
+position = Vector2(120, 88.00001)
+scale = Vector2(0.75, 0.75)
+
+[node name="voltar" type="Button" parent="." unique_id=827582592]
+offset_left = 832.0
+offset_top = 512.0
+offset_right = 1088.0
+offset_bottom = 578.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_8orb0")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_r8mdp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_06ix1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_r8mdp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8iwrc")
+text = "Voltar"
+script = ExtResource("3_2jk3e")
+key = "VOLTAR"

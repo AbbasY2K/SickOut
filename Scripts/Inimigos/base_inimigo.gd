@@ -263,11 +263,27 @@ func aplicar_knockback(forca: Vector2):
 
 	velocity.x = knockback.x
 
-
 func ativar_efeitos_morte():
+	var nivel_sequencia := 1
+	var player_node = get_tree().get_first_node_in_group("player")
 
-	if has_node("sfx/kill"):
-		$sfx/kill.play()
+	if is_instance_valid(player_node) and player_node.has_method("registrar_kill_streak"):
+		nivel_sequencia = player_node.registrar_kill_streak()
+
+	var kill_sound = get_node_or_null("sfx/kill")
+
+	if kill_sound:
+		match nivel_sequencia:
+			1:
+				kill_sound.pitch_scale = 1.0
+			2:
+				kill_sound.pitch_scale = 0.94
+				kill_sound.volume_db += 1.0
+			_:
+				kill_sound.pitch_scale = 0.86
+				kill_sound.volume_db += 2.0
+
+		kill_sound.play()
 
 	if has_node("sangue"):
 		$sangue.emitting = true
@@ -275,8 +291,7 @@ func ativar_efeitos_morte():
 	var blood_splash = get_node_or_null("../../../bloodSplash")
 
 	if blood_splash and blood_splash.has_method("impacto_kill"):
-		blood_splash.impacto_kill()
-
+		blood_splash.impacto_kill(nivel_sequencia)
 
 func registrar_kill(pontuacao: int):
 

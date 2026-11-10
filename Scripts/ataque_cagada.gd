@@ -82,5 +82,5 @@ func _physics_process(_delta):
 
 
 func _on_area_body_entered(body: Node2D) -> void:
-	if body.has_method("freezePlayer") and not body.invencivel:
-		body.get_parent().gameover()
+	if body.is_in_group("player"):
+		body.takeDamage(global_position)

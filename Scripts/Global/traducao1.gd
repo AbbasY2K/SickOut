@@ -6,12 +6,15 @@ var texts := {
 		
 		"JOGAR": "PLAY",
 		"CONFIG": "SETTINGS",
+		"CONFIG_PAUSE": "Settings",
 		"HISTORIA": "STORY",
 		"CREDITOS": "CREDITS",
 		"FECHAR": "CLOSE",
 		"INFO": "INFO",
 		"FASES": "LEVELS",
 		"LOG": "CREATE PERFORMANCE LOG",
+		"POTATO": "Performance Mode",
+		"SAVE": "Delete Data",
 
 		"OBG_TEXTO1": "[wave]Thank you for playing\nour game![/wave]",
 		"OBG_TEXTO2": "[wave]Follow us on Instagram:\n[color=#9751dd]@finallevel_studio[/color][/wave]",
@@ -60,12 +63,15 @@ var texts := {
 		
 		"JOGAR": "JOGAR",
 		"CONFIG": "CONFIG",
+		"CONFIG_PAUSE": "Configuração",
 		"HISTORIA": "HISTÓRIA",
 		"CREDITOS": "CRÉDITOS",
 		"FECHAR": "FECHAR",
 		"INFO": "INFO",
 		"FASES": "FASES",
 		"LOG": "GERAR LOG DE DESEMPENHO",
+		"POTATO": "Modo Desempenho",
+		"SAVE": "Apagar Save",
 
 		"OBG_TEXTO1": "[wave]Obrigado por testar \nnosso jogo![/wave]",
 		"OBG_TEXTO2": "[wave]Acompanhe no Instagram:\n[color=#9751dd]@finallevel_studio[/color][/wave]",

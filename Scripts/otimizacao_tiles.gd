@@ -38,6 +38,7 @@ var container_chunks: Node2D
 var tem_dado_morte: bool = false
 var morte_acionada: bool = false
 
+var potato_mode_aplicado: bool = false
 
 func _ready() -> void:
 	set_process(false)
@@ -49,6 +50,7 @@ func _ready() -> void:
 	player = _encontrar_player()
 
 	call_deferred("_criar_chunks")
+	aplicar_potato_mode()
 
 
 func _criar_chunks() -> void:
@@ -271,6 +273,9 @@ func _carregar_chunk_imediato(chave: Vector2i) -> void:
 	_finalizar_chunk(chave, chunk)
 
 func _process(delta: float) -> void:
+	if potato_mode_aplicado != Global.potatoMode:
+		aplicar_potato_mode()
+	
 	if not preparado:
 		if not is_instance_valid(player):
 			player = _encontrar_player()
@@ -296,6 +301,27 @@ func _process(delta: float) -> void:
 
 	_processar_fila_carregamento()
 
+func aplicar_potato_mode() -> void:
+	potato_mode_aplicado = Global.potatoMode
+
+	var fase := get_tree().current_scene
+	if fase == null:
+		return
+
+	var tileset3 := fase.find_child("tileSet3", true, false) as CanvasItem
+	var chunks := fase.find_child("tileSet3_Chunks", true, false) as CanvasItem
+
+	if is_instance_valid(tileset3):
+		if Global.potatoMode:
+			tileset3.hide()
+		else:
+			tileset3.show()
+
+	if is_instance_valid(chunks):
+		if Global.potatoMode:
+			chunks.hide()
+		else:
+			chunks.show()
 
 func _physics_process(_delta: float) -> void:
 	if not preparado or morte_acionada or not tem_dado_morte:

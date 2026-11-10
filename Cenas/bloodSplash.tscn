@@ -2,9 +2,46 @@
 
 [ext_resource type="Script" uid="uid://b7k3kt0v28d5g" path="res://Scripts/bloodSplash.gd" id="1_4ncap"]
 [ext_resource type="Texture2D" uid="uid://c5akvoekm1bx" path="res://Sprites/Assets/bloodSplash.png" id="3_4ncap"]
+[ext_resource type="Shader" uid="uid://csgobms57dsme" path="res://Shaders/estatico.gdshader" id="3_y700b"]
+[ext_resource type="Shader" uid="uid://d12eqpug8ibgk" path="res://Shaders/mensagem.gdshader" id="4_wsygu"]
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="5_8xhe6"]
+[ext_resource type="AudioStream" uid="uid://dlhi4ith0tpeq" path="res://Audio/Sons/sangue.mp3" id="6_wsygu"]
+[ext_resource type="AudioStream" uid="uid://cxjkdpguadsj6" path="res://Audio/Sons/sangue2.mp3" id="7_3j405"]
+[ext_resource type="AudioStream" uid="uid://chiv0elmqei3l" path="res://Audio/Sons/sangue3.mp3" id="8_aacft"]
+[ext_resource type="AudioStream" uid="uid://dvvgy1icilhnu" path="res://Audio/Sons/sangue4.mp3" id="9_pxx51"]
+[ext_resource type="AudioStream" uid="uid://dyp2hiqgsbhpn" path="res://Audio/Sons/grito1.mp3" id="10_nhofv"]
+[ext_resource type="AudioStream" uid="uid://cvwcfrycrna76" path="res://Audio/Sons/grito2.mp3" id="11_ntnd1"]
+[ext_resource type="AudioStream" uid="uid://6e6t3edg0gaa" path="res://Audio/Sons/grito3.mp3" id="12_68cuf"]
+[ext_resource type="AudioStream" uid="uid://g1sng5q4hnan" path="res://Audio/Sons/grito4.mp3" id="13_oulyg"]
+[ext_resource type="AudioStream" uid="uid://dlvfaat7jstf0" path="res://Audio/Sons/grito5.mp3" id="14_y6qpi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrivr"]
+shader = ExtResource("3_y700b")
+shader_parameter/intensity = 0.0
+shader_parameter/distortion = 0.010000000475
+shader_parameter/noise_strength = 0.3070000145825
+shader_parameter/scanline_strength = 0.16400000779
+shader_parameter/chromatic_shift = 0.006000000285
+shader_parameter/tracking_strength = 0.035
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3j405"]
+shader = ExtResource("4_wsygu")
+shader_parameter/intensidade = 0.4890000232275
+shader_parameter/scanlines = 0.40400001919
+shader_parameter/velocidade = 23.4970010686075
+shader_parameter/distorcao = 0.014000000665
+shader_parameter/cor_glitch = Color(0.75, 0.25, 1, 1)
 
 [node name="bloodSplash" type="CanvasLayer" unique_id=350166330]
 script = ExtResource("1_4ncap")
+
+[node name="vhs" type="ColorRect" parent="." unique_id=167632612]
+material = SubResource("ShaderMaterial_xrivr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="flash" type="ColorRect" parent="." unique_id=537161834]
 modulate = Color(1, 1, 1, 0)
@@ -17,3 +54,58 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(575.99994, 319.99997)
 scale = Vector2(5.4084496, 5.7853117)
 texture = ExtResource("3_4ncap")
+
+[node name="mensagem" type="RichTextLabel" parent="." unique_id=1286361638]
+self_modulate = Color(0.9372549, 0, 0.101960786, 1)
+material = SubResource("ShaderMaterial_3j405")
+offset_left = 32.0
+offset_top = 128.0
+offset_right = 102.0
+offset_bottom = 160.0
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.22152612, 0.24637064, 0.2550083, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("5_8xhe6")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake rate=18 level=12]KILL![/shake]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="bip1" type="AudioStreamPlayer" parent="mensagem" unique_id=1449327212]
+stream = ExtResource("6_wsygu")
+volume_db = 6.0
+
+[node name="bip2" type="AudioStreamPlayer" parent="mensagem" unique_id=1864195604]
+stream = ExtResource("7_3j405")
+volume_db = 6.0
+
+[node name="bip3" type="AudioStreamPlayer" parent="mensagem" unique_id=182429487]
+stream = ExtResource("8_aacft")
+volume_db = 6.0
+
+[node name="bip4" type="AudioStreamPlayer" parent="mensagem" unique_id=1717784649]
+stream = ExtResource("9_pxx51")
+volume_db = 6.0
+
+[node name="gritos" type="Node" parent="." unique_id=874750270]
+
+[node name="grito1" type="AudioStreamPlayer" parent="gritos" unique_id=1462141022]
+stream = ExtResource("10_nhofv")
+
+[node name="grito2" type="AudioStreamPlayer" parent="gritos" unique_id=1631281628]
+stream = ExtResource("11_ntnd1")
+volume_db = -8.0
+
+[node name="grito3" type="AudioStreamPlayer" parent="gritos" unique_id=1536884455]
+stream = ExtResource("12_68cuf")
+volume_db = -4.0
+
+[node name="grito4" type="AudioStreamPlayer" parent="gritos" unique_id=479225307]
+stream = ExtResource("13_oulyg")
+
+[node name="grito5" type="AudioStreamPlayer" parent="gritos" unique_id=2126089530]
+stream = ExtResource("14_y6qpi")

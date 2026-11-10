@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://do2pi1d7mm08c"]
 
+[ext_resource type="Shader" uid="uid://csgobms57dsme" path="res://Shaders/estatico.gdshader" id="1_3whgg"]
 [ext_resource type="Script" uid="uid://dqh164r14j1w5" path="res://Scripts/menu_pausa.gd" id="1_iwq1s"]
+[ext_resource type="Texture2D" uid="uid://dw8d2f6u358vd" path="res://Sprites/Assets/seringa.png" id="2_6n75h"]
+[ext_resource type="Texture2D" uid="uid://c8p14h3pq47f" path="res://Sprites/Assets/seringaVermelha.png" id="2_7pdbv"]
 [ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="2_a61uv"]
 [ext_resource type="FontFile" uid="uid://c5582kvprwiex" path="res://Fontes/Pixelout Personal Use Only.ttf" id="4_db7cq"]
+[ext_resource type="Texture2D" uid="uid://eablwrv1gxno" path="res://Sprites/Assets/packMunicao.png" id="4_j8ts0"]
 [ext_resource type="Shader" uid="uid://bnnj3fmtr537a" path="res://Shaders/shader_texto.gdshader" id="5_0m28x"]
 [ext_resource type="Script" uid="uid://cbbkf0aymupet" path="res://Scripts/botaoMenu.gd" id="5_v3wx3"]
 [ext_resource type="Texture2D" uid="uid://beoawqgf0l3rm" path="res://Sprites/Assets/municaoUI.png" id="6_ua171"]
@@ -15,8 +19,13 @@
 [ext_resource type="Script" uid="uid://c4udcigkyaeog" path="res://Scripts/kill_count.gd" id="10_db7cq"]
 [ext_resource type="AudioStream" uid="uid://d3ud2uqh4bn4o" path="res://Audio/Sons/selecionar.ogg" id="15_o48mr"]
 [ext_resource type="PackedScene" uid="uid://dov8h3pe1obqq" path="res://Cenas/controles_gameplay.tscn" id="15_v3wx3"]
+[ext_resource type="Script" uid="uid://cx1uv611x8st5" path="res://Scripts/opcoes_fase.gd" id="16_3whgg"]
 [ext_resource type="PackedScene" uid="uid://bjtedmy3ch3uf" path="res://Cenas/controles_menu.tscn" id="16_o48mr"]
 [ext_resource type="AudioStream" uid="uid://c2caxqijdcmde" path="res://Audio/Sons/hover_botao2.wav" id="16_xsrlu"]
+[ext_resource type="Script" uid="uid://miqaf48q7j51" path="res://Scripts/Textos/label.gd" id="17_6n75h"]
+[ext_resource type="Texture2D" uid="uid://boltw3o3k5jrp" path="res://Sprites/UI/checked.png" id="18_6n75h"]
+[ext_resource type="Texture2D" uid="uid://2u3vwqb6p0mp" path="res://Sprites/UI/slider.png" id="18_48t2m"]
+[ext_resource type="Texture2D" uid="uid://irgoq4difx3i" path="res://Sprites/UI/unchecked.png" id="19_48t2m"]
 
 [sub_resource type="Animation" id="Animation_db7cq"]
 length = 0.001
@@ -69,6 +78,15 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6n75h"]
+shader = ExtResource("1_3whgg")
+shader_parameter/intensity = 0.1600000076
+shader_parameter/distortion = 0.010000000475
+shader_parameter/noise_strength = 0.3070000145825
+shader_parameter/scanline_strength = 0.16400000779
+shader_parameter/chromatic_shift = 0.006000000285
+shader_parameter/tracking_strength = 0.035
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_frg0r"]
 bg_color = Color(0.38431373, 1, 0, 0.47058824)
 border_width_left = 5
@@ -94,6 +112,13 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42paj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrivr"]
+bg_color = Color(0.101960786, 0.35686275, 0.101960786, 0.38039216)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_khww2"]
 shader = ExtResource("5_0m28x")
@@ -169,6 +194,204 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m28x"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vyjh0"]
+content_margin_top = 32.0
+bg_color = Color(0.05953374, 0.33203125, 0.0025939941, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5sc4"]
+content_margin_top = 32.0
+bg_color = Color(0.115448035, 0.609375, 0.016662598, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v2up"]
+content_margin_top = 32.0
+bg_color = Color(0.34283486, 0.7578125, 0.26049805, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o1pv0"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebatf"]
+bg_color = Color(0.609375, 0.609375, 0.609375, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2twb"]
+bg_color = Color(0.8862745, 0.9098039, 0.80784315, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8nmt"]
+bg_color = Color(3.1044335e-06, 0.5873193, 0.21157107, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eepa5"]
+bg_color = Color(2.0455568e-06, 0.41908053, 0.14161271, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gio0i"]
+bg_color = Color(0.7523067, 0, 0.060234837, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvmne"]
+bg_color = Color(0.94592506, 0.00072196126, 0.0830465, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Animation" id="Animation_d5b5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jcv74"]
+resource_name = "in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rvpc5"]
+resource_name = "out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blackout:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("blackout:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o1pv0"]
+_data = {
+&"RESET": SubResource("Animation_d5b5f"),
+&"in": SubResource("Animation_jcv74"),
+&"out": SubResource("Animation_rvpc5")
+}
+
 [node name="ui" type="CanvasLayer" unique_id=1991959248]
 layer = 2
 
@@ -179,6 +402,13 @@ color = Color(0, 0, 0, 1)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="blackout" unique_id=395359688]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_ua171")
+
+[node name="toxico" type="ColorRect" parent="." unique_id=847147618]
+texture_filter = 1
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0.13725491, 0.6156863, 0.11372549, 0)
+metadata/_edit_use_anchors_ = true
 
 [node name="borda" type="Panel" parent="." unique_id=1683695255]
 modulate = Color(1, 1, 1, 0.3254902)
@@ -195,13 +425,44 @@ offset_right = 1152.0
 offset_bottom = 640.0
 color = Color(0, 0, 0, 1)
 
+[node name="vhs" type="ColorRect" parent="." unique_id=1917380018]
+visible = false
+material = SubResource("ShaderMaterial_6n75h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="items" type="HBoxContainer" parent="." unique_id=1360696477]
+offset_left = 960.0
+offset_top = 120.0
+offset_right = 1120.0
+offset_bottom = 152.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="siringasVermelhas" type="TextureRect" parent="items" unique_id=832715432]
+layout_mode = 2
+texture = ExtResource("2_7pdbv")
+
+[node name="siringasVerdes" type="TextureRect" parent="items" unique_id=1397174671]
+visible = false
+layout_mode = 2
+texture = ExtResource("2_6n75h")
+
+[node name="packMunicao" type="TextureRect" parent="items" unique_id=565368090]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_j8ts0")
+
 [node name="pauseMenu" type="VBoxContainer" parent="." unique_id=1505222959]
 process_mode = 2
 visible = false
 offset_left = 416.00003
-offset_top = 192.0
+offset_top = 144.0
 offset_right = 672.0
-offset_bottom = 411.7333
+offset_bottom = 432.0
 scale = Vector2(1.25, 1.25)
 script = ExtResource("1_iwq1s")
 
@@ -226,11 +487,54 @@ text = "Voltar"
 script = ExtResource("5_v3wx3")
 key = "VOLTAR"
 
-[node name="botao2" type="Control" parent="pauseMenu" unique_id=1061660679]
+[node name="botao2" type="Control" parent="pauseMenu" unique_id=1445832468]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="menu" type="Button" parent="pauseMenu/botao2" unique_id=1011950437]
+[node name="reiniciar" type="Button" parent="pauseMenu/botao2" unique_id=970398546]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 67.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_a61uv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_frg0r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_au0cq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_frg0r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_42paj")
+text = "Reiniciar Fase
+"
+script = ExtResource("5_v3wx3")
+key = "RETRY"
+
+[node name="botao3" type="Control" parent="pauseMenu" unique_id=447174570]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="config" type="Button" parent="pauseMenu/botao3" unique_id=97904220]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 67.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_a61uv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_frg0r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_au0cq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_frg0r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_42paj")
+text = "Configurações"
+script = ExtResource("5_v3wx3")
+key = "CONFIG_PAUSE"
+
+[node name="botao4" type="Control" parent="pauseMenu" unique_id=1061660679]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="menu" type="Button" parent="pauseMenu/botao4" unique_id=1011950437]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 67.0
@@ -247,28 +551,6 @@ text = "Menu Principal
 "
 script = ExtResource("5_v3wx3")
 key = "MAINMENU"
-
-[node name="botao3" type="Control" parent="pauseMenu" unique_id=447174570]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="reiniciar" type="Button" parent="pauseMenu/botao3" unique_id=97904220]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 67.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("2_a61uv")
-theme_override_styles/normal = SubResource("StyleBoxFlat_frg0r")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_au0cq")
-theme_override_styles/hover = SubResource("StyleBoxFlat_frg0r")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_42paj")
-text = "Reiniciar Cena
-"
-script = ExtResource("5_v3wx3")
-key = "RETRY"
 
 [node name="gameOver" type="Control" parent="." unique_id=261477842]
 visible = false
@@ -343,6 +625,16 @@ offset_right = 191.0
 offset_bottom = 759.99994
 scale = Vector2(1.5, 1.5)
 theme_override_constants/separation = 0
+
+[node name="Control" type="Control" parent="municao" unique_id=317644210]
+layout_mode = 2
+
+[node name="ColorRect" type="Panel" parent="municao/Control" unique_id=1561701439]
+layout_mode = 0
+offset_top = 21.333344
+offset_right = 165.33334
+offset_bottom = 74.66669
+theme_override_styles/panel = SubResource("StyleBoxFlat_xrivr")
 
 [node name="label" type="Label" parent="municao" unique_id=1586437293]
 material = SubResource("ShaderMaterial_khww2")
@@ -654,6 +946,249 @@ text = "[center][wave]STAMINA"
 fit_content = true
 autowrap_mode = 0
 
+[node name="opcoes" type="Node2D" parent="." unique_id=99516428]
+visible = false
+script = ExtResource("16_3whgg")
+
+[node name="fundo" type="ColorRect" parent="opcoes" unique_id=686983563]
+modulate = Color(1, 1, 1, 0.78431374)
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="titulo" type="RichTextLabel" parent="opcoes" unique_id=1428574806]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 512.0
+offset_bottom = 146.0
+theme_override_fonts/normal_font = ExtResource("2_a61uv")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[shake rate=20 level=10]CONFIGURAÇÕES
+"
+fit_content = true
+vertical_alignment = 1
+script = ExtResource("9_db7cq")
+key = "CONFIG"
+
+[node name="linhas" type="Control" parent="opcoes" unique_id=1164237340]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="linha1" type="ColorRect" parent="opcoes/linhas" unique_id=1825632799]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 144.0
+offset_right = 512.0
+offset_bottom = 145.0
+
+[node name="linha2" type="ColorRect" parent="opcoes/linhas" unique_id=1938751131]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 248.0
+offset_right = 776.0
+offset_bottom = 249.0
+
+[node name="linha3" type="ColorRect" parent="opcoes/linhas" unique_id=1658791307]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 328.0
+offset_right = 776.0
+offset_bottom = 329.0
+
+[node name="opcoes" type="VBoxContainer" parent="opcoes" unique_id=651672974]
+offset_left = 64.0
+offset_top = 196.0
+offset_right = 350.0
+offset_bottom = 335.0
+theme_override_constants/separation = 42
+
+[node name="desempenho" type="HBoxContainer" parent="opcoes/opcoes" unique_id=1776110455]
+layout_mode = 2
+theme_override_constants/separation = 23
+
+[node name="label" type="Label" parent="opcoes/opcoes/desempenho" unique_id=1212471584]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_a61uv")
+theme_override_font_sizes/font_size = 32
+text = "Modo Desempenho:"
+vertical_alignment = 2
+script = ExtResource("17_6n75h")
+key = "POTATO"
+
+[node name="check" type="CheckButton" parent="opcoes/opcoes/desempenho" unique_id=1306177403]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../musica/Control/volumeSlider")
+theme_override_icons/checked = ExtResource("18_6n75h")
+theme_override_icons/unchecked = ExtResource("19_48t2m")
+
+[node name="musica" type="HBoxContainer" parent="opcoes/opcoes" unique_id=164142834]
+layout_mode = 2
+
+[node name="label" type="Label" parent="opcoes/opcoes/musica" unique_id=228567649]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_a61uv")
+theme_override_font_sizes/font_size = 32
+text = "Volume da Música:"
+vertical_alignment = 2
+script = ExtResource("17_6n75h")
+key = "MESTRE"
+
+[node name="Control" type="Control" parent="opcoes/opcoes/musica" unique_id=657326176]
+layout_mode = 2
+
+[node name="volumeSlider" type="HSlider" parent="opcoes/opcoes/musica/Control" unique_id=1297481927]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -17.0
+offset_right = 406.0
+offset_bottom = 38.0
+focus_neighbor_top = NodePath("../../../desempenho/check")
+focus_neighbor_bottom = NodePath("../../../sons/Control/sonsSlider")
+theme_override_icons/grabber = ExtResource("18_48t2m")
+theme_override_icons/grabber_highlight = ExtResource("18_48t2m")
+theme_override_icons/grabber_disabled = ExtResource("18_48t2m")
+theme_override_styles/slider = SubResource("StyleBoxFlat_vyjh0")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_d5sc4")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_8v2up")
+step = 5.0
+value = 100.0
+
+[node name="sons" type="HBoxContainer" parent="opcoes/opcoes" unique_id=771541702]
+layout_mode = 2
+
+[node name="label" type="Label" parent="opcoes/opcoes/sons" unique_id=1108947050]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_a61uv")
+theme_override_font_sizes/font_size = 32
+text = "Volume dos Sons:"
+vertical_alignment = 2
+script = ExtResource("17_6n75h")
+key = "SONS"
+
+[node name="Control" type="Control" parent="opcoes/opcoes/sons" unique_id=725185369]
+layout_mode = 2
+
+[node name="sonsSlider" type="HSlider" parent="opcoes/opcoes/sons/Control" unique_id=184350045]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -18.0
+offset_right = 423.0
+offset_bottom = 37.0
+focus_neighbor_top = NodePath("../../../musica/Control/volumeSlider")
+focus_neighbor_bottom = NodePath("../../../../voltar")
+theme_override_icons/grabber = ExtResource("18_48t2m")
+theme_override_icons/grabber_highlight = ExtResource("18_48t2m")
+theme_override_icons/grabber_disabled = ExtResource("18_48t2m")
+theme_override_styles/slider = SubResource("StyleBoxFlat_vyjh0")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_d5sc4")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_8v2up")
+step = 5.0
+value = 100.0
+
+[node name="voltar" type="Button" parent="opcoes" unique_id=1839485715]
+offset_left = 64.0
+offset_top = 448.0
+offset_right = 320.0
+offset_bottom = 512.0
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../opcoes/sons/Control/sonsSlider")
+focus_neighbor_right = NodePath("../lang")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("9_um40y")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_o1pv0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ebatf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f2twb")
+text = "Voltar"
+script = ExtResource("5_v3wx3")
+key = "VOLTAR"
+
+[node name="lang" type="Button" parent="opcoes" unique_id=117912647]
+offset_left = 384.0
+offset_top = 448.0
+offset_right = 704.0
+offset_bottom = 512.0
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../voltar")
+focus_neighbor_top = NodePath("../opcoes/sons/Control/sonsSlider")
+focus_neighbor_right = NodePath("../apagar")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("9_um40y")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_f8nmt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eepa5")
+text = "Linguagem: PT-BR"
+script = ExtResource("5_v3wx3")
+key = "NULL"
+
+[node name="apagar" type="Button" parent="opcoes" unique_id=973686662]
+offset_left = 768.0
+offset_top = 448.0
+offset_right = 1088.0
+offset_bottom = 512.0
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../lang")
+focus_neighbor_top = NodePath("../opcoes/sons/Control/sonsSlider")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_fonts/font = ExtResource("9_um40y")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_gio0i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uvmne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uvmne")
+disabled = true
+text = "Apagar Save"
+script = ExtResource("5_v3wx3")
+key = "SAVE"
+
+[node name="blackout" type="ColorRect" parent="opcoes" unique_id=1219670371]
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_right = 1152.0
+offset_bottom = 640.0
+color = Color(0, 0, 0, 1)
+
+[node name="hoverBotao" type="AudioStreamPlayer" parent="opcoes" unique_id=1708806306]
+stream = ExtResource("16_xsrlu")
+volume_db = -5.0
+
+[node name="sfx" type="Node" parent="opcoes" unique_id=630512971]
+
+[node name="lang" type="AudioStreamPlayer" parent="opcoes/sfx" unique_id=1533280824]
+stream = ExtResource("15_o48mr")
+
+[node name="controlesMenu" parent="opcoes" unique_id=1523935731 instance=ExtResource("16_o48mr")]
+
+[node name="Panel" parent="opcoes/controlesMenu" index="0" unique_id=270207209]
+offset_left = 896.0
+offset_top = 64.0
+offset_right = 1088.0
+offset_bottom = 256.0
+
+[node name="setaLeft" parent="opcoes/controlesMenu" index="1" unique_id=511473772]
+position = Vector2(896.00006, 124.00003)
+
+[node name="setaRight" parent="opcoes/controlesMenu" index="2" unique_id=637617226]
+position = Vector2(1016.00006, 124.00003)
+
+[node name="setaup" parent="opcoes/controlesMenu" index="3" unique_id=110457286]
+position = Vector2(956, 64)
+
+[node name="setaDown" parent="opcoes/controlesMenu" index="4" unique_id=690401709]
+position = Vector2(956, 184)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="opcoes" unique_id=1382429958]
+libraries/ = SubResource("AnimationLibrary_o1pv0")
+autoplay = &"out"
+
 [node name="selectBotao" type="AudioStreamPlayer" parent="." unique_id=820611376]
 stream = ExtResource("15_o48mr")
 volume_db = -2.0
@@ -664,7 +1199,14 @@ stream = ExtResource("16_xsrlu")
 volume_db = -5.0
 
 [connection signal="pressed" from="pauseMenu/botao1/voltar" to="pauseMenu" method="_on_voltar_pressed"]
-[connection signal="pressed" from="pauseMenu/botao2/menu" to="pauseMenu" method="_on_menu_pressed"]
-[connection signal="pressed" from="pauseMenu/botao3/reiniciar" to="pauseMenu" method="_on_reiniciar_pressed"]
+[connection signal="pressed" from="pauseMenu/botao2/reiniciar" to="pauseMenu" method="_on_reiniciar_pressed"]
+[connection signal="pressed" from="pauseMenu/botao3/config" to="pauseMenu" method="_on_config_pressed"]
+[connection signal="pressed" from="pauseMenu/botao4/menu" to="pauseMenu" method="_on_menu_pressed"]
+[connection signal="pressed" from="opcoes/opcoes/desempenho/check" to="opcoes" method="_on_check_pressed"]
+[connection signal="value_changed" from="opcoes/opcoes/musica/Control/volumeSlider" to="opcoes" method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="opcoes/voltar" to="opcoes" method="_on_voltar_pressed"]
+[connection signal="pressed" from="opcoes/lang" to="opcoes" method="_on_lang_pressed"]
+[connection signal="pressed" from="opcoes/apagar" to="opcoes" method="_on_lang_pressed"]
 
 [editable path="controlesGameplay"]
+[editable path="opcoes/controlesMenu"]

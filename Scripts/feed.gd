@@ -46,7 +46,7 @@ func adicionar_kill():
 	var key = mensagens.pick_random()
 	var texto = Tradutor.get_text(key)
 
-	msg.get_node("Label").text = "[shake]" + texto
+	msg.get_node("Label").text = texto
 
 	$"../killCount".add_count()
 	$feed.add_child(msg)

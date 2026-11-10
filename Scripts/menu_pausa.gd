@@ -23,7 +23,7 @@ func _on_voltar_pressed() -> void:
 	$"../../sfx/music".volume_db = -5
 
 func _on_menu_pressed() -> void:
-	piscar_botao($botao2/menu)
+	piscar_botao($botao4/menu)
 	get_viewport().gui_release_focus()
 	await get_tree().create_timer(0.5).timeout
 	$"../../AnimationPlayer".play("fadeIn")
@@ -34,8 +34,16 @@ func _on_menu_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Cenas/Menus/menu.tscn")
 
+func _on_config_pressed() -> void:
+	piscar_botao($botao3/config)
+	get_viewport().gui_release_focus()
+	await get_tree().create_timer(0.5).timeout
+
+	$"../opcoes".show()
+	$"../opcoes/opcoes/desempenho/check".grab_focus()
+
 func _on_reiniciar_pressed() -> void:
-	piscar_botao($botao3/reiniciar)
+	piscar_botao($botao2/reiniciar)
 	get_viewport().gui_release_focus()
 	await get_tree().create_timer(0.5).timeout
 	$"../../AnimationPlayer".play("fadeIn")

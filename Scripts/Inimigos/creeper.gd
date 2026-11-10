@@ -228,13 +228,11 @@ func _on_hit_box_body_entered(body):
 	if exploding or exploded or gas_mode:
 		return
 
-	if body.has_method("freezePlayer") and not body.invencivel:
-
-		body.get_parent().gameover()
+	if body.is_in_group("player"):
+		body.takeDamage(global_position)
 
 
 func _on_gas_body_entered(body):
 
-	if body.has_method("freezePlayer") and not body.invencivel:
-
-		body.get_parent().gameover()
+	if body.is_in_group("player"):
+		body.takeDamage(global_position)

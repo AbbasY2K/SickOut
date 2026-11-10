@@ -12,17 +12,18 @@
 [ext_resource type="Texture2D" uid="uid://d3c6moe3qgjl" path="res://Sprites/player/queda.png" id="6_jx05c"]
 [ext_resource type="Texture2D" uid="uid://ctv02deesimgu" path="res://Sprites/player/player_melee1.png" id="7_had87"]
 [ext_resource type="Texture2D" uid="uid://dbq44xd4pm3g8" path="res://Sprites/player/player_melee2.png" id="8_axwfv"]
-[ext_resource type="AudioStream" uid="uid://crr78tdqx0bbi" path="res://Audio/Sons/recarregar.ogg" id="10_2enhl"]
 [ext_resource type="AudioStream" uid="uid://c4oq7nnhsy0fo" path="res://Audio/Sons/tiro.ogg" id="11_had87"]
 [ext_resource type="AudioStream" uid="uid://bu41x4bns6c1c" path="res://Audio/Sons/recarregar_tudo.ogg" id="11_ruciq"]
 [ext_resource type="AudioStream" uid="uid://c8pmbl3pjjfge" path="res://Audio/Sons/melee.ogg" id="12_axwfv"]
 [ext_resource type="Texture2D" uid="uid://cej1jbqtl1yyi" path="res://Sprites/player/tiroPulo.png" id="13_4j5ex"]
 [ext_resource type="AudioStream" uid="uid://b8hs32hfh3n6b" path="res://Audio/Sons/land.ogg" id="15_8tubf"]
+[ext_resource type="AudioStream" uid="uid://d1w6042usdyt7" path="res://Audio/Sons/empty.mp3" id="16_4j5ex"]
 [ext_resource type="AudioStream" uid="uid://d0geybpisk2u7" path="res://Audio/Sons/pulo.ogg" id="16_a4yfx"]
 [ext_resource type="AudioStream" uid="uid://7xt77yksn11c" path="res://Audio/Sons/pulo_2.ogg" id="17_alogn"]
 [ext_resource type="AudioStream" uid="uid://16hsm3sgunpj" path="res://Audio/Sons/dash.wav" id="18_4j5ex"]
 [ext_resource type="AudioStream" uid="uid://uqtwh7kd7bwv" path="res://Audio/Sons/walljump.wav" id="20_alogn"]
 [ext_resource type="AudioStream" uid="uid://ctmohn8l0gcii" path="res://Audio/Sons/walk.wav" id="21_a4yfx"]
+[ext_resource type="AudioStream" uid="uid://d1jtm0q3eebp1" path="res://Audio/Sons/takeHit.mp3" id="24_dj8y3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_had87"]
 radius = 9.0
@@ -1006,6 +1007,21 @@ script = ExtResource("1_pmvhq")
 [node name="gancho" type="Node2D" parent="." unique_id=1620724202]
 position = Vector2(0, -14)
 
+[node name="sangue" type="CPUParticles2D" parent="." unique_id=1564125014]
+emitting = false
+amount = 15
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+randomness = 1.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 250.0
+angle_min = -126.7
+scale_amount_max = 3.0
+color = Color(1, 0, 0, 1)
+hue_variation_max = 0.5
+
 [node name="mira" type="RayCast2D" parent="." unique_id=1682006761]
 target_position = Vector2(0, 0)
 
@@ -1105,11 +1121,12 @@ volume_db = -8.0
 stream = ExtResource("12_axwfv")
 volume_db = -6.0
 
-[node name="reload" type="AudioStreamPlayer" parent="sfx" unique_id=68646354]
-stream = ExtResource("10_2enhl")
+[node name="unloaded" type="AudioStreamPlayer" parent="sfx" unique_id=68646354]
+stream = ExtResource("16_4j5ex")
 
 [node name="reloadFull" type="AudioStreamPlayer" parent="sfx" unique_id=154456019]
 stream = ExtResource("11_ruciq")
+pitch_scale = 1.35
 
 [node name="land" type="AudioStreamPlayer" parent="sfx" unique_id=1232152041]
 stream = ExtResource("15_8tubf")
@@ -1143,6 +1160,10 @@ pitch_scale = 0.9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="sfx/walk" unique_id=1292246238]
 libraries/ = SubResource("AnimationLibrary_4j5ex")
+
+[node name="hit" type="AudioStreamPlayer" parent="sfx" unique_id=2083831212]
+stream = ExtResource("24_dj8y3")
+volume_db = 12.0
 
 [connection signal="area_shape_entered" from="areaSoco" to="." method="_on_area_soco_area_shape_entered"]
 [connection signal="body_entered" from="areaSoco" to="." method="_on_area_soco_body_entered"]

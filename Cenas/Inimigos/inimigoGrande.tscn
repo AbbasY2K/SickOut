@@ -478,7 +478,8 @@ libraries/ = SubResource("AnimationLibrary_rdsc4")
 
 [node name="kill" type="AudioStreamPlayer" parent="sfx" unique_id=1772351025]
 stream = ExtResource("5_sdd7i")
-volume_db = -4.771
+volume_db = -1.771
+pitch_scale = 0.8
 
 [node name="ataque" type="AudioStreamPlayer" parent="sfx" unique_id=1294112796]
 stream = ExtResource("6_kojty")

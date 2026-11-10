@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cf8fv7qh1riii"]
+
+[ext_resource type="Script" uid="uid://grtcr0vlc2pj" path="res://Scripts/chuveiro_acido.gd" id="1_73c81"]
+[ext_resource type="Texture2D" uid="uid://c20gm24f1udrf" path="res://Sprites/inimigos/chuveiro.png" id="1_sw38m"]
+[ext_resource type="Texture2D" uid="uid://bm561rbocjpy" path="res://Sprites/Assets/spray.png" id="2_re66x"]
+[ext_resource type="AudioStream" uid="uid://do7b7ud1xo7v3" path="res://Audio/Sons/gas.mp3" id="4_liqml"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
+size = Vector2(32, 160)
+
+[node name="chuveiroAcido" type="Node2D" unique_id=1319446235]
+script = ExtResource("1_73c81")
+toxicidade_por_segundo = 25.0
+
+[node name="particulas" type="CPUParticles2D" parent="." unique_id=1799818572]
+amount = 12
+texture = ExtResource("2_re66x")
+lifetime = 0.5
+randomness = 0.44
+direction = Vector2(0, 5)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 350.0
+scale_amount_min = 0.25
+scale_amount_max = 0.4
+color = Color(0.20784314, 0.6862745, 0.20784314, 0.88235295)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=233415529]
+position = Vector2(0, -16)
+texture = ExtResource("1_sw38m")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1291108120]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=487991579]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_xrivr")
+
+[node name="gas" type="AudioStreamPlayer2D" parent="." unique_id=1102536520]
+stream = ExtResource("4_liqml")
+volume_db = 4.0
+autoplay = true
+max_distance = 192.0

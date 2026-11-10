@@ -131,12 +131,12 @@ func _matar_player(alvo: Node) -> void:
 
 	var pai: Node = alvo.get_parent()
 
-	if pai != null and pai.has_method("gameover"):
-		pai.gameover()
+	if pai != null and pai.has_method("takeDamage"):
+		pai.takeDamage()
 		return
 
-	if alvo.has_method("gameover"):
-		alvo.gameover()
+	if alvo.has_method("takeDamage"):
+		alvo.takeDamage()
 		return
 
 	if alvo.has_method("morrer"):

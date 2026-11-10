@@ -155,7 +155,6 @@ texture = ExtResource("6_1pnhw")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, -8, 8)
 0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(8, -8, 8, 8, -8, 8, -8, -8)
-0:0/0/custom_data_0 = true
 0:0/0/custom_data_1 = true
 2:0/0 = 0
 2:0/0/custom_data_0 = true

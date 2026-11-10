@@ -3,6 +3,8 @@ extends Node2D
 @onready var area := $Area2D
 @onready var sprite := $Sprite2D
 
+
+
 @export var fita_id := "fita_01"
 
 var collected := false
@@ -39,6 +41,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		Global.fitas[fita_id] = true
 		Global.salvar_config()
+		
+		var hud = get_tree().get_first_node_in_group("hud")
+
+		if hud:
+			hud.mostrar_fita()
+
 		
 		await get_tree().create_timer(0.3).timeout
 
