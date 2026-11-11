@@ -17,7 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://de78lmgqoyeaf" path="res://Sprites/Assets/portaSaida.png" id="12_aiq5a"]
 [ext_resource type="PackedScene" uid="uid://7jfxdddhhpca" path="res://Cenas/packMunicao.tscn" id="12_qtgqu"]
 [ext_resource type="PackedScene" uid="uid://rnlt3ygnh74b" path="res://Cenas/caixa.tscn" id="17_ksnm3"]
+[ext_resource type="PackedScene" uid="uid://bq67t2glqg5rt" path="res://Cenas/seringa_vermelha.tscn" id="17_pfpt5"]
 [ext_resource type="PackedScene" uid="uid://cv8dda4h0qhrb" path="res://Cenas/fita.tscn" id="18_30rt3"]
+[ext_resource type="Resource" uid="uid://dhw7bh4tk1q73" path="res://Cenas/Cutscenes/Documentos/documento_3.tres" id="19_616er"]
 [ext_resource type="Script" uid="uid://wcai0pdsws65" path="res://Scripts/laser.gd" id="19_gcx5h"]
 [ext_resource type="PackedScene" uid="uid://ccf6nbhnabb0d" path="res://Cenas/Inimigos/creeper.tscn" id="20_ctyf4"]
 [ext_resource type="Texture2D" uid="uid://bi4nnbegrdq6k" path="res://Sprites/Assets/laserCorpo.png" id="20_ek4so"]
@@ -30,11 +32,12 @@
 [ext_resource type="PackedScene" uid="uid://do2pi1d7mm08c" path="res://Cenas/ui.tscn" id="25_qapm4"]
 [ext_resource type="PackedScene" uid="uid://cupkgjelanyul" path="res://Cenas/player.tscn" id="26_sfudt"]
 [ext_resource type="Script" uid="uid://korrdw78qygf" path="res://Scripts/elevador.gd" id="27_kq42d"]
-[ext_resource type="PackedScene" uid="uid://lngcisklqfs" path="res://Cenas/Cutscenes/creditos.tscn" id="28_vk2dr"]
 [ext_resource type="Texture2D" uid="uid://e7bp57d86gia" path="res://Sprites/Assets/elevadorPorta.png" id="29_rfjba"]
 [ext_resource type="PackedScene" uid="uid://buiy1o157r48a" path="res://Cenas/shader.tscn" id="30_jtspi"]
+[ext_resource type="PackedScene" uid="uid://crpgqftntqdfb" path="res://Cenas/Fases/fase4.tscn" id="31_pfpt5"]
 [ext_resource type="PackedScene" uid="uid://qssw3wykysac" path="res://Cenas/bloodSplash.tscn" id="34_30rt3"]
 [ext_resource type="AudioStream" uid="uid://bojfs6q50aj22" path="res://Audio/Sons/slotSound.mp3" id="34_j1m0t"]
+[ext_resource type="PackedScene" uid="uid://cs8viosds6hbi" path="res://Cenas/fita_lore.tscn" id="35_on17v"]
 [ext_resource type="AudioStream" uid="uid://dql4588673lxo" path="res://Audio/Musicas/Fases/musica_fase3.mp3" id="36_ow6sm"]
 [ext_resource type="PackedScene" uid="uid://ce8ccwo2ldqe1" path="res://Cenas/Menus/introFase.tscn" id="39_cnr28"]
 [ext_resource type="AudioStream" uid="uid://shp5xcbbtnup" path="res://Audio/Sons/morte.ogg" id="40_8xqht"]
@@ -471,7 +474,7 @@ script = ExtResource("8_30rt3")
 
 [node name="tileSet2" type="TileMapLayer" parent="." unique_id=1310177801]
 position = Vector2(-64, 0)
-tile_map_data = PackedByteArray("AAAcAFgABQABAAEAAAAjAFgABQAFAAEAAAAdAFgABQADAAEAAAAeAFgABQADAAEAAAAfAFgABQADAAEAAAAgAFgABQADAAEAAAAhAFgABQADAAEAAAAiAFgABQADAAEAAAAcAFkABQABAAMAAAAcAFoABQABAAMAAAAcAFsABQABAAMAAAAcAFwABQABAAMAAAAcAF0ABQABAAMAAAAcAF4ABQABAAMAAAAcAF8ABQABAAMAAAAjAFkABQAFAAMAAAAjAFoABQAFAAMAAAAjAFsABQAFAAMAAAAjAFwABQAFAAMAAAAjAF0ABQAFAAMAAAAjAF4ABQAFAAMAAAAjAF8ABQAFAAMAAAAfAFkABQADAAMAAAAeAFkABQADAAMAAAAdAFkABQADAAMAAAAdAFoABQADAAMAAAAdAFsABQADAAMAAAAdAFwABQADAAMAAAAdAF0ABQADAAMAAAAdAF4ABQADAAMAAAAdAF8ABQADAAMAAAAgAFkABQADAAMAAAAhAFkABQADAAMAAAAiAF8ABQADAAMAAAAiAF4ABQADAAMAAAAiAF0ABQADAAMAAAAiAFwABQADAAMAAAAiAFsABQADAAMAAAAiAFoABQADAAMAAAAiAFkABQADAAMAAAAgAFsABQADAAMAAAAgAFwABQADAAMAAAAgAF0ABQADAAMAAAAgAF4ABQADAAMAAAAfAFsABQADAAMAAAAfAFwABQADAAMAAAAfAF0ABQADAAMAAAAfAF4ABQADAAMAAAAgAFoABQADAAMAAAAfAFoABQADAAMAAAAhAF4ABQADAAMAAAAhAF0ABQADAAMAAAAhAFwABQADAAMAAAAhAFsABQADAAMAAAAhAFoABQADAAMAAAAfAF8ABQADAAMAAAAgAF8ABQADAAMAAAAhAF8ABQADAAMAAAAeAFoABQADAAMAAAAeAFsABQADAAMAAAAeAFwABQADAAMAAAAeAF0ABQADAAMAAAAeAF4ABQADAAMAAAAeAF8ABQADAAMAAABkAEwABQABAAEAAABnAEwABQAFAAEAAABlAEwABQADAAEAAABmAEwABQADAAEAAABlAE0ABQADAAMAAABlAE4ABQADAAMAAABlAE8ABQADAAMAAABlAFAABQADAAMAAABlAFEABQADAAMAAABlAFIABQADAAMAAABlAFMABQADAAMAAABlAFQABQADAAMAAABlAFUABQADAAMAAABlAFYABQADAAMAAABlAFcABQADAAMAAABlAFgABQADAAMAAABlAFkABQADAAMAAABlAFoABQADAAMAAABmAFoABQADAAMAAABmAFkABQADAAMAAABmAFgABQADAAMAAABmAFcABQADAAMAAABmAFYABQADAAMAAABmAFUABQADAAMAAABmAFQABQADAAMAAABmAFMABQADAAMAAABmAFIABQADAAMAAABmAFEABQADAAMAAABmAFAABQADAAMAAABmAE8ABQADAAMAAABmAE4ABQADAAMAAABmAE0ABQADAAMAAABkAFoABQABAAMAAABkAFkABQABAAMAAABkAFgABQABAAMAAABkAFcABQABAAMAAABkAFYABQABAAMAAABkAFUABQABAAMAAABkAFQABQABAAMAAABkAFMABQABAAMAAABkAFIABQABAAMAAABkAFEABQABAAMAAABkAFAABQABAAMAAABkAE8ABQABAAMAAABkAE4ABQABAAMAAABkAE0ABQABAAMAAABnAE0ABQAFAAMAAABnAE4ABQAFAAMAAABnAE8ABQAFAAMAAABnAFAABQAFAAMAAABnAFEABQAFAAMAAABnAFIABQAFAAMAAABnAFMABQAFAAMAAABnAFQABQAFAAMAAABnAFUABQAFAAMAAABnAFYABQAFAAMAAABnAFcABQAFAAMAAABnAFgABQAFAAMAAABnAFkABQAFAAMAAABnAFoABQAFAAMAAAA=")
+tile_map_data = PackedByteArray("AAAcAFgABQABAAEAAAAjAFgABQAFAAEAAAAdAFgABQADAAEAAAAeAFgABQADAAEAAAAfAFgABQADAAEAAAAgAFgABQADAAEAAAAhAFgABQADAAEAAAAiAFgABQADAAEAAAAcAFkABQABAAMAAAAcAFoABQABAAMAAAAcAFsABQABAAMAAAAcAFwABQABAAMAAAAcAF0ABQABAAMAAAAcAF4ABQABAAMAAAAcAF8ABQABAAMAAAAjAFkABQAFAAMAAAAjAFoABQAFAAMAAAAjAFsABQAFAAMAAAAjAFwABQAFAAMAAAAjAF0ABQAFAAMAAAAjAF4ABQAFAAMAAAAjAF8ABQAFAAMAAAAfAFkABQADAAMAAAAeAFkABQADAAMAAAAdAFkABQADAAMAAAAdAFoABQADAAMAAAAdAFsABQADAAMAAAAdAFwABQADAAMAAAAdAF0ABQADAAMAAAAdAF4ABQADAAMAAAAdAF8ABQADAAMAAAAgAFkABQADAAMAAAAhAFkABQADAAMAAAAiAF8ABQADAAMAAAAiAF4ABQADAAMAAAAiAF0ABQADAAMAAAAiAFwABQADAAMAAAAiAFsABQADAAMAAAAiAFoABQADAAMAAAAiAFkABQADAAMAAAAgAFsABQADAAMAAAAgAFwABQADAAMAAAAgAF0ABQADAAMAAAAgAF4ABQADAAMAAAAfAFsABQADAAMAAAAfAFwABQADAAMAAAAfAF0ABQADAAMAAAAfAF4ABQADAAMAAAAgAFoABQADAAMAAAAfAFoABQADAAMAAAAhAF4ABQADAAMAAAAhAF0ABQADAAMAAAAhAFwABQADAAMAAAAhAFsABQADAAMAAAAhAFoABQADAAMAAAAfAF8ABQADAAMAAAAgAF8ABQADAAMAAAAhAF8ABQADAAMAAAAeAFoABQADAAMAAAAeAFsABQADAAMAAAAeAFwABQADAAMAAAAeAF0ABQADAAMAAAAeAF4ABQADAAMAAAAeAF8ABQADAAMAAABkAFEAAgABAAEAAABkAFIAAgABAAMAAABkAFMAAgABAAMAAABkAFQAAgABAAMAAABkAFUAAgABAAMAAABlAFEAAgADAAEAAABlAFIAAgADAAMAAABlAFMAAgADAAMAAABlAFQAAgADAAMAAABlAFUAAgADAAMAAABmAFEAAgADAAEAAABmAFIAAgADAAMAAABmAFMAAgADAAMAAABmAFQAAgADAAMAAABmAFUAAgADAAMAAABnAFEAAgAFAAEAAABnAFIAAgAFAAMAAABnAFMAAgAFAAMAAABnAFQAAgAFAAMAAABnAFUAAgAFAAMAAABkAFYAAgABAAMAAABkAFcAAgABAAMAAABkAFgAAgABAAMAAABkAFkAAgABAAMAAABkAFoAAgABAAMAAABlAFYAAgADAAMAAABlAFcAAgADAAMAAABlAFgAAgADAAMAAABlAFkAAgADAAMAAABlAFoAAgADAAMAAABmAFYAAgADAAMAAABmAFcAAgADAAMAAABmAFgAAgADAAMAAABmAFkAAgADAAMAAABmAFoAAgADAAMAAABnAFYAAgAFAAMAAABnAFcAAgAFAAMAAABnAFgAAgAFAAMAAABnAFkAAgAFAAMAAABnAFoAAgAFAAMAAAA=")
 tile_set = ExtResource("3_ow6sm")
 script = ExtResource("8_30rt3")
 
@@ -617,6 +620,9 @@ position = Vector2(1376, 608)
 [node name="packMunicao2" parent="elementos/packs" unique_id=1979798220 instance=ExtResource("12_qtgqu")]
 position = Vector2(1368, 1392)
 
+[node name="seringaVermelha" parent="elementos/packs" unique_id=1913861845 instance=ExtResource("17_pfpt5")]
+position = Vector2(920, 584)
+
 [node name="tirolesas" type="Node2D" parent="elementos" unique_id=251730781]
 
 [node name="caixas" type="Node2D" parent="elementos" unique_id=430008694]
@@ -627,8 +633,11 @@ position = Vector2(1832, 624)
 [node name="caixa19" parent="elementos/caixas" unique_id=190043932 instance=ExtResource("17_ksnm3")]
 position = Vector2(64, 1520)
 
-[node name="fita" parent="elementos" unique_id=412393285 instance=ExtResource("18_30rt3")]
-position = Vector2(1568, 1184)
+[node name="fitas" type="Node2D" parent="elementos" unique_id=1096560798]
+
+[node name="fita" parent="elementos/fitas" unique_id=412393285 instance=ExtResource("18_30rt3")]
+position = Vector2(1568, 1264)
+documento = ExtResource("19_616er")
 fita_id = "fita_03"
 
 [node name="obstaculos" type="Node2D" parent="." unique_id=117996570]
@@ -747,7 +756,7 @@ position = Vector2(-63.564438, 619)
 [node name="elevador" type="Node2D" parent="." unique_id=1413883226]
 position = Vector2(71, 1332)
 script = ExtResource("27_kq42d")
-caminho = ExtResource("28_vk2dr")
+caminho = ExtResource("31_pfpt5")
 
 [node name="ElevadorPorta" type="Sprite2D" parent="elevador" unique_id=1205872267]
 position = Vector2(2752.5, 36.00013)
@@ -786,6 +795,11 @@ visible = false
 visible = false
 
 [node name="bloodSplash" parent="." unique_id=1946395862 instance=ExtResource("34_30rt3")]
+
+[node name="fitaLore" parent="." unique_id=794670300 node_paths=PackedStringArray("musica") instance=ExtResource("35_on17v")]
+layer = 3
+visible = false
+musica = NodePath("../sfx/music")
 
 [node name="blackout" type="CanvasLayer" parent="." unique_id=1687293567]
 process_mode = 3

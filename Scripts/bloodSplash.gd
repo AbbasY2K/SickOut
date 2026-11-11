@@ -70,8 +70,7 @@ func mostrar_fita() -> void:
 	mensagem.parse_bbcode("[shake rate=12 level=5]FITA COLETADA![/shake]")
 	mensagem.visible_characters = -1
 	mensagem.self_modulate = Color(0.55, 0.45, 1.0, 1.0)
-	
-	
+
 
 	if vhs_material:
 		if vhs_tween and vhs_tween.is_valid():
@@ -92,12 +91,6 @@ func mostrar_fita() -> void:
 	mensagem.modulate = Color(1, 1, 1, 0)
 	mensagem.scale = Vector2.ONE * 0.65
 	mensagem.rotation = randf_range(-0.035, 0.035)
-
-	var bip = bips.pick_random()
-	bip.stop()
-	bip.volume_db = bip_volume_base
-	bip.pitch_scale = randf_range(0.9, 1.1)
-	bip.play()
 
 	mensagem_tween = create_tween()
 	mensagem_tween.set_parallel(true)
@@ -137,6 +130,13 @@ func mostrar_fita() -> void:
 		func():
 			mensagem.visible = false
 	)
+
+func parar_distorcao_vhs() -> void:
+	if vhs_tween and vhs_tween.is_valid():
+		vhs_tween.kill()
+
+	if vhs_material:
+		vhs_material.set_shader_parameter("intensity", 0.0)
 
 func tocar_grito() -> void:
 	var grito: AudioStreamPlayer = gritos.pick_random()

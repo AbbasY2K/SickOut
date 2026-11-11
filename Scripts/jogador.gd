@@ -212,6 +212,8 @@ func _ready():
 
 
 func _exit_tree():
+	var overdoseEstavaAtiva := overdoseActive
+
 	overdoseActive = false
 	overdoseToken += 1
 
@@ -222,7 +224,7 @@ func _exit_tree():
 	if overdoseSceneTween != null and is_instance_valid(overdoseSceneTween):
 		overdoseSceneTween.kill()
 
-	if is_instance_valid(overdoseMusic):
+	if overdoseEstavaAtiva and is_instance_valid(overdoseMusic):
 		overdoseMusic.pitch_scale = overdoseOriginalMusicPitch
 
 	if is_instance_valid(overdoseShader):
@@ -234,7 +236,6 @@ func _exit_tree():
 	transicionar_cenario_overdose(false, false)
 
 	atualizar_escala_tempo()
-
 
 func _physics_process(delta):
 	var playerDelta = delta
@@ -1277,6 +1278,53 @@ func unfreezePlayer():
 	set_physics_process(true)
 
 
+func inimigo_tem_chunks_ativas(inimigo: Node2D) -> bool:
+	var gerenciadores := get_tree().get_nodes_in_group(
+		"gerenciadores_chunks"
+	)
+
+	if gerenciadores.is_empty():
+		return true
+
+	var encontrouGerenciadorComChunks := false
+	var encontrouChunkNaPosicao := false
+
+	for gerenciador in gerenciadores:
+
+		if not is_instance_valid(gerenciador):
+			continue
+
+		if not gerenciador.has_method("consultar_estado_chunk"):
+			continue
+
+		var estado := int(
+			gerenciador.consultar_estado_chunk(
+				inimigo.global_position
+			)
+		)
+
+		if estado == -1:
+			return false
+
+		if estado == -2:
+			continue
+
+		encontrouGerenciadorComChunks = true
+
+		if estado == 0:
+			continue
+
+		encontrouChunkNaPosicao = true
+
+		if estado != 2:
+			return false
+
+	return (
+		not encontrouGerenciadorComChunks
+		or encontrouChunkNaPosicao
+	)
+
+
 func ativar_inimigos_proximos():
 
 	for inimigo in get_tree().get_nodes_in_group("inimigo"):
@@ -1284,7 +1332,13 @@ func ativar_inimigos_proximos():
 		if not is_instance_valid(inimigo):
 			continue
 
-		if inimigo.dead:
+		if inimigo.get("dead") == true:
+			continue
+
+		if not inimigo_tem_chunks_ativas(inimigo):
+			if inimigo.process_mode != Node.PROCESS_MODE_DISABLED:
+				inimigo.process_mode = Node.PROCESS_MODE_DISABLED
+
 			continue
 
 		if inimigo.process_mode != Node.PROCESS_MODE_DISABLED:

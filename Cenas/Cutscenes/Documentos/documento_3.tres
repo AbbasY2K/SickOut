@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://dhw7bh4tk1q73"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_j3w6h"]
+
+[resource]
+script = ExtResource("1_j3w6h")
+titulo = "Memorando Interno — Unidades de Segurança"
+texto = "Memorando Interno — Unidades de Segurança
+
+Texto:
+
+As novas unidades de segurança apresentaram resultados satisfatórios durante os testes de campo.
+
+As modificações cibernéticas aumentaram consideravelmente a força, a resistência e o tempo de resposta dos guardas selecionados.
+
+Os sistemas de obediência também foram aprimorados. As unidades respondem diretamente às ordens do centro de controle, reduzindo a possibilidade de insubordinação.
+
+Apesar dos resultados positivos, alguns funcionários demonstraram preocupação com a substituição gradual da equipe humana.
+
+Nota de Harvey: A segurança da instalação não pode depender de indivíduos que ainda possuem liberdade para questionar ordens."
+metadata/_custom_type_script = "uid://xwkar2igup63"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://bepthuo7am6rs"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_2hswq"]
+
+[resource]
+script = ExtResource("1_2hswq")
+titulo = "Relatório Bioquímico — Lote 04"
+texto = "Os resultados dos últimos testes demonstram avanços na resistência física e na capacidade de recuperação dos indivíduos submetidos ao composto.
+
+Entretanto, os efeitos ainda são instáveis. Alguns pacientes apresentam alterações comportamentais, perda de controle motor e crescimento celular irregular.
+
+Andrew considera os resultados promissores e recomenda a continuidade dos testes.
+
+Harvey discorda da quantidade de indivíduos descartados durante o processo, mas reconhece que os resultados estão próximos do esperado.
+
+Conclusão: Os testes devem continuar. A quantidade de cobaias disponíveis não será um problema enquanto a administração mantiver o controle sobre as transferências."
+metadata/_custom_type_script = "uid://xwkar2igup63"

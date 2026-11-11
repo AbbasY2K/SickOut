@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://cr78cf2q7rnwb"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_tu452"]
+
+[resource]
+script = ExtResource("1_tu452")
+titulo = "Relatório de Incidente — Instalação Anterior"
+texto = "Antes da construção do atual presídio, este terreno abrigava uma instalação privada de pesquisas científicas.
+
+O local foi oficialmente fechado após um incidente ainda não esclarecido. Os registros públicos mencionam falhas estruturais e a interrupção das atividades, mas não apresentam detalhes sobre o ocorrido.
+
+Durante uma inspeção recente, foram encontrados equipamentos antigos em funcionamento nos níveis inferiores. Algumas salas também apresentavam sinais de uso recente.
+
+A administração recomenda que funcionários não autorizados evitem qualquer acesso às instalações subterrâneas.
+
+Observação: A existência desses espaços não deve ser mencionada em relatórios externos."
+metadata/_custom_type_script = "uid://xwkar2igup63"

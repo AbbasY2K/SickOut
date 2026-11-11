@@ -16,6 +16,8 @@ var tempoTotal = 0
 
 var nomeFaseAtual := "Desconhecida"
 
+signal documento_solicitado(documento: DocumentoLore)
+
 var animacao = false
 var playerAtual = ""
 
@@ -44,6 +46,7 @@ func _ready():
 	carregar_config()
 	carregar_ranks()
 
+	
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 

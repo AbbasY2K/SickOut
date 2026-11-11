@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://dxcdm5mvkdpew"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_5d10v"]
+
+[resource]
+script = ExtResource("1_5d10v")
+titulo = "RELATÓRIO SHORI"
+texto = "Os experimentos realizados nos detentos apresentaram resultados inesperados. A administração decidiu manter os testes em sigilo.
+Um placeholder EXXXXXXXXAordinario!"
+metadata/_custom_type_script = "uid://xwkar2igup63"

@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cv8dda4h0qhrb" path="res://Cenas/fita.tscn" id="19_nmeat"]
 [ext_resource type="PackedScene" uid="uid://bpfxr0dy66mj7" path="res://Cenas/Inimigos/inimigo.tscn" id="20_ncs76"]
 [ext_resource type="PackedScene" uid="uid://cupkgjelanyul" path="res://Cenas/player.tscn" id="22_4lxsy"]
+[ext_resource type="Resource" uid="uid://doyr4ejwr251q" path="res://Cenas/Cutscenes/Documentos/documento_1.tres" id="23_n7pwx"]
 [ext_resource type="Script" uid="uid://korrdw78qygf" path="res://Scripts/elevador.gd" id="23_smi6t"]
 [ext_resource type="PackedScene" uid="uid://bg38x6co6apmc" path="res://Cenas/Inimigos/cavaleiro.tscn" id="24_wtqvg"]
 [ext_resource type="PackedScene" uid="uid://buiy1o157r48a" path="res://Cenas/shader.tscn" id="25_l1474"]
@@ -43,6 +44,7 @@
 [ext_resource type="AudioStream" uid="uid://cuk3bylimmdw7" path="res://Audio/Sons/start.ogg" id="36_msua0"]
 [ext_resource type="AudioStream" uid="uid://ckqsl0ws35tv3" path="res://Audio/Sons/pickUp.ogg" id="37_o6ul3"]
 [ext_resource type="AudioStream" uid="uid://bvj0txq3v4rfc" path="res://Audio/Musicas/Fases/musica_fase1.mp3" id="38_8h31s"]
+[ext_resource type="PackedScene" uid="uid://cs8viosds6hbi" path="res://Cenas/fita_lore.tscn" id="39_n7pwx"]
 [ext_resource type="Shader" uid="uid://mumbu3li5gms" path="res://Shaders/overdose.gdshader" id="39_s8ybk"]
 [ext_resource type="PackedScene" uid="uid://qssw3wykysac" path="res://Cenas/bloodSplash.tscn" id="40_d5jaf"]
 [ext_resource type="AudioStream" uid="uid://2m2daku4xewx" path="res://Audio/Sons/abrir_porta.ogg" id="40_wtqvg"]
@@ -298,7 +300,7 @@ layer = -1
 visible = false
 
 [node name="escuro" type="CanvasModulate" parent="." unique_id=107932217]
-color = Color(0.38928655, 0.38928664, 0.3892865, 1)
+color = Color(0.60784316, 0.60784316, 0.60784316, 1)
 
 [node name="parallaxBg" parent="." unique_id=1027217606 instance=ExtResource("4_pay7n")]
 
@@ -502,6 +504,7 @@ position = Vector2(3528, 624)
 
 [node name="fita" parent="elementos/fitas" unique_id=412393285 instance=ExtResource("19_nmeat")]
 position = Vector2(4352, 352)
+documento = ExtResource("23_n7pwx")
 
 [node name="obstaculos" type="Node2D" parent="." unique_id=117996570]
 
@@ -555,7 +558,7 @@ position = Vector2(256, 621)
 position = Vector2(352, 621)
 
 [node name="inimigo2" parent="obstaculos/inimigos" unique_id=598223569 instance=ExtResource("20_ncs76")]
-position = Vector2(3208, 536)
+position = Vector2(3280, 536)
 
 [node name="inimigo3" parent="obstaculos/inimigos" unique_id=573890454 instance=ExtResource("20_ncs76")]
 position = Vector2(1664, 432)
@@ -682,6 +685,7 @@ position = Vector2(-128, 619)
 visible = false
 
 [node name="shaderOverdose" type="CanvasLayer" parent="." unique_id=1387941106]
+layer = 3
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="shaderOverdose" unique_id=537161834]
@@ -693,6 +697,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ui" parent="." unique_id=1991959248 instance=ExtResource("31_e4wux")]
 visible = false
+
+[node name="fitaLore" parent="." unique_id=794670300 node_paths=PackedStringArray("musica") instance=ExtResource("39_n7pwx")]
+layer = 3
+visible = false
+musica = NodePath("../sfx/music")
 
 [node name="bloodSplash" parent="." unique_id=1726762737 instance=ExtResource("40_d5jaf")]
 

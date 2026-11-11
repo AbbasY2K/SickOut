@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d1dmtvig8m8dn" path="res://Cenas/fundoAnimado.tscn" id="2_h3mel"]
 [ext_resource type="TileSet" uid="uid://bpquqoaig4t5f" path="res://Cenas/tileSetFundo.tres" id="3_ix7w8"]
 [ext_resource type="TileSet" uid="uid://1ayidbvlky0h" path="res://Cenas/tileSet.tres" id="4_1oopq"]
-[ext_resource type="Shader" uid="uid://cb0pvio7ir6qg" path="res://Cenas/Fases/luz.gdshader" id="4_k164i"]
+[ext_resource type="Shader" uid="uid://doatpscmxcq8b" path="res://Cenas/Fases/luz.gdshader" id="4_k164i"]
 [ext_resource type="Shader" uid="uid://hrkl20amucl0" path="res://Shaders/photoshop.gdshader" id="7_78pp7"]
 [ext_resource type="Texture2D" uid="uid://6a5p4weu65qd" path="res://Sprites/Assets/luz.png" id="7_h3mel"]
 [ext_resource type="Script" uid="uid://ossxdccclmgh" path="res://Scripts/iluminacao.gd" id="7_mhj3g"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cvs63absddfpo" path="res://Audio/Sons/tirolesa.ogg" id="22_nf74j"]
 [ext_resource type="AudioStream" uid="uid://b1804wvobux3y" path="res://Audio/Sons/subir_tirolesa.ogg" id="23_10k15"]
 [ext_resource type="PackedScene" uid="uid://cv8dda4h0qhrb" path="res://Cenas/fita.tscn" id="23_mhj3g"]
+[ext_resource type="Resource" uid="uid://cr78cf2q7rnwb" path="res://Cenas/Cutscenes/Documentos/documento_2.tres" id="24_pdji6"]
 [ext_resource type="PackedScene" uid="uid://rnlt3ygnh74b" path="res://Cenas/caixa.tscn" id="24_s136o"]
 [ext_resource type="PackedScene" uid="uid://cupkgjelanyul" path="res://Cenas/player.tscn" id="26_yc4v5"]
 [ext_resource type="Script" uid="uid://korrdw78qygf" path="res://Scripts/elevador.gd" id="27_jeldu"]
@@ -46,8 +47,9 @@
 [ext_resource type="AudioStream" uid="uid://bojfs6q50aj22" path="res://Audio/Sons/slotSound.mp3" id="42_1oopq"]
 [ext_resource type="PackedScene" uid="uid://qssw3wykysac" path="res://Cenas/bloodSplash.tscn" id="42_18hjc"]
 [ext_resource type="AudioStream" uid="uid://2m2daku4xewx" path="res://Audio/Sons/abrir_porta.ogg" id="42_kb3gh"]
+[ext_resource type="PackedScene" uid="uid://cs8viosds6hbi" path="res://Cenas/fita_lore.tscn" id="42_xl1tw"]
 [ext_resource type="AudioStream" uid="uid://c7klsrm3k45d3" path="res://Audio/Sons/fechar_porta.ogg" id="43_ekcog"]
-[ext_resource type="AudioStream" uid="uid://2j0va3t0gu38" path="res://Audio/Musicas/Fases/musica_fase2.mp3" id="43_ix7w8"]
+[ext_resource type="AudioStream" uid="uid://c1qedrkxa0rgk" path="res://Audio/Musicas/Fases/musica_fase2.mp3" id="43_ix7w8"]
 [ext_resource type="AudioStream" uid="uid://ckqsl0ws35tv3" path="res://Audio/Sons/pickUp.ogg" id="44_3p4uh"]
 [ext_resource type="AudioStream" uid="uid://bu41x4bns6c1c" path="res://Audio/Sons/recarregar_tudo.ogg" id="50_18hjc"]
 [ext_resource type="AudioStream" uid="uid://byb3k3aojwg0k" path="res://Audio/Sons/vida.wav" id="51_78pp7"]
@@ -750,8 +752,11 @@ position = Vector2(2924, 624)
 [node name="caixa18" parent="elementos/caixas" unique_id=1682165359 instance=ExtResource("24_s136o")]
 position = Vector2(3768, 656)
 
-[node name="fita" parent="elementos" unique_id=412393285 instance=ExtResource("23_mhj3g")]
+[node name="fitas" type="Node2D" parent="elementos" unique_id=892804585]
+
+[node name="fita" parent="elementos/fitas" unique_id=412393285 instance=ExtResource("23_mhj3g")]
 position = Vector2(1960, 424)
+documento = ExtResource("24_pdji6")
 fita_id = "fita_02"
 
 [node name="obstaculos" type="Node2D" parent="." unique_id=117996570]
@@ -900,6 +905,11 @@ visible = false
 visible = false
 
 [node name="bloodSplash" parent="." unique_id=1348320504 instance=ExtResource("42_18hjc")]
+
+[node name="fitaLore" parent="." unique_id=794670300 node_paths=PackedStringArray("musica") instance=ExtResource("42_xl1tw")]
+layer = 3
+visible = false
+musica = NodePath("../sfx/music")
 
 [node name="blackout" type="CanvasLayer" parent="." unique_id=1687293567]
 process_mode = 3

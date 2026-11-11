@@ -15,8 +15,6 @@ script = ExtResource("1_p0i3x")
 shape = SubResource("RectangleShape2D_xrivr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=634809845]
-position = Vector2(0, 16)
 texture = ExtResource("2_oi2ui")
-offset = Vector2(0, -16)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

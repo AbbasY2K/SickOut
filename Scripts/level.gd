@@ -421,6 +421,7 @@ func gameover() -> void:
 
 	music.pitch_scale = 0.6
 	music.volume_db = -5
+	
 
 	if is_instance_valid(music_filter):
 		music_filter.cutoff_hz = 5000.0

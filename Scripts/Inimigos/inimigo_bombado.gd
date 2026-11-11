@@ -1,14 +1,16 @@
+
 extends Inimigo
 
-
-var CHASE_SPEED := 150.0
+var CHASE_SPEED := 165.0
+var DISTANCIA_ATAQUE := 125.0
+var ALTURA_ATAQUE := 48.0
 
 var current_speed := 0.0
 
 var state := "walk"
 var state_timer := 0.0
 
-var attack_cooldown := 0.8
+var attack_cooldown := 1.0
 var attack_timer := 0.0
 
 var origin_x := 0.0
@@ -22,9 +24,9 @@ func _ready():
 
 	super._ready()
 
-	WALK_SPEED = 55.0
+	WALK_SPEED = 60.0
 	RUN_SPEED = CHASE_SPEED
-	ACCELERATION = 700.0
+	ACCELERATION = 850.0
 
 	vida = 3
 
@@ -74,7 +76,11 @@ func walk_state(delta):
 			player.global_position.y - global_position.y
 		)
 
-		if diff_y < 32.0:
+		var diff_x = abs(
+			player.global_position.x - global_position.x
+		)
+
+		if diff_y < ALTURA_ATAQUE:
 
 			target_speed = CHASE_SPEED
 
@@ -86,6 +92,11 @@ func walk_state(delta):
 
 				direction = dir
 				atualizar_direcao()
+
+			if diff_x <= DISTANCIA_ATAQUE and attack_timer <= 0:
+
+				iniciar_ataque()
+				return
 
 	current_speed = move_toward(
 		current_speed,
@@ -222,8 +233,7 @@ func _on_inimigo_hit_box_body_entered(body):
 		return
 
 	if body.is_in_group("player"):
-			body.takeDamage(global_position)
-
+		body.takeDamage(global_position)
 
 
 func _on_visao_ataque_body_entered(body):
@@ -255,7 +265,7 @@ func iniciar_ataque():
 
 	state = "attack"
 
-	state_timer = 0.9
+	state_timer = 0.75
 
 	attack_timer = attack_cooldown
 
@@ -265,6 +275,7 @@ func iniciar_ataque():
 	anim.play("ataque")
 
 	call_deferred("_spawn_ataque")
+
 
 func morrer_tiro(_dir_ataque := 1.0):
 
@@ -280,9 +291,10 @@ func morrer_tiro(_dir_ataque := 1.0):
 		sprite.modulate = Color.WHITE
 		morrer_melee(direction)
 
+
 func _spawn_ataque():
 
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.16).timeout
 
 	if dead:
 		return

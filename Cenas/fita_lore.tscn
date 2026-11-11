@@ -1,23 +1,21 @@
 [gd_scene format=3 uid="uid://cs8viosds6hbi"]
 
+[ext_resource type="Script" uid="uid://db6dhrmlrrbhw" path="res://Scripts/fita_lore.gd" id="1_2jk3e"]
+[ext_resource type="Shader" uid="uid://mumbu3li5gms" path="res://Shaders/overdose.gdshader" id="1_8orb0"]
 [ext_resource type="PackedScene" uid="uid://b2wcje5nlmv2c" path="res://Cenas/documento.tscn" id="1_s5xyp"]
 [ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="2_8orb0"]
 [ext_resource type="Script" uid="uid://cbbkf0aymupet" path="res://Scripts/botaoMenu.gd" id="3_2jk3e"]
+[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="6_r8mdp"]
+[ext_resource type="Script" uid="uid://db8l3ael3irbm" path="res://Scripts/Textos/richTextLabel.gd" id="7_06ix1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jk3e"]
+shader = ExtResource("1_8orb0")
+shader_parameter/strength = 1.0
+shader_parameter/pulse_speed = 1.8
+shader_parameter/green_intensity = 0.075
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8mdp"]
-bg_color = Color(0.38431373, 1, 0, 0.47058824)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06ix1"]
-bg_color = Color(0.11372549, 0.29411766, 0, 0.47058824)
+bg_color = Color(0.38431373, 1, 0, 0.13333334)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -30,7 +28,163 @@ corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8iwrc"]
 
-[node name="fitaLore" type="Node2D" unique_id=1123956193]
+[sub_resource type="Animation" id="Animation_r8mdp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("documento:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("documento:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.5235988]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("documento:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-525, 511.99994)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("voltar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("aviso:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_06ix1"]
+resource_name = "in"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("documento:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("documento:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.56259686, -0.080840856]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("documento:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-729, 412), Vector2(101, 56)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("voltar:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.75, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("voltar")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"grab_focus"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("aviso:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8iwrc"]
+_data = {
+&"RESET": SubResource("Animation_r8mdp"),
+&"in": SubResource("Animation_06ix1")
+}
+
+[node name="fitaLore" type="CanvasLayer" unique_id=794670300]
+script = ExtResource("1_2jk3e")
+
+[node name="blackout" type="ColorRect" parent="." unique_id=1478330186]
+texture_filter = 1
+material = SubResource("ShaderMaterial_2jk3e")
+offset_right = 1152.0
+offset_bottom = 640.0
+metadata/_edit_use_anchors_ = true
 
 [node name="fundo" type="ColorRect" parent="." unique_id=834854766]
 offset_right = 1152.0
@@ -38,14 +192,16 @@ offset_bottom = 640.0
 color = Color(0, 0, 0, 0.3372549)
 
 [node name="documento" parent="." unique_id=715714774 instance=ExtResource("1_s5xyp")]
-position = Vector2(120, 88.00001)
+position = Vector2(-525, 511.99994)
+rotation = -0.5235988
 scale = Vector2(0.75, 0.75)
 
 [node name="voltar" type="Button" parent="." unique_id=827582592]
-offset_left = 832.0
-offset_top = 512.0
-offset_right = 1088.0
-offset_bottom = 578.0
+modulate = Color(1, 1, 1, 0)
+offset_left = 768.0
+offset_top = 320.0
+offset_right = 1024.0
+offset_bottom = 384.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -53,9 +209,28 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_8orb0")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_r8mdp")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_06ix1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_r8mdp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_r8mdp")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_8iwrc")
 text = "Voltar"
 script = ExtResource("3_2jk3e")
 key = "VOLTAR"
+
+[node name="aviso" type="RichTextLabel" parent="." unique_id=1287843219]
+modulate = Color(1, 1, 1, 0)
+offset_left = 640.0
+offset_top = 112.0
+offset_right = 1088.0
+offset_bottom = 256.0
+theme_override_fonts/normal_font = ExtResource("6_r8mdp")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave]Voce encontrou um SEGREDO..."
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_06ix1")
+key = "AVISO_FITA"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=480215640]
+libraries/ = SubResource("AnimationLibrary_8iwrc")

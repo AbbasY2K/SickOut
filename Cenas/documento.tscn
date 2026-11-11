@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b2wcje5nlmv2c"]
 
 [ext_resource type="FontFile" uid="uid://t7750dfue2wn" path="res://Fontes/ari-w9500-bold.ttf" id="1_yolbw"]
-[ext_resource type="FontFile" uid="uid://ckyxmqkjkja46" path="res://Fontes/sburbits.ttf" id="2_evt77"]
 
 [node name="documento" type="Node2D" unique_id=715714774]
 
@@ -10,26 +9,30 @@ offset_right = 472.0
 offset_bottom = 657.75
 color = Color(0.91883445, 0.99999994, 0.8196672, 1)
 
-[node name="titulo" type="Label" parent="." unique_id=1128264620]
+[node name="elementos" type="VBoxContainer" parent="." unique_id=1232589640]
 offset_left = 16.0
-offset_top = 16.0
+offset_top = 32.0
 offset_right = 456.0
-offset_bottom = 72.0
+offset_bottom = 624.0
+theme_override_constants/separation = 24
+
+[node name="titulo" type="Label" parent="elementos" unique_id=1128264620]
+layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_yolbw")
-theme_override_font_sizes/font_size = 35
-text = "DOCUMENTO SECRETO"
+theme_override_font_sizes/font_size = 28
+text = "Registro de Transferência — Interno 047"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="texto" type="RichTextLabel" parent="." unique_id=127335433]
-offset_left = 16.0
-offset_top = 72.0
-offset_right = 456.0
-offset_bottom = 640.0
+[node name="texto" type="RichTextLabel" parent="elementos" unique_id=127335433]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = ExtResource("2_evt77")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("1_yolbw")
+theme_override_font_sizes/normal_font_size = 16
 text = "Sickout é um jogo de ação indie do gênero platformer e hack and slash 2D desenvolvido pela Final Level Studio, inspirado em títulos como Katana ZERO e Hotline Miami, disponível para download no itch.io.
 
 Principais Detalhes:

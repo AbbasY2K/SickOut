@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cxdr8lnjfscad" path="res://Audio/Sons/explosion.wav" id="5_apocq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrivr"]
-size = Vector2(384, 512)
+size = Vector2(384, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ix0rq"]
 size = Vector2(68, 52)
@@ -40,6 +40,7 @@ hue_variation_max = 0.5
 [node name="Area2D" type="Area2D" parent="." unique_id=617379416]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1593828528]
+position = Vector2(0, 128)
 shape = SubResource("RectangleShape2D_xrivr")
 
 [node name="hitbox" type="Area2D" parent="." unique_id=364187909]

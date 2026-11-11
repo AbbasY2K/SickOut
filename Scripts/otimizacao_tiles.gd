@@ -44,6 +44,8 @@ func _ready() -> void:
 	set_process(false)
 	set_physics_process(false)
 
+	add_to_group("gerenciadores_chunks")
+
 	if tile_set != null:
 		tem_dado_morte = tile_set.has_custom_data_layer_by_name(nome_dado_tile)
 
@@ -381,10 +383,13 @@ func _atualizar_chunks() -> void:
 		if remocoes_feitas >= limite_remocoes:
 			continue
 
+		_desativar_inimigos_da_chunk(chave)
+
 		chunk.enabled = false
 		chunk.queue_free()
 
 		chunks_ativos.erase(chave)
+
 		remocoes_feitas += 1
 
 	if not construcao_atual.is_empty():
@@ -742,3 +747,75 @@ func _encontrar_player() -> Node2D:
 			return node as Node2D
 
 	return null
+
+
+func _obter_chave_chunk(posicao_mundo: Vector2) -> Vector2i:
+	var celula := local_to_map(to_local(posicao_mundo))
+
+	return Vector2i(
+		floori(float(celula.x) / float(tamanho_chunk)),
+		floori(float(celula.y) / float(tamanho_chunk))
+	)
+
+
+func chunk_esta_ativa_na_posicao(posicao_mundo: Vector2) -> bool:
+	if not preparado:
+		return false
+
+	if container_chunks == null:
+		return enabled
+
+	var chave := _obter_chave_chunk(posicao_mundo)
+
+	if not chunks_ativos.has(chave):
+		return false
+
+	var chunk := chunks_ativos[chave] as TileMapLayer
+
+	return is_instance_valid(chunk) and chunk.enabled
+
+
+func _desativar_inimigos_da_chunk(chave: Vector2i) -> void:
+	for inimigo in get_tree().get_nodes_in_group("inimigo"):
+
+		if not is_instance_valid(inimigo):
+			continue
+
+		if inimigo.get("dead") == true:
+			continue
+
+		var inimigo2D := inimigo as Node2D
+
+		if inimigo2D == null:
+			continue
+
+		var chaveInimigo := _obter_chave_chunk(
+			inimigo2D.global_position
+		)
+
+		if chaveInimigo != chave:
+			continue
+
+		inimigo.process_mode = Node.PROCESS_MODE_DISABLED
+
+func consultar_estado_chunk(posicao_mundo: Vector2) -> int:
+	if not preparado:
+		return -1
+
+	if dados_chunks.is_empty():
+		return -2
+
+	var chave := _obter_chave_chunk(posicao_mundo)
+
+	if not dados_chunks.has(chave):
+		return 0
+
+	if not chunks_ativos.has(chave):
+		return 1
+
+	var chunk := chunks_ativos[chave] as TileMapLayer
+
+	if not is_instance_valid(chunk) or not chunk.enabled:
+		return 1
+
+	return 2

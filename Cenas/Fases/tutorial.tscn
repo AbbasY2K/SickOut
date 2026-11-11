@@ -32,10 +32,10 @@
 [ext_resource type="AudioStream" uid="uid://shp5xcbbtnup" path="res://Audio/Sons/morte.ogg" id="33_bh7e2"]
 [ext_resource type="AudioStream" uid="uid://cuk3bylimmdw7" path="res://Audio/Sons/start.ogg" id="34_avukl"]
 [ext_resource type="AudioStream" uid="uid://2m2daku4xewx" path="res://Audio/Sons/abrir_porta.ogg" id="35_1mm38"]
+[ext_resource type="AudioStream" uid="uid://cu248vq4eth04" path="res://Audio/Musicas/Fases/musica_fase0.mp3" id="35_pnxja"]
 [ext_resource type="AudioStream" uid="uid://c7klsrm3k45d3" path="res://Audio/Sons/fechar_porta.ogg" id="36_htwnf"]
 [ext_resource type="AudioStream" uid="uid://ckqsl0ws35tv3" path="res://Audio/Sons/pickUp.ogg" id="37_3lnpu"]
 [ext_resource type="AudioStream" uid="uid://bu41x4bns6c1c" path="res://Audio/Sons/recarregar_tudo.ogg" id="37_pnxja"]
-[ext_resource type="AudioStream" uid="uid://c1qedrkxa0rgk" path="res://Audio/Musicas/Fases/musica_fase0.mp3" id="38_ohv2p"]
 [ext_resource type="AudioStream" uid="uid://bojfs6q50aj22" path="res://Audio/Sons/slotSound.mp3" id="39_07qj8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7xvk3"]
@@ -729,7 +729,7 @@ volume_db = 8.0
 
 [node name="music" type="AudioStreamPlayer" parent="sfx" unique_id=863961657]
 process_mode = 3
-stream = ExtResource("38_ohv2p")
+stream = ExtResource("35_pnxja")
 autoplay = true
 parameters/looping = true
 

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://doyr4ejwr251q"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_b362k"]
+
+[resource]
+script = ExtResource("1_b362k")
+titulo = "Eles escondem alguma coisa"
+texto = "Não sei há quanto tempo estou aqui, mas tenho certeza de que esse lugar não é uma prisão normal.
+
+Tem gente que é chamada para exames médicos e nunca mais volta. Os guardas dizem que foram transferidos, mas ninguém sabe para onde.
+
+Às vezes, durante a madrugada, escuto barulhos estranhos vindo de baixo. Parece equipamento funcionando, portas pesadas abrindo e até gritos.
+
+Já tentei perguntar sobre isso, mas ninguém responde. Alguns presos dizem que é melhor ficar quieto. Outros simplesmente fingem que não sabem de nada.
+
+Ontem vi um dos guardas levando um detento por uma passagem que eu nunca tinha visto antes. Não parecia levar para nenhuma enfermaria.
+
+Não sei o que acontece lá embaixo, mas uma coisa é certa: não estamos aqui apenas para cumprir nossas penas."
+metadata/_custom_type_script = "uid://xwkar2igup63"

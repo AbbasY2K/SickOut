@@ -15,7 +15,8 @@ var texts := {
 		"TUTORIAL_9": "[wave]Good! This will help a lot.[/wave]",
 		
 		"PRESS_QUADRADO": "[center]PRESS [img=24x24]res://Sprites/UI/botao_quadrado.png[/img]",
-		"TRANCADO": "THE DOOR IS LOCKED."
+		"TRANCADO": "THE DOOR IS LOCKED.",
+		"AVISO_FITA": "[wave]You found a SECRET...",
 	},
 
 	"ptbr": {
@@ -32,7 +33,8 @@ var texts := {
 		"TUTORIAL_9": "[wave]Boa! Isso vai te ajudar bastante.[/wave]",
 		
 		"PRESS_QUADRADO": "[center]PRESSIONE [img=24x24]res://Sprites/UI/botao_quadrado.png[/img]",
-		"TRANCADO": "A PORTA ESTÁ TRANCADA."
+		"TRANCADO": "A PORTA ESTÁ TRANCADA.",
+		"AVISO_FITA": "[wave]Você encontrou um SEGREDO..."
 	}
 }
 

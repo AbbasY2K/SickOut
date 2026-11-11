@@ -38,7 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://bojfs6q50aj22" path="res://Audio/Sons/slotSound.mp3" id="37_pnxja"]
 [ext_resource type="AudioStream" uid="uid://2m2daku4xewx" path="res://Audio/Sons/abrir_porta.ogg" id="38_xy7c8"]
 [ext_resource type="AudioStream" uid="uid://c7klsrm3k45d3" path="res://Audio/Sons/fechar_porta.ogg" id="39_7xvk3"]
-[ext_resource type="AudioStream" uid="uid://c1qedrkxa0rgk" path="res://Audio/Musicas/Fases/musica_fase0.mp3" id="42_7xvk3"]
+[ext_resource type="AudioStream" uid="uid://c1qedrkxa0rgk" path="res://Audio/Musicas/Fases/musica_fase2.mp3" id="42_7xvk3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7xvk3"]
 shader = ExtResource("6_en8dj")

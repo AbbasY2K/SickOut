@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://bscnff0f3of3i"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_g0onf"]
+
+[resource]
+script = ExtResource("1_g0onf")
+titulo = "Ficha Clínica — Sujeito B-21"
+texto = "Nome: Billy
+Idade: 21 anos
+Status: Em observação
+Setor: Laboratório inferior
+
+O sujeito foi encaminhado para avaliação após apresentar características incomuns durante os exames iniciais.
+
+Diferentemente de outros pacientes, seu organismo demonstrou uma resposta favorável aos primeiros procedimentos. Andrew considera que ele pode ser importante para a próxima etapa do projeto.
+
+O paciente permanece consciente e apresenta resistência aos procedimentos. Nas últimas sessões, perguntou repetidamente sobre o paradeiro de seu irmão.
+
+A equipe recebeu instruções para não responder.
+
+Anotação de Andrew: Não autorizo o descarte deste indivíduo. Quero acompanhar pessoalmente os próximos resultados."
+metadata/_custom_type_script = "uid://xwkar2igup63"
