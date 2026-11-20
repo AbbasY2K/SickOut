@@ -1,30 +1,27 @@
-
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
 
-// Scanlines
-uniform float scanline_strength : hint_range(0.0, 0.08) = 0.018;
-uniform float scanline_density : hint_range(0.5, 3.0) = 1.25;
-uniform float scanline_speed : hint_range(0.0, 5.0) = 0.8;
-uniform float scanline_wave : hint_range(0.0, 1.0) = 0.35;
-uniform float scanline_pulse : hint_range(0.0, 1.0) = 0.25;
-uniform float scanline_bands : hint_range(0.0, 1.0) = 0.30;
+uniform vec2 reference_resolution = vec2(1280.0, 720.0);
+
+// CRT
+uniform float scanline_strength : hint_range(0.0, 0.05) = 0.006;
+uniform float scanline_density : hint_range(0.5, 2.0) = 1.0;
 
 // Vinheta
-uniform float vignette_strength : hint_range(0.0, 1.0) = 0.45;
+uniform float vignette_strength : hint_range(0.0, 1.0) = 0.80;
 uniform float vignette_size : hint_range(0.1, 1.0) = 0.40;
 uniform float vignette_softness : hint_range(0.01, 1.0) = 0.45;
 
 // Imagem
 uniform float contrast : hint_range(0.8, 1.5) = 1.06;
-uniform float brightness : hint_range(0.5, 1.2) = 1.0;
-uniform float chroma_shift : hint_range(0.0, 0.003) = 0.0003;
+uniform float brightness : hint_range(0.5, 1.2) = 0.94;
+uniform float chroma_shift : hint_range(0.0, 2.0) = 0.0;
 
 // Efeitos
 uniform float static_strength : hint_range(0.0, 0.05) = 0.002;
-uniform float glitch_strength : hint_range(0.0, 0.03) = 0.0015;
+uniform float glitch_strength : hint_range(0.0, 10.0) = 2.0;
 uniform float flicker_strength : hint_range(0.0, 0.03) = 0.002;
 
 float random(vec2 uv) {
@@ -34,114 +31,46 @@ float random(vec2 uv) {
 void fragment() {
 	vec2 uv = SCREEN_UV;
 	vec2 resolution = vec2(textureSize(SCREEN_TEXTURE, 0));
+	vec2 virtual_uv = uv * reference_resolution;
 
-	// Glitch raro
-	float glitchLine = step(
-		0.998,
-		sin(TIME * 1.5 + uv.y * 30.0)
-	);
+	// Glitch
+	float glitchLine = step(0.998, sin(TIME * 1.5 + uv.y * 30.0));
 
 	if (glitchLine > 0.0) {
-		uv.x += sin(TIME * 70.0 + uv.y * 100.0) * glitch_strength;
+		uv.x += sin(TIME * 70.0 + uv.y * 100.0) * glitch_strength / resolution.x;
 	}
 
-	// Aberração cromática
-	float r = texture(
-		SCREEN_TEXTURE,
-		uv + vec2(chroma_shift, 0.0)
-	).r;
+	// Aberração cromática em pixels inteiros
+	vec2 chroma_offset = vec2(chroma_shift / resolution.x, 0.0);
 
+	float r = texture(SCREEN_TEXTURE, uv + chroma_offset).r;
 	float g = texture(SCREEN_TEXTURE, uv).g;
-
-	float b = texture(
-		SCREEN_TEXTURE,
-		uv - vec2(chroma_shift, 0.0)
-	).b;
+	float b = texture(SCREEN_TEXTURE, uv - chroma_offset).b;
 
 	vec3 col = vec3(r, g, b);
 
-	// Coordenada vertical em pixels
-	float line_pos = SCREEN_UV.y * resolution.y * scanline_density;
+	// Scanlines
+	float scan = sin(virtual_uv.y * scanline_density);
+	scan = scan * 0.5 + 0.5;
 
-	// Linhas com bordas definidas e intensidade variável
-	float line_phase = line_pos * 3.14159265;
-	float scan = 0.5 + 0.5 * cos(line_phase);
-
-	// Ondulação orgânica que percorre as linhas
-	float wave = sin(
-		SCREEN_UV.y * 18.0
-		- TIME * scanline_speed * 2.0
-		+ sin(TIME * 1.3 + SCREEN_UV.y * 9.0) * 1.5
-	);
-
-	float wave_mod = 1.0 + wave * scanline_wave * 0.45;
-
-	// Pulsos de intensidade com ritmos diferentes
-	float pulse_a = 0.5 + 0.5 * sin(
-		TIME * 2.0 - SCREEN_UV.y * 24.0
-	);
-
-	float pulse_b = 0.5 + 0.5 * sin(
-		TIME * 3.7 + SCREEN_UV.y * 11.0
-	);
-
-	float pulse = mix(
-		1.0,
-		0.65 + pulse_a * 0.25 + pulse_b * 0.25,
-		scanline_pulse
-	);
-
-	// Faixa luminosa móvel
-	float band_pos = fract(TIME * scanline_speed * 0.12);
-
-	float band_dist = abs(SCREEN_UV.y - band_pos);
-	band_dist = min(band_dist, 1.0 - band_dist);
-
-	float band = exp(-band_dist * 35.0);
-
-	// Segunda faixa, mais larga e mais suave
-	float band2 = exp(
-		-abs(SCREEN_UV.y - fract(band_pos + 0.45)) * 14.0
-	);
-
-	float band_mod = 1.0 + (
-		band * 0.20 + band2 * 0.07
-	) * scanline_bands;
-
-	// Pequenas irregularidades entre linhas
-	float line_id = floor(line_pos);
-
-	float irregularity = random(vec2(line_id, 7.31));
-	float line_variation = mix(
-		0.88 + irregularity * 0.24,
-		1.0,
-		1.0 - scanline_wave
-	);
-
-	float scan_intensity = scan
-		* wave_mod
-		* pulse
-		* band_mod
-		* line_variation;
-
-	col *= 1.0 - scan_intensity * scanline_strength;
+	col *= 1.0 - (scan * scanline_strength);
 
 	// Ruído
-	float noise = random(vec2(
-		floor(uv.x * resolution.x),
-		floor(uv.y * resolution.y + TIME * 20.0)
-	));
+	float noise = random(
+		vec2(
+			floor(virtual_uv.x),
+			floor(virtual_uv.y + TIME * 20.0)
+		)
+	);
 
 	col += (noise - 0.5) * static_strength;
 
 	// Flicker
-	float flicker = 1.0
-		+ sin(TIME * 12.0) * flicker_strength;
-
+	float flicker = 1.0 + sin(TIME * 12.0) * flicker_strength;
 	col *= flicker;
 
-	// Vinheta suavizada
-	float dist = distance(SCREEN_UV, vec2(0.5));
+	// Vinheta
+	float dist = distance(uv, vec2(0.5));
 
 	float vignette = 1.0 - smoothstep(
 		vignette_size,
@@ -149,16 +78,11 @@ void fragment() {
 		dist
 	);
 
-	float edge_darkness = mix(0.35, 1.0, vignette);
-
-	col *= mix(
-		1.0,
-		edge_darkness,
-		vignette_strength
-	);
+	float edge_darkness = mix(0.20, 1.0, vignette);
+	col *= mix(1.0, edge_darkness, vignette_strength);
 
 	// Iluminação central
-	col *= 1.0 + vignette * 0.06;
+	col *= 1.0 + (vignette * 0.06);
 
 	// Contraste e brilho
 	col = (col - 0.5) * contrast + 0.5;

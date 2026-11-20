@@ -255,7 +255,6 @@ focus_neighbor_top = NodePath("../fase1")
 focus_neighbor_right = NodePath("../fase5")
 focus_neighbor_bottom = NodePath("../fase7")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
-disabled = true
 text = "4"
 fase_id = 4
 
@@ -269,7 +268,6 @@ focus_neighbor_top = NodePath("../fase2")
 focus_neighbor_right = NodePath("../fase6")
 focus_neighbor_bottom = NodePath("../fase8")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_xrivr")
-disabled = true
 text = "5"
 fase_id = 5
 

@@ -33,6 +33,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_constants/line_separation = 1
 theme_override_fonts/normal_font = ExtResource("1_yolbw")
 theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
 text = "Sickout é um jogo de ação indie do gênero platformer e hack and slash 2D desenvolvido pela Final Level Studio, inspirado em títulos como Katana ZERO e Hotline Miami, disponível para download no itch.io.
 
 Principais Detalhes:

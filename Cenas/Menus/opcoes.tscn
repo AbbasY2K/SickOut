@@ -314,7 +314,7 @@ theme_override_font_sizes/font_size = 32
 text = "Volume da Música:"
 vertical_alignment = 2
 script = ExtResource("5_8epad")
-key = "MESTRE"
+key = "MUSICA"
 
 [node name="Control" type="Control" parent="opcoes/musica" unique_id=657326176]
 layout_mode = 2

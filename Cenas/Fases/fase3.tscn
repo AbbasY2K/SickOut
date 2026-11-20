@@ -842,7 +842,6 @@ volume_db = 8.0
 process_mode = 3
 stream = ExtResource("36_ow6sm")
 volume_db = -3.0
-autoplay = true
 parameters/looping = true
 
 [node name="slot" type="AudioStreamPlayer" parent="sfx" unique_id=1801556514]

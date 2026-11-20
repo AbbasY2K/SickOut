@@ -236,6 +236,8 @@ func aplicar_potato_mode() -> void:
 	if is_instance_valid(shader):
 		shader.visible = mostrar
 
+
+
 func configurar_audio_music() -> void:
 	music_bus_idx = AudioServer.get_bus_index("Music")
 
@@ -243,16 +245,25 @@ func configurar_audio_music() -> void:
 		AudioServer.add_bus()
 		music_bus_idx = AudioServer.bus_count - 1
 		AudioServer.set_bus_name(music_bus_idx, "Music")
+		AudioServer.set_bus_send(music_bus_idx, "Master")
+
+	music.bus = "Music"
+
+	music_filter = null
 
 	for i in range(AudioServer.get_bus_effect_count(music_bus_idx)):
 		var efeito := AudioServer.get_bus_effect(music_bus_idx, i)
 
 		if efeito is AudioEffectLowPassFilter:
 			music_filter = efeito
-			return
+			break
 
-	music_filter = AudioEffectLowPassFilter.new()
-	AudioServer.add_bus_effect(music_bus_idx, music_filter, 0)
+	if not is_instance_valid(music_filter):
+		music_filter = AudioEffectLowPassFilter.new()
+		AudioServer.add_bus_effect(music_bus_idx, music_filter, 0)
+
+	music_filter.cutoff_hz = 20000.0
+
 
 
 func atualizar_municao() -> void:
@@ -293,7 +304,7 @@ func _input(event: InputEvent) -> void:
 		music.volume_db = -5
 
 		if is_instance_valid(music_filter):
-			music_filter.cutoff_hz = 5000.0
+			music_filter.cutoff_hz = 20000.0
 
 	else:
 		get_tree().paused = true

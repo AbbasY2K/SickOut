@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cl8bkns2sk8xr"
-path="res://.godot/imported/Sem título.jpg-a5f99b0a5307e42c92e3cd01b8ef93d3.ctex"
+path="res://.godot/imported/Sem título.jpg-3e91ca87c9247b18766518056e65a7dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Cenas/Menus/Sem título.jpg"
-dest_files=["res://.godot/imported/Sem título.jpg-a5f99b0a5307e42c92e3cd01b8ef93d3.ctex"]
+source_file="res://Sprites/placeHolder/Sem título.jpg"
+dest_files=["res://.godot/imported/Sem título.jpg-3e91ca87c9247b18766518056e65a7dd.ctex"]
 
 [params]
 

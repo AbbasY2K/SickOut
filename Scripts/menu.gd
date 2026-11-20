@@ -10,6 +10,22 @@ func _ready() -> void:
 		
 		return
 
+	if OS.has_feature("pc"):
+		if not InputMap.has_action("melee"):
+			InputMap.add_action("melee")
+
+		var ja_configurado := false
+
+		for evento in InputMap.action_get_events("melee"):
+			if evento is InputEventMouseButton and evento.button_index == MOUSE_BUTTON_LEFT:
+				ja_configurado = true
+				break
+
+		if not ja_configurado:
+			var clique_esquerdo := InputEventMouseButton.new()
+			clique_esquerdo.button_index = MOUSE_BUTTON_LEFT
+			InputMap.action_add_event("melee", clique_esquerdo)
+
 	if Global.animacao == true:
 		$video.start()
 
@@ -52,7 +68,6 @@ func _ready() -> void:
 
 	$leaderboard/info.bbcode_enabled = true
 	$leaderboard/info.text = texto
-	$fitas.text = "fitas: " + str(Global.fitas.size()) + "/10"
 
 	Global.speedrun = false
 	$shader.show()
@@ -99,9 +114,9 @@ func _on_play_pressed() -> void:
 	$video.stop()
 	$music.stop()
 
-	$AnimationPlayer.play("flash")
-	await get_tree().create_timer(5.5).timeout
-	get_tree().change_scene_to_file("res://Cenas/Fases/tutorial.tscn")
+	$AnimationPlayer.play("in")
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://Cenas/sickout.tscn")
 
 func _on_historia_pressed() -> void:
 	$historiaPainel/fechar.grab_focus()

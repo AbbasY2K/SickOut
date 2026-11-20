@@ -11,6 +11,7 @@ var texts := {
 		"CREDITOS": "CREDITS",
 		"FECHAR": "CLOSE",
 		"INFO": "INFO",
+		"FITAS": "TAPES",
 		"FASES": "LEVELS",
 		"LOG": "CREATE PERFORMANCE LOG",
 		"POTATO": "Performance Mode",
@@ -40,7 +41,7 @@ var texts := {
 		"CONTINUAR": "CONTINUE",
 		"NIVEIS": "LEVELS",
 		
-		"MESTRE": "Master",
+		"MUSICA": "Music",
 		"SONS": "Sound",
 		
 		"PICKLEVEL": "PICK A LEVEL",
@@ -49,11 +50,14 @@ var texts := {
 		"FASE1": "LEVEL 1",
 		"FASE2": "LEVEL 2",
 		"FASE3": "LEVEL 3",
+		"FASE4": "LEVEL 4",
 
 		"NOME_FASE0": "The Tutorial",
 		"NOME_FASE1": "",
 		"NOME_FASE2": "",
-		"NOME_FASE3": ""
+		"NOME_FASE3": "",
+		"NOME_FASE4": "",
+		"NOME_FASE5": ""
 	
 	
 	},
@@ -68,6 +72,7 @@ var texts := {
 		"CREDITOS": "CRÉDITOS",
 		"FECHAR": "FECHAR",
 		"INFO": "INFO",
+		"FITAS": "FITAS",
 		"FASES": "FASES",
 		"LOG": "GERAR LOG DE DESEMPENHO",
 		"POTATO": "Modo Desempenho",
@@ -97,7 +102,7 @@ var texts := {
 		"CONTINUAR": "CONTINUAR",
 		"NIVEIS": "FASES",
 		
-		"MESTRE": "Mestre",
+		"MUSICA": "Música",
 		"SONS": "Sons",
 		
 		"PICKLEVEL": "SELECIONE A FASE",
@@ -106,11 +111,15 @@ var texts := {
 		"FASE1": "FASE 1",
 		"FASE2": "FASE 2",
 		"FASE3": "FASE 3",
+		"FASE4": "FASE 4",
+		"FASE5": "FASE 5",
 		
 		"NOME_FASE0": "O Tutorial",
 		"NOME_FASE1": "",
 		"NOME_FASE2": "",
-		"NOME_FASE3": ""
+		"NOME_FASE3": "",
+		"NOME_FASE4": "",
+		"NOME_FASE5": ""
 
 
 	}

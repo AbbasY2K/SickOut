@@ -28,6 +28,35 @@ func _ready():
 	focus_exited.connect(_on_unfocus)
 
 func _on_focus():
+	if get_tree().current_scene.name == "menu":
+		if Global.lingua == "eng":
+			if name == "play":
+				$"../infoBotao".text = "Start the game from the Tutorial!"
+			if name == "fases":
+				$"../infoBotao".text = "Select a specific level to play."
+			if name == "opcoes":
+				$"../infoBotao".text = "Configure your game preferences."
+			if name == "historia":
+				$"../infoBotao".text = "Read a summary of Sickout's story!"
+			if name == "creditos":
+				$"../infoBotao".text = "Names of the people who brought this project to life!"
+			if name == "fitas":
+				$"../infoBotao".text = "Menu showing your collected tapes. Coming soon!"
+
+		elif Global.lingua == "ptbr":
+			if name == "play":
+				$"../infoBotao".text = "Comece o jogo desde o Tutorial!"
+			if name == "fases":
+				$"../infoBotao".text = "Selecione uma fase específica para jogar."
+			if name == "opcoes":
+				$"../infoBotao".text = "Configure suas preferências para o jogo."
+			if name == "historia":
+				$"../infoBotao".text = "Veja um resumo da história do Sickout!"
+			if name == "creditos":
+				$"../infoBotao".text = "Nomes das pessoas que deram vida a esse projeto!"
+			if name == "fitas":
+				$"../infoBotao".text = "Menu mostrando suas fitas coletadas. Em breve!"
+
 	if hoverBotao:
 		hoverBotao.play()
 

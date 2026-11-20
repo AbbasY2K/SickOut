@@ -883,7 +883,7 @@ size_flags_vertical = 3
 focus_neighbor_left = NodePath("../play")
 focus_neighbor_top = NodePath("../log")
 focus_neighbor_right = NodePath("../play")
-focus_neighbor_bottom = NodePath("../info")
+focus_neighbor_bottom = NodePath("../fitas")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
@@ -907,9 +907,9 @@ offset_right = 320.0
 offset_bottom = 425.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_neighbor_left = NodePath("../info")
+focus_neighbor_left = NodePath("../fitas")
 focus_neighbor_top = NodePath("../play")
-focus_neighbor_right = NodePath("../info")
+focus_neighbor_right = NodePath("../fitas")
 focus_neighbor_bottom = NodePath("../historia")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -926,7 +926,7 @@ clip_text = true
 script = ExtResource("9_at84a")
 key = "CONFIG"
 
-[node name="info" type="Button" parent="." unique_id=225645876]
+[node name="fitas" type="Button" parent="." unique_id=225645876]
 offset_left = 320.0
 offset_top = 344.0
 offset_right = 576.0
@@ -948,10 +948,10 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_v3wx3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_s1cw2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_kxreb")
 disabled = true
-text = "INFO"
+text = "FITAS"
 clip_text = true
 script = ExtResource("9_at84a")
-key = "INFO"
+key = "FITAS"
 
 [node name="historia" type="Button" parent="." unique_id=131679193]
 offset_left = 64.0
@@ -987,7 +987,7 @@ offset_bottom = 512.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 focus_neighbor_left = NodePath("../historia")
-focus_neighbor_top = NodePath("../info")
+focus_neighbor_top = NodePath("../fitas")
 focus_neighbor_right = NodePath("../historia")
 focus_neighbor_bottom = NodePath("../log")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -1012,18 +1012,19 @@ offset_right = 896.0
 offset_bottom = 224.0
 theme_override_fonts/font = ExtResource("10_8jfiv")
 theme_override_font_sizes/font_size = 24
-text = " protótipo v12.11.26"
+text = "DEMO v12.11.26"
 horizontal_alignment = 2
 
-[node name="fitas" type="Label" parent="." unique_id=182499259]
-visible = false
-offset_left = 256.0
-offset_top = 200.0
-offset_right = 576.0
-offset_bottom = 224.0
+[node name="infoBotao" type="Label" parent="." unique_id=965267417]
+offset_left = 40.0
+offset_top = 216.0
+offset_right = 597.0
+offset_bottom = 248.0
 theme_override_fonts/font = ExtResource("10_8jfiv")
-theme_override_font_sizes/font_size = 24
-text = "fitas: 0/10"
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="speedrun" type="Button" parent="." unique_id=952425483]
 visible = false
@@ -1154,8 +1155,6 @@ offset_right = 1000.0
 offset_bottom = 496.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-focus_neighbor_right = NodePath("../historia")
-focus_neighbor_bottom = NodePath("../speedrun")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -1258,7 +1257,7 @@ offset_bottom = 640.0
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="fases" to="." method="_on_fases_pressed"]
 [connection signal="pressed" from="opcoes" to="." method="_on_opcoes_pressed"]
-[connection signal="pressed" from="info" to="." method="_on_info_pressed"]
+[connection signal="pressed" from="fitas" to="." method="_on_info_pressed"]
 [connection signal="pressed" from="historia" to="." method="_on_historia_pressed"]
 [connection signal="pressed" from="creditos" to="." method="_on_creditos_pressed"]
 [connection signal="pressed" from="speedrun" to="." method="_on_speedrun_pressed"]

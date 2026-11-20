@@ -32,8 +32,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		$hmmm.stop()
 		$grab.play()
 
-		area.monitoring = false
-		area.monitorable = false
+		area.set_deferred("monitoring", false)
+		area.set_deferred("monitorable", false)
 
 		sprite.material.set_shader_parameter("pickup_glitch", true)
 

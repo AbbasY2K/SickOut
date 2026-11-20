@@ -1034,7 +1034,7 @@ theme_override_font_sizes/font_size = 32
 text = "Volume da Música:"
 vertical_alignment = 2
 script = ExtResource("17_6n75h")
-key = "MESTRE"
+key = "MUSICA"
 
 [node name="Control" type="Control" parent="opcoes/opcoes/musica" unique_id=657326176]
 layout_mode = 2
@@ -1204,6 +1204,7 @@ volume_db = -5.0
 [connection signal="pressed" from="pauseMenu/botao4/menu" to="pauseMenu" method="_on_menu_pressed"]
 [connection signal="pressed" from="opcoes/opcoes/desempenho/check" to="opcoes" method="_on_check_pressed"]
 [connection signal="value_changed" from="opcoes/opcoes/musica/Control/volumeSlider" to="opcoes" method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="opcoes/opcoes/sons/Control/sonsSlider" to="opcoes" method="_on_sons_slider_value_changed"]
 [connection signal="pressed" from="opcoes/voltar" to="opcoes" method="_on_voltar_pressed"]
 [connection signal="pressed" from="opcoes/lang" to="opcoes" method="_on_lang_pressed"]
 [connection signal="pressed" from="opcoes/apagar" to="opcoes" method="_on_lang_pressed"]

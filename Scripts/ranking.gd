@@ -15,6 +15,7 @@ func _ready():
 	var pontos = Global.pontuacaoAtual if Global.pontuacaoAtual != null else 0
 	var kills = Global.killsAtual if Global.killsAtual != null else 0
 	var mortes = Global.mortesAtual if Global.mortesAtual != null else 0
+	@warning_ignore("incompatible_ternary")
 	var tempo_total = Global.tempoTotal if Global.tempoTotal != null else 0.0
 
 	$ui/labels/pontos.text = "[tornado radius=1 freq=3]%s:[/tornado] [shake level=2]%d[/shake]" % [
@@ -80,6 +81,7 @@ func calcular_rank():
 
 	var score := 0.0
 
+	@warning_ignore("incompatible_ternary")
 	var pontos = Global.pontuacaoAtual if Global.pontuacaoAtual != null else 0.0
 	var meta_pontos = Global.metaPontuacao if Global.metaPontuacao != null else 1.0
 
@@ -88,6 +90,7 @@ func calcular_rank():
 
 	var mortes = Global.mortesAtual if Global.mortesAtual != null else 0
 
+	@warning_ignore("incompatible_ternary")
 	var tempo_total = Global.tempoTotal if Global.tempoTotal != null else 0.0
 	var meta_tempo = Global.metaTempo if Global.metaTempo != null else 0.0
 

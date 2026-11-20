@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="DocumentoLore" format=3 uid="uid://dl2uiwf8aweym"]
+
+[ext_resource type="Script" uid="uid://xwkar2igup63" path="res://Cenas/Cutscenes/Documentos/documentolore.gd" id="1_nrw22"]
+
+[resource]
+script = ExtResource("1_nrw22")
+titulo = "Instruções Extras!"
+texto = "Algumas outras mecânicas importantes para ajudar durante sua jornada em SickOut:
+
+[center]Movimentação[/center]
+- Wall Jump: pule enquanto estiver encostado em uma parede para ganhar impulso.
+- Wall Slide: ao cair próximo de uma parede, sua descida fica mais lenta.
+
+[center]Sobrevivência[/center]
+- Stamina: é usada em habilidades como o dash e o wall jump. Ela se recupera com o tempo.
+- Seringa vermelha: concede uma vida extra.
+- Áreas tóxicas: aumentam sua toxicidade. Saia delas antes que o nível chegue a 100.
+
+[center]Fitas[/center]
+Cada fase tem uma fita esconde! Encontre elas para descobrir a história do jogo!
+Dica: combine suas habilidades , nem sempre enfrentar todos os inimigos de frente é a melhor opção."
+metadata/_custom_type_script = "uid://xwkar2igup63"

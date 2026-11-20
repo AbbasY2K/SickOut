@@ -1,7 +1,10 @@
+
 extends Node
 
 var freshStart = true
 var volume := 100
+var volume_musica: float = 100.0
+var volume_sons: float = 100.0
 var spawnAtual: Node2D
 
 var timerTempo: float = 0.0
@@ -42,13 +45,111 @@ const CAMINHO = "user://sickoutSave.txt"
 const CONFIG = "user://config.cfg"
 const RANKS = "user://ranks.cfg"
 
-func _ready():
+const BUS_MUSICA := "Music"
+const BUS_SONS := "Sons"
+
+
+func _ready() -> void:
+	configurar_barramentos_audio()
+
 	carregar_config()
 	carregar_ranks()
 
-	
+	aplicar_volumes_audio()
+
+	var callback := Callable(self, "_on_audio_node_added")
+
+	if not get_tree().node_added.is_connected(callback):
+		get_tree().node_added.connect(callback)
+
+	var cena = get_tree().current_scene
+
+	if is_instance_valid(cena):
+		configurar_audio_recursivo(cena)
+
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
+
+func configurar_barramentos_audio() -> void:
+	garantir_barramento(BUS_MUSICA)
+	garantir_barramento(BUS_SONS)
+
+
+func garantir_barramento(nome: String) -> int:
+	var indice := AudioServer.get_bus_index(nome)
+
+	if indice == -1:
+		AudioServer.add_bus()
+		indice = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(indice, nome)
+
+	AudioServer.set_bus_send(indice, "Master")
+
+	return indice
+
+
+func eh_player_audio(node: Node) -> bool:
+	return (
+		node is AudioStreamPlayer
+		or node is AudioStreamPlayer2D
+		or node is AudioStreamPlayer3D
+	)
+
+
+func configurar_audio_node(node: Node) -> void:
+	if not eh_player_audio(node):
+		return
+
+	var nome := String(node.name).to_lower()
+
+	if node.is_in_group("musica") or nome in ["music", "musica", "bgm", "trilha"]:
+		node.bus = BUS_MUSICA
+	elif node.bus == "Master" or AudioServer.get_bus_index(node.bus) == -1:
+		node.bus = BUS_SONS
+
+
+func configurar_audio_recursivo(node: Node) -> void:
+	configurar_audio_node(node)
+
+	for filho in node.get_children():
+		configurar_audio_recursivo(filho)
+
+
+func _on_audio_node_added(node: Node) -> void:
+	configurar_audio_node(node)
+
+
+func definir_volume_musica(valor: float) -> void:
+	volume_musica = clampf(valor, 0.0, 100.0)
+	aplicar_volume_barramento(BUS_MUSICA, volume_musica)
+
+
+func definir_volume_sons(valor: float) -> void:
+	volume_sons = clampf(valor, 0.0, 100.0)
+	aplicar_volume_barramento(BUS_SONS, volume_sons)
+
+
+func aplicar_volumes_audio() -> void:
+	aplicar_volume_barramento(BUS_MUSICA, volume_musica)
+	aplicar_volume_barramento(BUS_SONS, volume_sons)
+
+
+func aplicar_volume_barramento(nome: String, valor: float) -> void:
+	var indice := AudioServer.get_bus_index(nome)
+
+	if indice == -1:
+		return
+
+	var volume_normalizado := clampf(valor, 0.0, 100.0)
+
+	var volume_db := -80.0
+
+	if volume_normalizado > 0.0:
+		volume_db = linear_to_db(volume_normalizado / 100.0)
+
+	AudioServer.set_bus_volume_db(indice, volume_db)
+	AudioServer.set_bus_mute(indice, volume_normalizado <= 0.0)
 
 
 func formatar_tempo(tempo: float):
@@ -67,6 +168,8 @@ func salvar_config():
 	var cfg = ConfigFile.new()
 
 	cfg.set_value("geral", "volume", volume)
+	cfg.set_value("geral", "volume_musica", volume_musica)
+	cfg.set_value("geral", "volume_sons", volume_sons)
 	cfg.set_value("geral", "lingua", lingua)
 	cfg.set_value("geral", "potatoMode", potatoMode)
 
@@ -75,13 +178,27 @@ func salvar_config():
 
 	cfg.save(CONFIG)
 
+
 func carregar_config():
 	var cfg = ConfigFile.new()
 
 	if cfg.load(CONFIG) != OK:
 		return
 
-	volume = cfg.get_value("geral", "volume", 100)
+	volume = int(cfg.get_value("geral", "volume", 100))
+
+	volume_musica = clampf(
+		float(cfg.get_value("geral", "volume_musica", volume)),
+		0.0,
+		100.0
+	)
+
+	volume_sons = clampf(
+		float(cfg.get_value("geral", "volume_sons", volume)),
+		0.0,
+		100.0
+	)
+
 	lingua = cfg.get_value("geral", "lingua", null)
 	potatoMode = cfg.get_value("geral", "potatoMode", false)
 
@@ -253,8 +370,13 @@ func apagar_saves() -> void:
 				return
 
 	volume = 100
+	volume_musica = 100.0
+	volume_sons = 100.0
+
 	lingua = null
 	potatoMode = false
+
+	aplicar_volumes_audio()
 
 	ranks.clear()
 	fitas.clear()
@@ -274,12 +396,3 @@ func apagar_saves() -> void:
 	mortesAtual = 0
 	tempoTotal = 0
 	timerTempo = 0.0
-
-
-func _process(_delta: float) -> void:
-	var bus_idx = AudioServer.get_bus_index("Master")
-
-	AudioServer.set_bus_volume_db(
-		bus_idx,
-		linear_to_db(volume / 100.0)
-	)

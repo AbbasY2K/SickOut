@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://dx3kesif3syh6" path="res://Cenas/Inimigos/crawling.tscn" id="2_m15ux"]
 [ext_resource type="Texture2D" uid="uid://c6ukac7bagxal" path="res://Sprites/inimigos/crawler/crawler.png" id="4_c2d0i"]
 [ext_resource type="AudioStream" uid="uid://cxdr8lnjfscad" path="res://Audio/Sons/explosion.wav" id="4_jmfiq"]
-[ext_resource type="Texture2D" uid="uid://n2pbm3mjff3e" path="res://Sprites/inimigos/prisioneiro/prisioneiro.png" id="4_m15ux"]
 [ext_resource type="AudioStream" uid="uid://6ptas384n8tg" path="res://Audio/Sons/fusing.wav" id="5_3wqco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qtp7"]
@@ -28,7 +27,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -52,7 +51,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_m15ux")]
+"values": [ExtResource("4_c2d0i")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -217,8 +216,8 @@ shape = SubResource("RectangleShape2D_duo5w")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=668319634]
 position = Vector2(0, -14.249998)
 scale = Vector2(1.5, 1.4673913)
-texture = ExtResource("4_m15ux")
-hframes = 2
+texture = ExtResource("4_c2d0i")
+hframes = 3
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1516111124]
